@@ -9,7 +9,9 @@ import java.sql.Statement;
  * Created by ibnujakaria on 3/10/17.
  */
 public class UserTableSchema {
+
     private Statement stmt;
+
     public void createTable ()
     {
         try {
