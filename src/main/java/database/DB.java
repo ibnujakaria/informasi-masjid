@@ -12,12 +12,16 @@ import java.sql.Statement;
 public class DB {
     public static Connection conn;
 
-    public static void connect ()
+    public static void  connect ()
     {
         try {
             Class.forName("org.sqlite.JDBC");
 
             conn = DriverManager.getConnection("jdbc:sqlite:informasi_masjid.sqlite");
+            Statement stmt = conn.createStatement();
+            stmt.execute("" +
+                    "create table if not exists migrations " +
+                    "(class varchar(500) not null, version int default 1)");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,4 +1,5 @@
 import database.DB;
+import database.schemas.UserTableSchema;
 
 /**
  * Created by ibnujakaria on 3/10/17.
