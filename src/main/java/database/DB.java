@@ -5,6 +5,7 @@ import database.schemas.UserTableSchema;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import static org.jooq.impl.DSL.*;
 
 /**
  * Created by ibnujakaria on 3/10/17.
@@ -31,6 +32,6 @@ public class DB {
     {
         connect();
         UserTableSchema userTableSchema = new UserTableSchema();
-        userTableSchema.createTable();
+        userTableSchema.up();
     }
 }

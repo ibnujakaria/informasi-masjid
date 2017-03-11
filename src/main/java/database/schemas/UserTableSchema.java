@@ -8,18 +8,22 @@ import java.sql.Statement;
 /**
  * Created by ibnujakaria on 3/10/17.
  */
-public class UserTableSchema {
+public class UserTableSchema extends Schema {
 
-    private Statement stmt;
+    protected int VERSION = 1;
+    protected String CLASS_NAME = UserTableSchema.class.toString();
 
-    public void createTable ()
-    {
-        try {
-            stmt = DB.conn.createStatement();
+    @Override
+    protected int getVersion() {
+        return 1;
+    }
 
-//            stmt.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+    @Override
+    protected void prepare() {
+        UP_QUERIES[0] = "create table users (id integer primary key autoincrement," +
+                "name varchar (200) not null, email varchar (200) not null, password varchar (200)," +
+                "address varchar (200) null, role integer default 0, " +
+                "is_ustadz integer default 0, created_at text, updated_at text)";
     }
 }
