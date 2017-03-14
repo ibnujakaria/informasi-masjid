@@ -1,3 +1,4 @@
+import com.jfoenix.controls.JFXButton;
 import database.DB;
 import database.schemas.UserTableSchema;
 import javafx.application.Application;
@@ -16,6 +17,8 @@ public class Main extends Application {
         Group root = new Group();
         Scene scene = new Scene(root, 600, 300);
 
+        JFXButton button = new JFXButton("Tanya Ustadz");
+        root.getChildren().add(button);
         primaryStage.setTitle("Info Masjid");
         primaryStage.setScene(scene);
         primaryStage.show();
