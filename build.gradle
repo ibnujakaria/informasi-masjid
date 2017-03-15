@@ -13,4 +13,5 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile 'org.jooq:jooq:3.9.1'
     compile 'com.jfoenix:jfoenix:1.0.0'
+    compile 'org.xerial:sqlite-jdbc:3.16.1'
 }
