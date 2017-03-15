@@ -1,6 +1,8 @@
 package scenes;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -8,6 +10,7 @@ import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -22,7 +25,6 @@ import java.io.FileNotFoundException;
 public class WelcomeScene extends MyGroup {
     VBox vBox;
     Label welcomeLabel;
-    ObservableList list;
     Image logo;
     ImageView imageView;
     JFXButton nextButton;
@@ -47,21 +49,39 @@ public class WelcomeScene extends MyGroup {
         nextButton = new JFXButton("Next");
 
         vBox = new VBox();
-        vBox.setSpacing(10);
-        vBox.setMargin(imageView, new Insets(20,100,20,300));
-        vBox.setMargin(welcomeLabel, new Insets(20,100,20,300));
+        setvBoxFullScreen();
+        vBox.setAlignment(Pos.CENTER);
+        vBox.getChildren().addAll(imageView,welcomeLabel,nextButton);
 
-        list = vBox.getChildren();
-        list.addAll(imageView, welcomeLabel, nextButton);
-
-        getChildren().addAll(vBox);
+        BorderPane border = new BorderPane();
+        border.setCenter(vBox);
+        this.getChildren().addAll(border);
     }
 
     @Override
     protected void addListeners() {
+        view.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                setvBoxFullScreen();
+            }
+        });
+
+        view.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                setvBoxFullScreen();
+            }
+        });
+
         nextButton.setOnAction(event -> {
             setNextScene(new PublicScene());
             moveNextScene();
         });
+    }
+
+    private void setvBoxFullScreen () {
+        vBox.setMinHeight(view.getHeight());
+        vBox.setMinWidth(view.getWidth());
     }
 }
