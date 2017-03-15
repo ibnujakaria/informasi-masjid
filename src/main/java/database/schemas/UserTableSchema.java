@@ -15,7 +15,7 @@ public class UserTableSchema extends Schema {
 
     @Override
     protected int getVersion() {
-        return 1;
+        return 2;
     }
 
 
@@ -25,5 +25,7 @@ public class UserTableSchema extends Schema {
                 "name varchar (200) not null, email varchar (200) not null, password varchar (200)," +
                 "address varchar (200) null, role integer default 0, " +
                 "is_ustadz integer default 0, created_at text, updated_at text)";
+
+        UP_QUERIES[1] = "alter table users add column username varchar(200)";
     }
 }
