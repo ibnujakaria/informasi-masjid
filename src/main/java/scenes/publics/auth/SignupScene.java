@@ -21,7 +21,6 @@ public class SignupScene extends MyGroup {
 
     @Override
     protected void prepareLayout() {
-        view = new MyScene(this, 800,600);
         VBox vBox = new VBox();
 
         Label label = new Label("Sign up Scene");
@@ -59,5 +58,10 @@ public class SignupScene extends MyGroup {
         backButton.setOnAction(event -> {
             movePreviousScene();
         });
+    }
+
+    @Override
+    protected void onRender() {
+
     }
 }

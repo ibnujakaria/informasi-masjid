@@ -15,4 +15,9 @@ public class DashboardScene extends MyGroup {
     protected void addListeners() {
 
     }
+
+    @Override
+    protected void onRender() {
+
+    }
 }

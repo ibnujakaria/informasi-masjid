@@ -31,7 +31,6 @@ public class WelcomeScene extends MyGroup {
 
     @Override
     protected void prepareLayout() {
-        view = new MyScene(this, 800, 600, Color.BEIGE);
         welcomeLabel = new Label("Informasi Masjid");
         welcomeLabel.setFont(Font.font("FZXiHeiI-Z08",33));
         try {
@@ -64,6 +63,7 @@ public class WelcomeScene extends MyGroup {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 setvBoxFullScreen();
+                System.out.println("listener2: width: "+newValue);
             }
         });
 
@@ -80,8 +80,14 @@ public class WelcomeScene extends MyGroup {
         });
     }
 
+    @Override
+    protected void onRender() {
+        setvBoxFullScreen();
+    }
+
     private void setvBoxFullScreen () {
-        vBox.setMinHeight(view.getHeight());
-        vBox.setMinWidth(view.getWidth());
+        System.out.println(this.getClass().toString() + ": setVBoxFullScreen");
+        vBox.setMinHeight(MyScene.height);
+        vBox.setMinWidth(MyScene.width);
     }
 }

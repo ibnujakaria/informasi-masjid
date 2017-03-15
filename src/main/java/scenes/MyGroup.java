@@ -13,9 +13,12 @@ public abstract class MyGroup extends Group{
 
     protected abstract void prepareLayout();
     protected abstract void addListeners();
+    protected abstract void onRender();
 
     public MyGroup() {
+        view = new MyScene(this, MyScene.width, MyScene.height);
         prepareLayout();
+        onRender();
         addListeners();
     }
 
@@ -26,6 +29,7 @@ public abstract class MyGroup extends Group{
         }
 
         Main.primaryStage.setScene(nextScene.getView());
+        nextScene.onRender();
         System.out.println("move to next scene: " + nextScene.getClass().toString());
     }
 
@@ -36,6 +40,7 @@ public abstract class MyGroup extends Group{
         }
 
         Main.primaryStage.setScene(previousScene.getView());
+        previousScene.onRender();
         System.out.println("move to previousscene: " + previousScene.getClass().toString());
     }
 
