@@ -80,7 +80,7 @@ public abstract class Schema {
         if (result.size() > 0) {
             System.out.println("there is already a migration");
             Record r = result.get(0);
-            int version = (int) r.get("version");
+            int version = Integer.parseInt(r.get("version") + "");
             return version;
         }
 
