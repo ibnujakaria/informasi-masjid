@@ -2,11 +2,14 @@ package app;
 
 import com.jfoenix.controls.JFXButton;
 import database.DB;
+import database.models.User;
 import database.schemas.UserTableSchema;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 import scenes.WelcomeScene;
 
 
@@ -26,7 +29,6 @@ public class Main extends Application {
         WelcomeScene welcomeScene = new WelcomeScene();
         primaryStage.setScene(welcomeScene.getView());
         primaryStage.show();
-
     }
 
     public static void main(String[] args) {

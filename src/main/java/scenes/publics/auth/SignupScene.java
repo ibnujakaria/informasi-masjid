@@ -1,10 +1,9 @@
 package scenes.publics.auth;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
+import database.models.User;
 import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import scenes.MyGroup;
@@ -59,5 +58,24 @@ public class SignupScene extends MyGroup {
         backButton.setOnAction(event -> {
             movePreviousScene();
         });
+
+        signUpButton.setOnAction(event -> {
+            doSignUpProcess();
+        });
+    }
+
+    private void doSignUpProcess() {
+        StackPane pane = new StackPane();
+        getChildren().add(pane);
+        JFXDialog dialog = new JFXDialog();
+        dialog.setContent(new Label("Loading.."));
+        dialog.show(pane);
+
+        User.createUser(
+                nameField.getText(), usernameField.getText(), emailField.getText(), addressField.getText(),
+                passwordField.getText(), false, false
+        );
+
+        movePreviousScene();
     }
 }
