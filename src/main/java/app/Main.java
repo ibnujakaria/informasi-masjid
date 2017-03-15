@@ -1,3 +1,5 @@
+package app;
+
 import com.jfoenix.controls.JFXButton;
 import database.DB;
 import database.schemas.UserTableSchema;
@@ -13,13 +15,18 @@ import scenes.WelcomeScene;
  */
 public class Main extends Application {
 
+    public static Stage primaryStage;
+
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage page) throws Exception {
+        this.primaryStage = page;
+
         primaryStage.setTitle("Info Masjid");
 
         WelcomeScene welcomeScene = new WelcomeScene();
         primaryStage.setScene(welcomeScene.getView());
         primaryStage.show();
+
     }
 
     public static void main(String[] args) {

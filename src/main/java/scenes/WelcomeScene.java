@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import scenes.publics.PublicScene;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -24,6 +25,7 @@ public class WelcomeScene extends MyGroup {
     ObservableList list;
     Image logo;
     ImageView imageView;
+    JFXButton nextButton;
 
     @Override
     protected void prepareLayout() {
@@ -31,7 +33,7 @@ public class WelcomeScene extends MyGroup {
         welcomeLabel = new Label("Informasi Masjid");
         welcomeLabel.setFont(Font.font("FZXiHeiI-Z08",33));
         try {
-            logo = new Image(new FileInputStream("/home/basithdj/IdeaProjects/informasi-masjid/dist/images/logo/Logo.png"));
+            logo = new Image(new FileInputStream("dist/images/logo/Logo.png"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -42,18 +44,24 @@ public class WelcomeScene extends MyGroup {
         imageView.setFitWidth(250);
         imageView.setPreserveRatio(true);
 
+        nextButton = new JFXButton("Next");
+
         vBox = new VBox();
         vBox.setSpacing(10);
         vBox.setMargin(imageView, new Insets(20,100,20,300));
         vBox.setMargin(welcomeLabel, new Insets(20,100,20,300));
 
         list = vBox.getChildren();
-        list.addAll(imageView,welcomeLabel);
+        list.addAll(imageView, welcomeLabel, nextButton);
 
         getChildren().addAll(vBox);
     }
 
     @Override
     protected void addListeners() {
+        nextButton.setOnAction(event -> {
+            setNextScene(new PublicScene());
+            moveNextScene();
+        });
     }
 }
