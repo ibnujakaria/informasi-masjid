@@ -21,7 +21,6 @@ public class LoginScene extends MyGroup {
 
     @Override
     protected void prepareLayout() {
-        view = new MyScene(this, 800, 600);
 
         VBox vBox = new VBox();
 

@@ -1,5 +1,6 @@
 package scenes;
 
+import app.Main;
 import com.jfoenix.controls.JFXButton;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -33,7 +34,6 @@ public class WelcomeScene extends MyGroup {
 
     @Override
     protected void prepareLayout() {
-        view = new MyScene(this, 800, 600);
         String uri = Paths.get("dist/css/welcome.css").toUri().toString();
         view.getStylesheets().add(uri);
         welcomeLabel = new Label("Informasi Masjid");
@@ -56,7 +56,7 @@ public class WelcomeScene extends MyGroup {
         nextButton = new JFXButton("Next");
 
         vBox = new VBox();
-        setvBoxFullScreen();
+//        setvBoxFullScreen();
         vBox.setAlignment(Pos.CENTER);
         vBox.getChildren().addAll(imageView,welcomeLabel,nextButton);
 
@@ -67,19 +67,20 @@ public class WelcomeScene extends MyGroup {
 
     @Override
     protected void addListeners() {
-        view.widthProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                setvBoxFullScreen();
-            }
-        });
-
-        view.heightProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                setvBoxFullScreen();
-            }
-        });
+//        view.widthProperty().addListener(new ChangeListener<Number>() {
+//            @Override
+//            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+//                setvBoxFullScreen();
+//                System.out.println("listener2: width: "+newValue);
+//            }
+//        });
+//
+//        view.heightProperty().addListener(new ChangeListener<Number>() {
+//            @Override
+//            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+//                setvBoxFullScreen();
+//            }
+//        });
 
         nextButton.setOnAction(event -> {
             setNextScene(new PublicScene());
@@ -87,8 +88,21 @@ public class WelcomeScene extends MyGroup {
         });
     }
 
-    private void setvBoxFullScreen () {
-        vBox.setMinHeight(view.getHeight());
-        vBox.setMinWidth(view.getWidth());
-    }
+//    @Override
+//    protected void onAfterBack() {
+//        super.onAfterBack();
+//        System.out.println("Iyak reh abelih la");
+//
+//        vBox.setMinWidth(getNextScene().getView().widthProperty().doubleValue());
+//        vBox.setMinHeight(getNextScene().getView().heightProperty().doubleValue());
+//    }
+
+//    private void setvBoxFullScreen () {
+//        System.out.println(this.getClass().toString() + ": setVBoxFullScreen");
+//        vBox.setMinHeight(Main.height);
+//        vBox.setMinWidth(Main.width);
+//
+//        System.out.println("MyScene.width => " + Main.width);
+//        System.out.println("MyScene.height => " + Main.height);
+//    }
 }

@@ -28,7 +28,6 @@ public class PublicScene extends MyGroup {
     Image background;
     @Override
     protected void prepareLayout() {
-        view = new MyScene(this, 800, 600);
         vBox = new VBox();
 
         String uri = Paths.get("dist/css/welcome.css").toUri().toString();
