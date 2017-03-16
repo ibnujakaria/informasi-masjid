@@ -35,7 +35,7 @@ public class WelcomeScene extends MyGroup {
     @Override
     protected void prepareLayout() {
         String uri = Paths.get("dist/css/welcome.css").toUri().toString();
-        view.getStylesheets().add(uri);
+
         welcomeLabel = new Label("Informasi Masjid");
         try {
             background = new Image(new FileInputStream("dist/images/logo/coba.jpg"));
@@ -45,7 +45,6 @@ public class WelcomeScene extends MyGroup {
         }
 
         ImagePattern imagePattern = new ImagePattern(background);
-        view.setFill(imagePattern);
 
         imageView = new ImageView(logo);
 
@@ -56,7 +55,7 @@ public class WelcomeScene extends MyGroup {
         nextButton = new JFXButton("Next");
 
         vBox = new VBox();
-//        setvBoxFullScreen();
+        setvBoxFullScreen();
         vBox.setAlignment(Pos.CENTER);
         vBox.getChildren().addAll(imageView,welcomeLabel,nextButton);
 
@@ -67,20 +66,20 @@ public class WelcomeScene extends MyGroup {
 
     @Override
     protected void addListeners() {
-//        view.widthProperty().addListener(new ChangeListener<Number>() {
-//            @Override
-//            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-//                setvBoxFullScreen();
-//                System.out.println("listener2: width: "+newValue);
-//            }
-//        });
-//
-//        view.heightProperty().addListener(new ChangeListener<Number>() {
-//            @Override
-//            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-//                setvBoxFullScreen();
-//            }
-//        });
+        Main.primaryStage.getScene().widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                setvBoxFullScreen();
+                System.out.println("listener2: width: "+newValue);
+            }
+        });
+
+        Main.primaryStage.getScene().heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                setvBoxFullScreen();
+            }
+        });
 
         nextButton.setOnAction(event -> {
             setNextScene(new PublicScene());
@@ -88,21 +87,15 @@ public class WelcomeScene extends MyGroup {
         });
     }
 
-//    @Override
-//    protected void onAfterBack() {
-//        super.onAfterBack();
-//        System.out.println("Iyak reh abelih la");
-//
-//        vBox.setMinWidth(getNextScene().getView().widthProperty().doubleValue());
-//        vBox.setMinHeight(getNextScene().getView().heightProperty().doubleValue());
-//    }
+    @Override
+    protected void onAfterBack() {
+        super.onAfterBack();
+        setvBoxFullScreen();
+    }
 
-//    private void setvBoxFullScreen () {
-//        System.out.println(this.getClass().toString() + ": setVBoxFullScreen");
-//        vBox.setMinHeight(Main.height);
-//        vBox.setMinWidth(Main.width);
-//
-//        System.out.println("MyScene.width => " + Main.width);
-//        System.out.println("MyScene.height => " + Main.height);
-//    }
+    private void setvBoxFullScreen () {
+        System.out.println(this.getClass().toString() + ": setVBoxFullScreen");
+        vBox.setMinHeight(Main.primaryStage.getScene().getHeight());
+        vBox.setMinWidth(Main.primaryStage.getScene().getWidth());
+    }
 }

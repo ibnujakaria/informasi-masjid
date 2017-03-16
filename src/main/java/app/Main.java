@@ -27,9 +27,10 @@ public class Main extends Application {
 
         primaryStage.setTitle("Info Masjid");
 
-        WelcomeScene welcomeScene = new WelcomeScene();
-        Scene scene = new Scene(welcomeScene, width, height);
+        Scene scene = new Scene(new Group(), width, height);
         primaryStage.setScene(scene);
+        WelcomeScene welcomeScene = new WelcomeScene();
+        scene.setRoot(welcomeScene);
         primaryStage.show();
     }
 

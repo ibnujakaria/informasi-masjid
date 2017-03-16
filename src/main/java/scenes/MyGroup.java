@@ -8,7 +8,6 @@ import javafx.scene.Group;
  */
 public abstract class MyGroup extends Group{
 
-    protected MyScene view;
     protected MyGroup nextScene, previousScene;
 
     protected abstract void prepareLayout();
@@ -16,12 +15,7 @@ public abstract class MyGroup extends Group{
 
     public MyGroup() {
         System.out.println("INSTANCE BARU: " + this.getClass().toString());
-        double newWidth, newHeight;
 
-        newWidth = getPreviousScene() == null ? Main.width : getPreviousScene().getView().getWidth();
-        newHeight = getPreviousScene() == null ? Main.height : getPreviousScene().getView().getHeight();
-
-//        view = new MyScene(this, newWidth, newHeight);
         prepareLayout();
         addListeners();
     }
@@ -39,7 +33,6 @@ public abstract class MyGroup extends Group{
             return;
         }
 
-//        Main.primaryStage.setScene(nextScene.getView());
         Main.primaryStage.getScene().setRoot(nextScene);
         nextScene.onAfterNext();
     }
@@ -49,7 +42,6 @@ public abstract class MyGroup extends Group{
             return;
         }
 
-//        Main.primaryStage.setScene(previousScene.getView());
         Main.primaryStage.getScene().setRoot(previousScene);
         previousScene.onAfterBack();
     }
@@ -71,11 +63,4 @@ public abstract class MyGroup extends Group{
         this.previousScene = previousScene;
     }
 
-    public MyScene getView() {
-        return view;
-    }
-
-    public void setView(MyScene view) {
-        this.view = view;
-    }
 }

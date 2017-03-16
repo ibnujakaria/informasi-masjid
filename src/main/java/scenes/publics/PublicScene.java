@@ -1,5 +1,6 @@
 package scenes.publics;
 
+import app.Main;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -31,7 +32,7 @@ public class PublicScene extends MyGroup {
         vBox = new VBox();
 
         String uri = Paths.get("dist/css/welcome.css").toUri().toString();
-        view.getStylesheets().add(uri);
+
         try {
             background = new Image(new FileInputStream("dist/images/logo/blur.jpg"));
         } catch (FileNotFoundException e) {
@@ -39,7 +40,6 @@ public class PublicScene extends MyGroup {
         }
 
         ImagePattern imagePattern = new ImagePattern(background);
-        view.setFill(imagePattern);
 
         Label label = new Label("PUBLIC SCENE");
         label.setFont(new Font(30));
@@ -77,8 +77,20 @@ public class PublicScene extends MyGroup {
 
     }
 
+    @Override
+    protected void onAfterNext() {
+        super.onAfterNext();
+        setvBoxFullScreen();
+    }
+
+    @Override
+    protected void onAfterBack() {
+        super.onAfterBack();
+        setvBoxFullScreen();
+    }
+
     private void setvBoxFullScreen () {
-        vBox.setMinHeight(view.getHeight());
-        vBox.setMinWidth(view.getWidth());
+        vBox.setMinHeight(Main.primaryStage.getScene().getHeight());
+        vBox.setMinWidth(Main.primaryStage.getScene().getWidth());
     }
 }
