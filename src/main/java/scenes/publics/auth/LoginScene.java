@@ -52,6 +52,9 @@ public class LoginScene extends MyGroup {
     @Override
     protected void addListeners() {
         backButton.setOnAction(event -> {
+            if (previousScene == null) {
+                setPreviousScene(new PublicScene());
+            }
             movePreviousScene();
         });
 
@@ -69,7 +72,7 @@ public class LoginScene extends MyGroup {
     private void doLoginProcess() {
         boolean success = Auth.attemps(usernameField.getText(), passwordField.getText());
         errorLabel.setVisible(false);
-        
+
         if (success) {
             setNextScene(new DashboardScene());
             moveNextScene();
