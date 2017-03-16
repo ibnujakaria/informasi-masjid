@@ -50,9 +50,7 @@ public class PublicScene extends MyGroup {
         tab1.setText("Jadwal Kajian");
         tab2.setText("Tanya Ustadz");
         tab3.setText("Rekaman Kajian");
-        tab1.setContent(listSchedule);
-        tab2.setContent(new Label("Content 2"));
-        tab3.setContent(new Label("Content 3"));
+
         double max = Main.primaryStage.getScene().getWidth() /3;
         tabPane.setTabMinWidth(max);
         tabPane.setTabMinHeight(70);
@@ -92,7 +90,9 @@ public class PublicScene extends MyGroup {
         setvBoxFullScreen();
         vBox.setMargin(buttons, new Insets(20, 20, 20, 320));
         ObservableList list = vBox.getChildren();
-
+        tab1.setContent(listSchedule);
+        tab2.setContent(buttons);
+        tab3.setContent(new Label("Content 3"));
         //Adding all the nodes to the observable list
         list.addAll(borderPane);
         getChildren().add(vBox);
