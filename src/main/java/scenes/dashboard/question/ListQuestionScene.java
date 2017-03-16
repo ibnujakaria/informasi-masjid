@@ -16,9 +16,4 @@ public class ListQuestionScene extends MyGroup
     protected void addListeners() {
 
     }
-
-    @Override
-    protected void onRender() {
-
-    }
 }

@@ -13,35 +13,45 @@ public abstract class MyGroup extends Group{
 
     protected abstract void prepareLayout();
     protected abstract void addListeners();
-    protected abstract void onRender();
 
     public MyGroup() {
-        view = new MyScene(this, MyScene.width, MyScene.height);
+        System.out.println("INSTANCE BARU: " + this.getClass().toString());
+        double newWidth, newHeight;
+
+        newWidth = getPreviousScene() == null ? Main.width : getPreviousScene().getView().getWidth();
+        newHeight = getPreviousScene() == null ? Main.height : getPreviousScene().getView().getHeight();
+
+//        view = new MyScene(this, newWidth, newHeight);
         prepareLayout();
-        onRender();
         addListeners();
+    }
+
+    protected void onAfterNext() {
+
+    }
+
+    protected void onAfterBack() {
+
     }
 
     public void moveNextScene() {
         if (nextScene == null) {
-            System.out.println("not moving to next scene");
             return;
         }
 
-        Main.primaryStage.setScene(nextScene.getView());
-        nextScene.onRender();
-        System.out.println("move to next scene: " + nextScene.getClass().toString());
+//        Main.primaryStage.setScene(nextScene.getView());
+        Main.primaryStage.getScene().setRoot(nextScene);
+        nextScene.onAfterNext();
     }
 
     public void movePreviousScene() {
         if (previousScene == null) {
-            System.out.println("not moving to previous scene");
             return;
         }
 
-        Main.primaryStage.setScene(previousScene.getView());
-        previousScene.onRender();
-        System.out.println("move to previousscene: " + previousScene.getClass().toString());
+//        Main.primaryStage.setScene(previousScene.getView());
+        Main.primaryStage.getScene().setRoot(previousScene);
+        previousScene.onAfterBack();
     }
 
     public MyGroup getNextScene() {
@@ -49,7 +59,6 @@ public abstract class MyGroup extends Group{
     }
 
     public void setNextScene(MyGroup nextScene) {
-        System.out.println("set next scene: " + nextScene.getClass().toString());
         nextScene.setPreviousScene(this);
         this.nextScene = nextScene;
     }
@@ -59,7 +68,6 @@ public abstract class MyGroup extends Group{
     }
 
     public void setPreviousScene(MyGroup previousScene) {
-        System.out.println("set previous scene: " + previousScene.getClass().toString());
         this.previousScene = previousScene;
     }
 

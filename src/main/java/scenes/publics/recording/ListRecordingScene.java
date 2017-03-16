@@ -15,9 +15,4 @@ public class ListRecordingScene extends MyGroup {
     protected void addListeners() {
 
     }
-
-    @Override
-    protected void onRender() {
-
-    }
 }

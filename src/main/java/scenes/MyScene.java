@@ -1,5 +1,6 @@
 package scenes;
 
+import app.Main;
 import javafx.beans.NamedArg;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -13,8 +14,6 @@ import javafx.stage.Window;
  * Created by ibnujakaria on 3/15/17.
  */
 public class MyScene extends Scene implements ChangeListener<Number> {
-    public static double height = 600, width = 800;
-
     public MyScene(@NamedArg("root") Parent root) {
         super(root);
         widthProperty().addListener(this);
@@ -54,7 +53,7 @@ public class MyScene extends Scene implements ChangeListener<Number> {
 
     @Override
     public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-        height = getHeight();
-        width = getWidth();
+//        Main.height = getHeight();
+//        Main.width = getWidth();
     }
 }

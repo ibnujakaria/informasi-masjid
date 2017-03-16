@@ -15,9 +15,4 @@ public class PostNewQuestionScene extends MyGroup {
     protected void addListeners() {
 
     }
-
-    @Override
-    protected void onRender() {
-
-    }
 }

@@ -16,6 +16,7 @@ import scenes.WelcomeScene;
 public class Main extends Application {
 
     public static Stage primaryStage;
+    public static double height = 400, width = 400;
 
     @Override
     public void start(Stage page) throws Exception {
@@ -24,7 +25,8 @@ public class Main extends Application {
         primaryStage.setTitle("Info Masjid");
 
         WelcomeScene welcomeScene = new WelcomeScene();
-        primaryStage.setScene(welcomeScene.getView());
+        Scene scene = new Scene(welcomeScene, width, height);
+        primaryStage.setScene(scene);
         primaryStage.show();
 
     }

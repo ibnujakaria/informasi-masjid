@@ -55,9 +55,4 @@ public class LoginScene extends MyGroup {
             publicScene.moveNextScene();
         });
     }
-
-    @Override
-    protected void onRender() {
-
-    }
 }

@@ -15,9 +15,4 @@ public class ListScheduleScene extends MyGroup {
     protected void addListeners() {
 
     }
-
-    @Override
-    protected void onRender() {
-
-    }
 }

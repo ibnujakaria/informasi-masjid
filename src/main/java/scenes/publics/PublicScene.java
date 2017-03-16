@@ -41,9 +41,4 @@ public class PublicScene extends MyGroup {
             moveNextScene();
         });
     }
-
-    @Override
-    protected void onRender() {
-
-    }
 }

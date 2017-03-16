@@ -59,9 +59,4 @@ public class SignupScene extends MyGroup {
             movePreviousScene();
         });
     }
-
-    @Override
-    protected void onRender() {
-
-    }
 }

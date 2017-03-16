@@ -15,9 +15,4 @@ public class AnswerQuestionScene extends MyGroup {
     protected void addListeners() {
 
     }
-
-    @Override
-    protected void onRender() {
-
-    }
 }

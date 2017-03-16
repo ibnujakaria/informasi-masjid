@@ -15,9 +15,4 @@ public class DetailScheduleScene extends MyGroup {
     protected void addListeners() {
 
     }
-
-    @Override
-    protected void onRender() {
-
-    }
 }
