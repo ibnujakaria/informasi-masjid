@@ -17,9 +17,8 @@ import scenes.dashboard.DashboardScene;
  */
 public class SignupScene extends MyGroup {
     JFXButton backButton, signUpButton;
-    JFXTextField nameField, usernameField, emailField;
+    JFXTextField nameField, usernameField, emailField, addressField;
     JFXPasswordField passwordField, passwordConfirmationField;
-    JFXTextArea addressField;
 
     @Override
     protected void prepareLayout() {
@@ -46,8 +45,8 @@ public class SignupScene extends MyGroup {
         passwordConfirmationField = new JFXPasswordField();
         passwordConfirmationField.setPromptText("Type your password again");
 
-        addressField = new JFXTextArea();
-        addressField.setPromptText("Address");
+        addressField = new JFXTextField();
+        addressField.setPromptText("City");
 
         vBox.getChildren().addAll(backButton, label, nameField, usernameField,
                 emailField, addressField, passwordField, passwordConfirmationField,
