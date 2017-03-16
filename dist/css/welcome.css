@@ -1,0 +1,18 @@
+.root {
+    -fx-background-image: url("https://www.google.com/images/srpr/logo3w.png");
+}
+
+.button {
+    -fx-text-fill: white;
+    -fx-background-color: #3498db;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+}
+
+.label {
+    -fx-font-size: 33px;
+    -fx-font-family: "FZXiHeiI-Z08";
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+

@@ -14,11 +14,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Font;
 import scenes.publics.PublicScene;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.nio.file.Paths;
 
 /**
  * Created by ibnujakaria on 3/15/17.
@@ -26,19 +28,24 @@ import java.io.FileNotFoundException;
 public class WelcomeScene extends MyGroup {
     VBox vBox;
     Label welcomeLabel;
-    Image logo;
+    Image logo,background;
     ImageView imageView;
     JFXButton nextButton;
 
     @Override
     protected void prepareLayout() {
+        String uri = Paths.get("dist/css/welcome.css").toUri().toString();
+        view.getStylesheets().add(uri);
         welcomeLabel = new Label("Informasi Masjid");
-        welcomeLabel.setFont(Font.font("FZXiHeiI-Z08",33));
         try {
-            logo = new Image(new FileInputStream("dist/images/logo/Logo.png"));
+            background = new Image(new FileInputStream("dist/images/logo/coba.jpg"));
+            logo = new Image(new FileInputStream("dist/images/logo/logo-1.png"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+        ImagePattern imagePattern = new ImagePattern(background);
+        view.setFill(imagePattern);
 
         imageView = new ImageView(logo);
 
