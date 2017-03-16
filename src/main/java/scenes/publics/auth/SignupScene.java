@@ -1,13 +1,16 @@
 package scenes.publics.auth;
 
 import com.jfoenix.controls.*;
+import core.auth.Auth;
 import database.models.User;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import org.jooq.Record;
+import org.jooq.Table;
 import scenes.MyGroup;
-import scenes.MyScene;
+import scenes.dashboard.DashboardScene;
 
 /**
  * Created by ibnujakaria on 3/15/17.
@@ -70,11 +73,17 @@ public class SignupScene extends MyGroup {
         dialog.setContent(new Label("Loading.."));
         dialog.show(pane);
 
-        User.createUser(
+        Record user = User.createUser(
                 nameField.getText(), usernameField.getText(), emailField.getText(), addressField.getText(),
                 passwordField.getText(), false, false
         );
 
-        movePreviousScene();
+        Auth.loginByUserRecord(user);
+        moveToDashboardScene();
+    }
+
+    private void moveToDashboardScene() {
+        setNextScene(new DashboardScene());
+        moveNextScene();
     }
 }
