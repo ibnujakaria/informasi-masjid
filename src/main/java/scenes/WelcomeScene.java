@@ -35,6 +35,7 @@ public class WelcomeScene extends MyGroup {
     @Override
     protected void prepareLayout() {
         String uri = Paths.get("dist/css/welcome.css").toUri().toString();
+        Main.primaryStage.getScene().getStylesheets().add(uri);
 
         welcomeLabel = new Label("Informasi Masjid");
         try {
@@ -45,6 +46,7 @@ public class WelcomeScene extends MyGroup {
         }
 
         ImagePattern imagePattern = new ImagePattern(background);
+        Main.primaryStage.getScene().setFill(imagePattern);
 
         imageView = new ImageView(logo);
 
