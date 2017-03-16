@@ -17,7 +17,6 @@ public class PublicScene extends MyGroup {
 
     @Override
     protected void prepareLayout() {
-        view = new MyScene(this, 800, 600);
         VBox vBox = new VBox();
         Label label = new Label("PUBLIC SCENE");
         label.setFont(new Font(30));
