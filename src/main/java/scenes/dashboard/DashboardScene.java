@@ -13,7 +13,7 @@ import scenes.publics.auth.LoginScene;
  * Created by ibnujakaria on 3/15/17.
  */
 public class DashboardScene extends MyGroup {
-    private JFXButton logoutButton;
+    private JFXButton logoutButton, adminButton;
 
     @Override
     protected void prepareLayout() {
@@ -22,8 +22,15 @@ public class DashboardScene extends MyGroup {
         Label welcome = new Label("Selamat datang: " + Auth.getUser().get("name"));
         logoutButton = new JFXButton("Logout");
 
+        adminButton = new JFXButton("Admin");
+        adminButton.setVisible(Auth.isAdmin());
+
+        System.out.println(Auth.getUser().get("username"));
+        System.out.println("role -> " + Auth.getUser().get("role"));
+        System.out.println(Auth.isAdmin() ? "Iki admin" : "Iki guduk admin");
+
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(label, welcome, logoutButton);
+        vBox.getChildren().addAll(label, welcome, adminButton, logoutButton);
         getChildren().add(vBox);
     }
 
@@ -34,6 +41,10 @@ public class DashboardScene extends MyGroup {
 
             setPreviousScene(new LoginScene());
             movePreviousScene();
+        });
+
+        adminButton.setOnAction(event -> {
+            System.out.println("Halaman admin!");
         });
     }
 }

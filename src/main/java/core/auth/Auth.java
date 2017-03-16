@@ -62,6 +62,13 @@ public class Auth {
         return is_login;
     }
 
+    public static boolean isAdmin () {
+        if (is_login) {
+            return Integer.parseInt(user.get("role").toString()) == 1;
+        }
+        return false;
+    }
+
     public static Record getUser ()
     {
         return user;
