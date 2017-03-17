@@ -9,10 +9,6 @@ import java.sql.Statement;
  * Created by ibnujakaria on 3/10/17.
  */
 public class UserTableSchema extends Schema {
-
-    protected int VERSION = 1;
-    protected String CLASS_NAME = UserTableSchema.class.toString();
-
     @Override
     protected int getVersion() {
         return 2;

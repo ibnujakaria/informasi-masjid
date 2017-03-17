@@ -1,5 +1,6 @@
 package database;
 
+import database.schemas.QuestionTableSchema;
 import database.schemas.UserTableSchema;
 
 import java.sql.Connection;
@@ -33,5 +34,8 @@ public class DB {
         connect();
         UserTableSchema userTableSchema = new UserTableSchema();
         userTableSchema.up();
+
+        QuestionTableSchema questionTableSchema = new QuestionTableSchema();
+        questionTableSchema.up();
     }
 }
