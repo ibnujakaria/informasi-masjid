@@ -82,4 +82,7 @@ public class Auth {
         return user;
     }
 
+    public static int getUserId() {
+        return Integer.parseInt(getUser().get("id").toString());
+    }
 }

@@ -4,9 +4,12 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import core.auth.Auth;
+import database.models.Question;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import org.jooq.Record;
 import scenes.MyGroup;
 
 /**
@@ -44,6 +47,13 @@ public class PostNewQuestionScene extends MyGroup {
     protected void addListeners() {
         backButton.setOnAction(event -> {
             movePreviousScene();
+        });
+
+        submitButton.setOnAction(event -> {
+            Record question = Question.create(Auth.getUserId(), titleField.getText(), descriptionField.getText(),
+                    isAnonimCheckbox.isSelected());
+
+            System.out.println(question);
         });
     }
 }
