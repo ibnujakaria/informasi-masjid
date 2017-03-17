@@ -39,7 +39,7 @@ public class MyListQuestionScene extends MyGroup
         questionListTapiVbox = new VBox();
 
         for (Record question : Question.getQuestionsOfUserId(Auth.getUserId())) {
-            questionListTapiVbox.getChildren().add(new QuestionComponent(question));
+            questionListTapiVbox.getChildren().add(new QuestionComponent(question, this));
         }
     }
 

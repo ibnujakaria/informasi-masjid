@@ -38,7 +38,7 @@ public class UnAnsweredQuestionScene extends MyGroup{
         questionListTapiVbox = new VBox();
 
         for (Record question : Question.getUnAnsweredQuestions()) {
-            questionListTapiVbox.getChildren().add(new QuestionComponent(question));
+            questionListTapiVbox.getChildren().add(new QuestionComponent(question, this));
         }
     }
 
