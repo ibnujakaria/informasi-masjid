@@ -1,10 +1,7 @@
 package scenes.publics;
 
 import app.Main;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXListView;
-import com.jfoenix.controls.JFXPopup;
-import com.jfoenix.controls.JFXTabPane;
+import com.jfoenix.controls.*;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

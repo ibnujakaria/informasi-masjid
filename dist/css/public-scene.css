@@ -11,3 +11,11 @@
     -fx-font-weight: bold;
     -fx-text-fill: black;
 }
+
+#top-menu{
+    -fx-background-color: #00bcd4ff;
+}
+
+#userBtn{
+    -fx-background-color: #00bcd4ff;
+}
