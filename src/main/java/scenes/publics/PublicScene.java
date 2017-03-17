@@ -34,10 +34,10 @@ public class PublicScene extends MyGroup {
     JFXTabPane tabPane;
     BorderPane borderPane;
     Tab tab1, tab2, tab3;
-//    JFXListView<Label> listSchedule;
+  
     @Override
     protected void prepareLayout() {
-        String uri = Paths.get("dist/css/welcome.css").toUri().toString();
+        String uri = Paths.get("dist/css/public-scene.css").toUri().toString();
         Main.primaryStage.getScene().getStylesheets().add(uri);
 
 //        vBox = new VBox();
@@ -60,7 +60,6 @@ public class PublicScene extends MyGroup {
         borderPane.prefWidthProperty().bind(Main.primaryStage.getScene().widthProperty());
         borderPane.setTop(new TopMenu());
         borderPane.setCenter(tabPane);
-
 
         try {
             background = new Image(new FileInputStream("dist/images/logo/blur.jpg"));
