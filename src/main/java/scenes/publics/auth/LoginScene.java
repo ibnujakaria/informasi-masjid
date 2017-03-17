@@ -5,6 +5,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import core.auth.Auth;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -90,8 +92,10 @@ public class LoginScene extends MyGroup {
                 if (kb.match(event)) {
                     if (previousScene == null) {
                         setPreviousScene(new PublicScene());
+                        setvBoxFullScreen();
                     }
                     movePreviousScene();
+                    setvBoxFullScreen();
                 }
             }
         });
@@ -99,18 +103,37 @@ public class LoginScene extends MyGroup {
         backButton.setOnAction(event -> {
             if (previousScene == null) {
                 setPreviousScene(new PublicScene());
+                setvBoxFullScreen();
             }
             movePreviousScene();
+            setvBoxFullScreen();
         });
 
         loginButton.setOnAction(event -> {
             doLoginProcess();
+            setvBoxFullScreen();
         });
 
         signUpButton.setOnAction(event -> {
             PublicScene publicScene = (PublicScene) getPreviousScene();
             publicScene.setNextScene(new SignupScene());
             publicScene.moveNextScene();
+            setvBoxFullScreen();
+        });
+
+        Main.primaryStage.getScene().widthProperty().addListener(new ChangeListener<Number>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                setvBoxFullScreen();
+            }
+        });
+
+        Main.primaryStage.getScene().heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                setvBoxFullScreen();
+            }
         });
     }
 
@@ -121,8 +144,10 @@ public class LoginScene extends MyGroup {
         if (success) {
             setNextScene(new DashboardScene());
             moveNextScene();
+            setvBoxFullScreen();
         } else {
             errorLabel.setVisible(true);
+            setvBoxFullScreen();
         }
     }
 

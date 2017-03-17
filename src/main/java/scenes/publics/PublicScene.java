@@ -2,6 +2,8 @@ package scenes.publics;
 
 import app.Main;
 import com.jfoenix.controls.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -94,6 +96,22 @@ public class PublicScene extends MyGroup {
 
     @Override
     protected void addListeners() {
+        Main.primaryStage.getScene().widthProperty().addListener(new ChangeListener<Number>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                setvBoxFullScreen();
+                System.out.println("listener2: width: "+newValue);
+            }
+        });
+
+        Main.primaryStage.getScene().heightProperty().addListener(new ChangeListener<Number>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                setvBoxFullScreen();
+            }
+        });
 //        backButton.setOnAction(event -> {
 //            movePreviousScene();
 //        });
@@ -108,17 +126,18 @@ public class PublicScene extends MyGroup {
     @Override
     protected void onAfterNext() {
         super.onAfterNext();
-//        setvBoxFullScreen();
+        setvBoxFullScreen();
     }
 
     @Override
     protected void onAfterBack() {
         super.onAfterBack();
-//        setvBoxFullScreen();
+        setvBoxFullScreen();
     }
 
     private void setvBoxFullScreen () {
-//        vBox.setMinHeight(Main.primaryStage.getScene().getHeight());
-//        vBox.setMinWidth(Main.primaryStage.getScene().getWidth());
+        System.out.println(this.getClass().toString() + ": setVBoxFullScreen");
+        borderPane.setMinHeight(Main.primaryStage.getScene().getHeight());
+        borderPane.setMinWidth(Main.primaryStage.getScene().getWidth());
     }
 }
