@@ -69,6 +69,14 @@ public class Auth {
         return false;
     }
 
+    public static boolean isUstadz () {
+        if (is_login) {
+            return Integer.parseInt(user.get("is_ustadz").toString()) == 1;
+        }
+
+        return false;
+    }
+
     public static Record getUser ()
     {
         return user;

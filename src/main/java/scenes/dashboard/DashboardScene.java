@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import scenes.MyGroup;
+import scenes.dashboard.question.PostNewQuestionScene;
 import scenes.publics.auth.LoginScene;
 
 
@@ -13,7 +14,7 @@ import scenes.publics.auth.LoginScene;
  * Created by ibnujakaria on 3/15/17.
  */
 public class DashboardScene extends MyGroup {
-    private JFXButton logoutButton, adminButton;
+    private JFXButton logoutButton, adminButton, addQuestion;
 
     @Override
     protected void prepareLayout() {
@@ -25,12 +26,15 @@ public class DashboardScene extends MyGroup {
         adminButton = new JFXButton("Admin");
         adminButton.setVisible(Auth.isAdmin());
 
+        addQuestion = new JFXButton("Tanya sesuatu");
+        addQuestion.setVisible(!Auth.isUstadz() && !Auth.isAdmin());
+
         System.out.println(Auth.getUser().get("username"));
         System.out.println("role -> " + Auth.getUser().get("role"));
         System.out.println(Auth.isAdmin() ? "Iki admin" : "Iki guduk admin");
 
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(label, welcome, adminButton, logoutButton);
+        vBox.getChildren().addAll(label, welcome, adminButton, addQuestion, logoutButton);
         getChildren().add(vBox);
     }
 
@@ -45,6 +49,11 @@ public class DashboardScene extends MyGroup {
 
         adminButton.setOnAction(event -> {
             System.out.println("Halaman admin!");
+        });
+
+        addQuestion.setOnAction(event -> {
+            setNextScene(new PostNewQuestionScene());
+            moveNextScene();
         });
     }
 }

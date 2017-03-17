@@ -29,7 +29,7 @@ public class User {
                 .set(field("password"), hashedPassword)
                 .set(field("role"), is_admin ? 1 : 0)
                 .set(field("address"), address)
-                .set(field("is_ustadz"), is_ustadz ? "true" : "false")
+                .set(field("is_ustadz"), is_ustadz ? 1 : 0)
                 .set(field("created_at"), new LocalDate() + " " + new LocalTime())
                 .set(field("updated_at"), new LocalDate() + " " + new LocalTime())
                 .execute();
