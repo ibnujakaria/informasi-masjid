@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import scenes.MyGroup;
+import scenes.admin.ustadz.AddUstadzScene;
 
 /**
  * Created by ibnujakaria on 3/17/17.
@@ -38,6 +39,11 @@ public class AdminScene extends MyGroup {
     protected void addListeners() {
         backButton.setOnAction(event -> {
             movePreviousScene();
+        });
+
+        listUstadzButton.setOnAction(event -> {
+            setNextScene(new AddUstadzScene());
+            moveNextScene();
         });
     }
 }
