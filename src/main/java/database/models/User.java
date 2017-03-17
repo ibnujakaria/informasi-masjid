@@ -49,4 +49,11 @@ public class User {
 
         return null;
     }
+
+    public static Result<Record> getUstadz ()
+    {
+        return db.select().from(table("users"))
+                .where(field("is_ustadz").equal(1))
+                .fetch();
+    }
 }
