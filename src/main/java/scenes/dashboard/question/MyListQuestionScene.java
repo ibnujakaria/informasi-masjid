@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import org.jooq.Record;
 import scenes.MyGroup;
-import scenes.dashboard.question.components.QuestionComponent;
+import core.components.QuestionComponent;
 
 /**
  * Created by ibnujakaria on 3/15/17.

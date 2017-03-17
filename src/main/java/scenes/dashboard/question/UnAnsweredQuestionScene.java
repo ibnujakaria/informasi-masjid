@@ -2,14 +2,13 @@ package scenes.dashboard.question;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
-import core.auth.Auth;
 import database.models.Question;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import org.jooq.Record;
 import scenes.MyGroup;
-import scenes.dashboard.question.components.QuestionComponent;
+import core.components.QuestionComponent;
 
 /**
  * Created by ibnujakaria on 3/17/17.

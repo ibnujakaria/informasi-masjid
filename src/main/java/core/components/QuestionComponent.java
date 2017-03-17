@@ -1,4 +1,4 @@
-package scenes.dashboard.question.components;
+package core.components;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.scene.control.Label;
