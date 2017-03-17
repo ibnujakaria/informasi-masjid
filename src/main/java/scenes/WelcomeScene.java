@@ -27,6 +27,7 @@ import java.nio.file.Paths;
  */
 public class WelcomeScene extends MyGroup {
     VBox vBox;
+    BorderPane border;
     Label welcomeLabel;
     Image logo,background;
     ImageView imageView;
@@ -61,7 +62,8 @@ public class WelcomeScene extends MyGroup {
         vBox.setAlignment(Pos.CENTER);
         vBox.getChildren().addAll(imageView,welcomeLabel,nextButton);
 
-        BorderPane border = new BorderPane();
+
+        border = new BorderPane();
         border.setCenter(vBox);
         this.getChildren().addAll(border);
     }
