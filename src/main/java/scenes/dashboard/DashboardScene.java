@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import scenes.MyGroup;
+import scenes.admin.AdminScene;
 import scenes.dashboard.question.ListQuestionScene;
 import scenes.dashboard.question.PostNewQuestionScene;
 import scenes.publics.auth.LoginScene;
@@ -52,7 +53,8 @@ public class DashboardScene extends MyGroup {
         });
 
         adminButton.setOnAction(event -> {
-            System.out.println("Halaman admin!");
+            setNextScene(new AdminScene());
+            moveNextScene();
         });
 
         addQuestion.setOnAction(event -> {
