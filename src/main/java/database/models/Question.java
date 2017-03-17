@@ -3,9 +3,7 @@ package database.models;
 import database.DB;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
-import org.jooq.DSLContext;
-import org.jooq.Record;
-import org.jooq.SQLDialect;
+import org.jooq.*;
 import org.jooq.impl.DSL;
 
 import static org.jooq.impl.DSL.*;
@@ -28,5 +26,18 @@ public class Question {
                 .set(field("updated_at"), new LocalDate() + " " + new LocalTime())
                 .returning(field("id"))
                 .fetchOne();
+    }
+
+    public static Result<Record> getQuestionsOfUserId (int user_id) {
+        Result<Record> results = db.select().from(table("questions"))
+                .where(field("user_id").equal(user_id))
+                .orderBy(field("id").desc())
+                .fetch();
+
+        for (Record r : results) {
+            System.out.println(r.get("title"));
+        }
+
+        return results;
     }
 }

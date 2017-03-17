@@ -1,9 +1,6 @@
 package scenes.dashboard.question;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import core.auth.Auth;
 import database.models.Question;
 import javafx.scene.control.Label;
@@ -12,6 +9,7 @@ import javafx.scene.text.Font;
 import org.jooq.Record;
 import scenes.MyGroup;
 import scenes.dashboard.DashboardScene;
+import scenes.dashboard.question.components.QuestionComponent;
 
 /**
  * Created by ibnujakaria on 3/15/17.
