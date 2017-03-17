@@ -26,8 +26,9 @@ public class TopMenu extends HBox {
     Image user;
 
     public TopMenu() {
-        setMinHeight(100);
+        setMinHeight(120);
         title = new Label("Info Masjid");
+        title.setId("title");
         setId("top-menu");
         setMargin(title, new Insets(10,0,0,10));
         addLeftMenu();
@@ -37,7 +38,7 @@ public class TopMenu extends HBox {
 
     private void addLeftMenu() {
         try {
-            user = new Image(new FileInputStream("dist/images/user/user.png"),50,50,false,false);
+            user = new Image(new FileInputStream("dist/images/user/user.png"),40,40,false,false);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

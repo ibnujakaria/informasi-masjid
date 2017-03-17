@@ -6,9 +6,14 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import core.auth.Auth;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -29,6 +34,7 @@ public class LoginScene extends MyGroup {
     Label errorLabel;
     VBox vBox;
     BorderPane back;
+    final KeyCombination kb = new KeyCodeCombination(KeyCode.B, KeyCombination.CONTROL_ANY);
 
     @Override
     protected void prepareLayout() {
@@ -72,12 +78,24 @@ public class LoginScene extends MyGroup {
         vBox.setAlignment(Pos.CENTER);
         ObservableList list = vBox.getChildren();
         list.addAll(header,usernameField,passwordField,errorLabel,buttons);
-        getChildren().addAll(vBox,back);
+        getChildren().addAll(vBox);
 
     }
 
     @Override
     protected void addListeners() {
+        setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (kb.match(event)) {
+                    if (previousScene == null) {
+                        setPreviousScene(new PublicScene());
+                    }
+                    movePreviousScene();
+                }
+            }
+        });
+
         backButton.setOnAction(event -> {
             if (previousScene == null) {
                 setPreviousScene(new PublicScene());

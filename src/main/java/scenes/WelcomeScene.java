@@ -2,9 +2,13 @@ package scenes;
 
 import app.Main;
 import com.jfoenix.controls.JFXButton;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -16,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Font;
+import javafx.util.Duration;
 import scenes.publics.PublicScene;
 
 import java.io.FileInputStream;
@@ -60,7 +65,7 @@ public class WelcomeScene extends MyGroup {
         vBox = new VBox();
         setvBoxFullScreen();
         vBox.setAlignment(Pos.CENTER);
-        vBox.getChildren().addAll(imageView,welcomeLabel,nextButton);
+        vBox.getChildren().addAll(imageView,welcomeLabel);
 
 
         border = new BorderPane();
@@ -70,6 +75,17 @@ public class WelcomeScene extends MyGroup {
 
     @Override
     protected void addListeners() {
+        Timeline auto = new Timeline(new KeyFrame(Duration.seconds(3), new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                setNextScene(new PublicScene());
+                moveNextScene();
+            }
+        }));
+        auto.setCycleCount(1);
+        auto.play();
+
         Main.primaryStage.getScene().widthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
