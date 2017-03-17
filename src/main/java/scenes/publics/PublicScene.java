@@ -36,6 +36,7 @@ public class PublicScene extends MyGroup {
     BorderPane borderPane;
     Tab tab1, tab2, tab3;
     JFXListView<Label> listSchedule;
+
     @Override
     protected void prepareLayout() {
         vBox = new VBox();
@@ -62,7 +63,7 @@ public class PublicScene extends MyGroup {
 
         borderPane.setCenter(tabPane);
 
-        String uri = Paths.get("dist/css/welcome.css").toUri().toString();
+        String uri = Paths.get("dist/css/public-scene.css").toUri().toString();
         Main.primaryStage.getScene().getStylesheets().add(uri);
 
         try {
