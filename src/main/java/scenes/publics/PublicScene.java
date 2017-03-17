@@ -15,6 +15,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Font;
 import scenes.MyGroup;
 import scenes.MyScene;
+import scenes.pieces.JadwalContent;
 import scenes.pieces.TopMenu;
 import scenes.publics.auth.LoginScene;
 
@@ -32,7 +33,7 @@ public class PublicScene extends MyGroup {
     JFXTabPane tabPane;
     BorderPane borderPane;
     Tab tab1, tab2, tab3;
-    JFXListView<Label> listSchedule;
+//    JFXListView<Label> listSchedule;
     @Override
     protected void prepareLayout() {
         String uri = Paths.get("dist/css/welcome.css").toUri().toString();
@@ -40,8 +41,8 @@ public class PublicScene extends MyGroup {
 
 //        vBox = new VBox();
         tabPane = new JFXTabPane();
-        listSchedule = new JFXListView<Label>();
-        for(int i = 0 ; i < 4 ; i++) listSchedule.getItems().add(new Label("Item " + i));
+//        listSchedule = new JFXListView<Label>();
+//        for(int i = 0 ; i < 4 ; i++) listSchedule.getItems().add(new Label("Item " + i));
 
         borderPane = new BorderPane();
         tab1 = new Tab();
@@ -86,7 +87,7 @@ public class PublicScene extends MyGroup {
 //        setvBoxFullScreen();
 //        vBox.setMargin(buttons, new Insets(20, 20, 20, 320));
 //        ObservableList list = vBox.getChildren();
-        tab1.setContent(listSchedule);
+        tab1.setContent(new JadwalContent());
         tab2.setContent(buttons);
         tab3.setContent(new Label("Content 3"));
         //Adding all the nodes to the observable list
