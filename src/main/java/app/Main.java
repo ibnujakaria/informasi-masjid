@@ -19,7 +19,7 @@ import scenes.WelcomeScene;
 public class Main extends Application {
 
     public static Stage primaryStage;
-    public static double height = 400, width = 400;
+    public static double height = 600, width = 800;
 
     @Override
     public void start(Stage page) throws Exception {
