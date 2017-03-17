@@ -16,6 +16,7 @@ import javafx.scene.text.Font;
 import scenes.MyGroup;
 import scenes.MyScene;
 import scenes.pieces.JadwalContent;
+import scenes.pieces.PertanyaanContent;
 import scenes.pieces.TopMenu;
 import scenes.publics.auth.LoginScene;
 
@@ -28,7 +29,7 @@ import java.nio.file.Paths;
  */
 public class PublicScene extends MyGroup {
 //    VBox vBox;
-    JFXButton backButton, loginButton, tanyaButton;
+//    JFXButton backButton, loginButton, tanyaButton;
     Image background;
     JFXTabPane tabPane;
     BorderPane borderPane;
@@ -74,21 +75,21 @@ public class PublicScene extends MyGroup {
 //        Label label = new Label("PUBLIC SCENE");
 //        label.setFont(new Font(30));
 //        backButton = new JFXButton("Back");
-        loginButton = new JFXButton("Masuk");
-        tanyaButton = new JFXButton("Tanya");
+//        loginButton = new JFXButton("Masuk");
+//        tanyaButton = new JFXButton("Tanya");
 
 
-        GridPane buttons = new GridPane();
-        buttons.setPadding(new Insets(10, 10, 10, 10));
-        buttons.setVgap(5);
-        buttons.setHgap(5);
-        buttons.add(loginButton, 0, 2);
-        buttons.add(tanyaButton, 1, 2);
+//        GridPane buttons = new GridPane();
+//        buttons.setPadding(new Insets(10, 10, 10, 10));
+//        buttons.setVgap(5);
+//        buttons.setHgap(5);
+//        buttons.add(loginButton, 0, 2);
+//        buttons.add(tanyaButton, 1, 2);
 //        setvBoxFullScreen();
 //        vBox.setMargin(buttons, new Insets(20, 20, 20, 320));
 //        ObservableList list = vBox.getChildren();
         tab1.setContent(new JadwalContent());
-        tab2.setContent(buttons);
+        tab2.setContent(new PertanyaanContent(this));
         tab3.setContent(new Label("Content 3"));
         //Adding all the nodes to the observable list
 //        list.addAll(borderPane);
@@ -101,10 +102,10 @@ public class PublicScene extends MyGroup {
 //            movePreviousScene();
 //        });
 
-        loginButton.setOnAction(event -> {
-            setNextScene(new LoginScene());
-            moveNextScene();
-        });
+//        loginButton.setOnAction(event -> {
+//            setNextScene(new LoginScene());
+//            moveNextScene();
+//        });
 
     }
 
