@@ -1,10 +1,16 @@
 package scenes.publics.auth;
 
+import app.Main;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import core.auth.Auth;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -21,11 +27,13 @@ public class LoginScene extends MyGroup {
     JFXPasswordField passwordField;
     JFXButton loginButton, signUpButton, backButton;
     Label errorLabel;
+    VBox vBox;
+    BorderPane back;
 
     @Override
     protected void prepareLayout() {
 
-        VBox vBox = new VBox();
+        vBox = new VBox();
 
         Label header = new Label("Login");
         header.setFont(new Font(40));
@@ -34,6 +42,10 @@ public class LoginScene extends MyGroup {
 
         passwordField = new JFXPasswordField();
         passwordField.setPromptText("Password");
+        usernameField.setMaxWidth(320);
+        passwordField.setMaxWidth(320);
+        usernameField.setMinHeight(50);
+        passwordField.setMinHeight(50);
 
         backButton = new JFXButton("Back");
         loginButton = new JFXButton("Login");
@@ -42,11 +54,26 @@ public class LoginScene extends MyGroup {
         errorLabel = new Label("Login gagal");
         errorLabel.setVisible(false);
 
-        HBox buttons = new HBox();
-        buttons.getChildren().addAll(loginButton, signUpButton);
+        backButton.setAlignment(Pos.TOP_LEFT);
+        back = new BorderPane();
+        back.setPadding(new Insets(10, 10, 10, 10));
+        back.setLeft(backButton);
 
-        vBox.getChildren().addAll(backButton, header, usernameField, passwordField, errorLabel, buttons);
-        getChildren().add(vBox);
+        GridPane buttons = new GridPane();
+        buttons.setPadding(new Insets(0, 10, 0, 10));
+        buttons.setVgap(10);
+        buttons.setHgap(10);
+        buttons.add(loginButton, 0, 2);
+        buttons.add(signUpButton, 1, 2);
+        buttons.setAlignment(Pos.CENTER);
+        setvBoxFullScreen();
+//        vBox.setMargin(buttons, new Insets(10, 10, 10, 100));
+
+        vBox.setAlignment(Pos.CENTER);
+        ObservableList list = vBox.getChildren();
+        list.addAll(header,usernameField,passwordField,errorLabel,buttons);
+        getChildren().addAll(vBox,back);
+
     }
 
     @Override
@@ -79,5 +106,10 @@ public class LoginScene extends MyGroup {
         } else {
             errorLabel.setVisible(true);
         }
+    }
+
+    private void setvBoxFullScreen () {
+        vBox.setMinHeight(Main.primaryStage.getScene().getHeight());
+        vBox.setMinWidth(Main.primaryStage.getScene().getWidth());
     }
 }
