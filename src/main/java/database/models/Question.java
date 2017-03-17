@@ -47,4 +47,17 @@ public class Question {
                 .orderBy(field("id").desc())
                 .fetch();
     }
+
+
+    public static boolean isUnAnswered(Record question) {
+        return question.get("answer") == null;
+    }
+
+    public static boolean isAnswered(Record question) {
+        return !isUnAnswered(question);
+    }
+
+    public static Record getUser(Record question) {
+        return User.getUserById(Integer.parseInt(question.get("user_id").toString()));
+    }
 }

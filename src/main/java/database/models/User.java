@@ -56,4 +56,10 @@ public class User {
                 .where(field("is_ustadz").equal(1))
                 .fetch();
     }
+
+    public static Record getUserById(int user_id) {
+        return db.select().from(table("users"))
+                .where(field("id").equal(user_id))
+                .fetchOne();
+    }
 }

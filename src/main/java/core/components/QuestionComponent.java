@@ -6,6 +6,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.jooq.Record;
 import scenes.MyGroup;
+import scenes.dashboard.question.DetailQuestionScene;
 
 /**
  * Created by ibnujakaria on 3/17/17.
@@ -15,10 +16,12 @@ public class QuestionComponent extends MyGroup {
     private Record question, user, ustadz;
     private Label titleLabel, descriptionLabel, dateLabel;
     private JFXButton seeDetailButton;
+    private MyGroup parent;
 
-    public QuestionComponent (Record question) {
+    public QuestionComponent (Record question, MyGroup parent) {
         this.question = question;
         loadAndDrawQuestion();
+        this.parent = parent;
     }
 
     @Override
@@ -56,6 +59,11 @@ public class QuestionComponent extends MyGroup {
 
     @Override
     protected void addListeners() {
-
+        seeDetailButton.setOnAction(event -> {
+            DetailQuestionScene detailQuestionScene = new DetailQuestionScene(question);
+            setNextScene(detailQuestionScene);
+            detailQuestionScene.setPreviousScene(parent);
+            moveNextScene();
+        });
     }
 }
