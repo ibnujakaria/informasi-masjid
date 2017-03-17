@@ -14,7 +14,7 @@ import scenes.dashboard.question.components.QuestionComponent;
 /**
  * Created by ibnujakaria on 3/15/17.
  */
-public class ListQuestionScene extends MyGroup
+public class MyListQuestionScene extends MyGroup
 {
     private JFXButton backButton;
     private JFXListView<QuestionComponent> questionList;

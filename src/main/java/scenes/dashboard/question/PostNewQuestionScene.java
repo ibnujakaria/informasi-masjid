@@ -9,7 +9,6 @@ import javafx.scene.text.Font;
 import org.jooq.Record;
 import scenes.MyGroup;
 import scenes.dashboard.DashboardScene;
-import scenes.dashboard.question.components.QuestionComponent;
 
 /**
  * Created by ibnujakaria on 3/15/17.
@@ -53,7 +52,7 @@ public class PostNewQuestionScene extends MyGroup {
                     isAnonimCheckbox.isSelected());
 
             DashboardScene dashboardScene = (DashboardScene) getPreviousScene();
-            dashboardScene.setNextScene(new ListQuestionScene());
+            dashboardScene.setNextScene(new MyListQuestionScene());
             dashboardScene.moveNextScene();
         });
     }

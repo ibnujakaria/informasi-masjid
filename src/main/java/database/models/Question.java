@@ -40,4 +40,11 @@ public class Question {
 
         return results;
     }
+
+    public static Result<Record> getUnAnsweredQuestions() {
+        return db.select().from(table("questions"))
+                .where(field("answer").isNull())
+                .orderBy(field("id").desc())
+                .fetch();
+    }
 }
