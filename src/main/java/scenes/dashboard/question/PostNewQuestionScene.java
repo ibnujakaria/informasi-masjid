@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import org.jooq.Record;
 import scenes.MyGroup;
+import scenes.dashboard.DashboardScene;
 
 /**
  * Created by ibnujakaria on 3/15/17.
@@ -53,7 +54,9 @@ public class PostNewQuestionScene extends MyGroup {
             Record question = Question.create(Auth.getUserId(), titleField.getText(), descriptionField.getText(),
                     isAnonimCheckbox.isSelected());
 
-            System.out.println(question);
+            DashboardScene dashboardScene = (DashboardScene) getPreviousScene();
+            dashboardScene.setNextScene(new ListQuestionScene());
+            dashboardScene.moveNextScene();
         });
     }
 }
