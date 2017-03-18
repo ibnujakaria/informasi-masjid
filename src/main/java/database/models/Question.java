@@ -1,5 +1,6 @@
 package database.models;
 
+import core.auth.Auth;
 import database.DB;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
@@ -39,6 +40,20 @@ public class Question {
         }
 
         return results;
+    }
+
+    public static Record getQuestionById (int question_id) {
+        return db.select().from(table("questions"))
+                .where(field("id").equal(question_id))
+                .fetchOne();
+    }
+
+    public static void answerQuestion (int question_id, String answer) {
+        db.update(table("questions"))
+                .set(field("ustadz_id"), Auth.getUserId())
+                .set(field("answer"), answer)
+                .where(field("id").equal(question_id))
+                .execute();
     }
 
     public static Result<Record> getUnAnsweredQuestions() {

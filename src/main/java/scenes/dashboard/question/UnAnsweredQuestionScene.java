@@ -27,6 +27,7 @@ public class UnAnsweredQuestionScene extends MyGroup{
         label.setFont(new Font(40));
 
         backButton = new JFXButton("Back");
+        questionListTapiVbox = new VBox();
         prepareQuestionList();
 
         vBox.getChildren().addAll(backButton, label, questionListTapiVbox);
@@ -34,8 +35,14 @@ public class UnAnsweredQuestionScene extends MyGroup{
         getChildren().add(vBox);
     }
 
+    @Override
+    protected void onAfterBack() {
+        super.onAfterBack();
+        prepareQuestionList();
+    }
+
     private void prepareQuestionList() {
-        questionListTapiVbox = new VBox();
+        questionListTapiVbox.getChildren().clear();
 
         for (Record question : Question.getUnAnsweredQuestions()) {
             questionListTapiVbox.getChildren().add(new QuestionComponent(question, this));
