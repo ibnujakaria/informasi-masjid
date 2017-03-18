@@ -5,9 +5,21 @@
 }
 
 .label {
-    -fx-font-size: 43px;
+    -fx-font-size: 23px;
     -fx-font-family: "Caviar Dreams";
-    -fx-text-fill: black;
+    -fx-text-fill: red;
+}
+
+#titleSignUp{
+    -fx-font-size: 53px;
+    -fx-font-family: "Caviar Dreams";
+    -fx-text-fill: white;
+}
+
+#titleLogin{
+    -fx-font-size: 53px;
+    -fx-font-family: "Caviar Dreams";
+    -fx-text-fill: white;
 }
 
 #title {
