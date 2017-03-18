@@ -52,7 +52,7 @@ public class DetailQuestionScene extends MyGroup {
 
         answerLabel.setVisible(Question.isAnswered(question));
         answerText.setVisible(Question.isAnswered(question));
-        answerText.setText(question.get("answer").toString());
+        answerText.setText(Question.isAnswered(question) ? question.get("answer").toString() : "");
     }
 
     @Override
