@@ -63,6 +63,9 @@ public class Question {
                 .fetch();
     }
 
+    public static boolean isAnonim (Record question) {
+        return question.get("is_anonim").equals(1);
+    }
 
     public static boolean isUnAnswered(Record question) {
         return question.get("answer") == null;

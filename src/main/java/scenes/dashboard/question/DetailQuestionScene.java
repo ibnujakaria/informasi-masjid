@@ -50,6 +50,10 @@ public class DetailQuestionScene extends MyGroup {
         descriptionLabel.setText(question.get("description").toString());
         nameUserLabel.setText(Question.getUser(question).get("name").toString());
 
+        if (Question.isAnonim(question)) {
+            nameUserLabel.setText("Hamba Allah");
+        }
+
         answerLabel.setVisible(Question.isAnswered(question));
         answerText.setVisible(Question.isAnswered(question));
         answerText.setText(Question.isAnswered(question) ? question.get("answer").toString() : "");
