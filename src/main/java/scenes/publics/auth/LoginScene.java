@@ -16,13 +16,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import scenes.MyGroup;
-import scenes.MyScene;
 import scenes.dashboard.DashboardScene;
 import scenes.publics.PublicScene;
 
@@ -32,19 +29,16 @@ import scenes.publics.PublicScene;
 public class LoginScene extends MyGroup {
     JFXTextField usernameField;
     JFXPasswordField passwordField;
-    JFXButton loginButton, signUpButton, backButton;
-    Label errorLabel;
+    JFXButton loginButton, signUpButton;
+    Label errorLabel,header;
     VBox vBox;
-    BorderPane back;
     final KeyCombination kb = new KeyCodeCombination(KeyCode.B, KeyCombination.CONTROL_ANY);
 
     @Override
     protected void prepareLayout() {
-
         vBox = new VBox();
-
-        Label header = new Label("Login");
-        header.setFont(new Font(40));
+        header = new Label("Login");
+        header.setId("titleLogin");
         usernameField = new JFXTextField();
         usernameField.setPromptText("Username");
 
@@ -55,17 +49,11 @@ public class LoginScene extends MyGroup {
         usernameField.setMinHeight(50);
         passwordField.setMinHeight(50);
 
-        backButton = new JFXButton("Back");
         loginButton = new JFXButton("Login");
         signUpButton = new JFXButton("Sign up");
 
-        errorLabel = new Label("Login gagal");
+        errorLabel = new Label("Login failed!");
         errorLabel.setVisible(false);
-
-        backButton.setAlignment(Pos.TOP_LEFT);
-        back = new BorderPane();
-        back.setPadding(new Insets(10, 10, 10, 10));
-        back.setLeft(backButton);
 
         GridPane buttons = new GridPane();
         buttons.setPadding(new Insets(0, 10, 0, 10));
@@ -75,7 +63,6 @@ public class LoginScene extends MyGroup {
         buttons.add(signUpButton, 1, 2);
         buttons.setAlignment(Pos.CENTER);
         setvBoxFullScreen();
-//        vBox.setMargin(buttons, new Insets(10, 10, 10, 100));
 
         vBox.setAlignment(Pos.CENTER);
         ObservableList list = vBox.getChildren();
@@ -98,15 +85,6 @@ public class LoginScene extends MyGroup {
                     setvBoxFullScreen();
                 }
             }
-        });
-
-        backButton.setOnAction(event -> {
-            if (previousScene == null) {
-                setPreviousScene(new PublicScene());
-                setvBoxFullScreen();
-            }
-            movePreviousScene();
-            setvBoxFullScreen();
         });
 
         loginButton.setOnAction(event -> {
