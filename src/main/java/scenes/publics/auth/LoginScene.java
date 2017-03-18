@@ -5,10 +5,17 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import core.auth.Auth;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -29,6 +36,7 @@ public class LoginScene extends MyGroup {
     Label errorLabel;
     VBox vBox;
     BorderPane back;
+    final KeyCombination kb = new KeyCodeCombination(KeyCode.B, KeyCombination.CONTROL_ANY);
 
     @Override
     protected void prepareLayout() {
@@ -72,27 +80,60 @@ public class LoginScene extends MyGroup {
         vBox.setAlignment(Pos.CENTER);
         ObservableList list = vBox.getChildren();
         list.addAll(header,usernameField,passwordField,errorLabel,buttons);
-        getChildren().addAll(vBox,back);
+        getChildren().addAll(vBox);
 
     }
 
     @Override
     protected void addListeners() {
+        setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (kb.match(event)) {
+                    if (previousScene == null) {
+                        setPreviousScene(new PublicScene());
+                        setvBoxFullScreen();
+                    }
+                    movePreviousScene();
+                    setvBoxFullScreen();
+                }
+            }
+        });
+
         backButton.setOnAction(event -> {
             if (previousScene == null) {
                 setPreviousScene(new PublicScene());
+                setvBoxFullScreen();
             }
             movePreviousScene();
+            setvBoxFullScreen();
         });
 
         loginButton.setOnAction(event -> {
             doLoginProcess();
+            setvBoxFullScreen();
         });
 
         signUpButton.setOnAction(event -> {
             PublicScene publicScene = (PublicScene) getPreviousScene();
             publicScene.setNextScene(new SignupScene());
             publicScene.moveNextScene();
+            setvBoxFullScreen();
+        });
+
+        Main.primaryStage.getScene().widthProperty().addListener(new ChangeListener<Number>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                setvBoxFullScreen();
+            }
+        });
+
+        Main.primaryStage.getScene().heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                setvBoxFullScreen();
+            }
         });
     }
 
@@ -103,8 +144,10 @@ public class LoginScene extends MyGroup {
         if (success) {
             setNextScene(new DashboardScene());
             moveNextScene();
+            setvBoxFullScreen();
         } else {
             errorLabel.setVisible(true);
+            setvBoxFullScreen();
         }
     }
 
