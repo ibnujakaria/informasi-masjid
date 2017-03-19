@@ -40,7 +40,7 @@ public class ListUstadzScene extends MyGroup {
     private void prepareUstadz() {
         listUstadz.getChildren().clear();
         for (Record r : User.getUstadz()) {
-            listUstadz.getChildren().add(new UserComponent(r));
+            listUstadz.getChildren().add(new UserComponent(this, r));
         }
     }
 

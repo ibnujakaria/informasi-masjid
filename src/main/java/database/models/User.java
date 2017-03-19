@@ -37,6 +37,33 @@ public class User {
         return getUserByUsername(username);
     }
 
+    public static Record update (Record user, String name, String username, String email, String address,
+                                 String password, boolean is_ustadz, boolean is_admin) {
+        String hashedPassword = null;
+        if (password != null) {
+            hashedPassword = Hashing.sha256().newHasher().putString(password, Charset.defaultCharset()).hash().toString();
+        }
+
+        UpdateSetMoreStep query = db.update(table("users"))
+                .set(field("name"), name)
+                .set(field("username"), username)
+                .set(field("email"), email)
+                .set(field("role"), is_admin ? 1 : 0)
+                .set(field("address"), address)
+                .set(field("is_ustadz"), is_ustadz ? 1 : 0)
+                .set(field("created_at"), new LocalDate() + " " + new LocalTime())
+                .set(field("updated_at"), new LocalDate() + " " + new LocalTime());
+
+        if (password != null) {
+            query = query.set(field("password"), hashedPassword);
+        }
+
+        query.where(field("id").equal(Integer.parseInt(user.get("id").toString())))
+                .execute();
+
+        return getUserByUsername(username);
+    }
+
     public static Record getUserByUsername (String username)
     {
         Result<Record> result = db.select().from(table("users"))
@@ -69,5 +96,13 @@ public class User {
                 .where(field("is_ustadz").equal(0))
                 .orderBy(field("id").desc())
                 .fetch();
+    }
+
+    public static boolean isUstadz(Record user) {
+        return Integer.parseInt(user.get("is_ustadz").toString()) == 1;
+    }
+
+    public static boolean isAdmin(Record user) {
+        return Integer.parseInt(user.get("role").toString()) == 1;
     }
 }

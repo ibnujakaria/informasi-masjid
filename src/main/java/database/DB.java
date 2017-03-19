@@ -1,6 +1,7 @@
 package database;
 
 import database.schemas.QuestionTableSchema;
+import database.schemas.ScheduleTableSchema;
 import database.schemas.UserTableSchema;
 
 import java.sql.Connection;
@@ -37,5 +38,8 @@ public class DB {
 
         QuestionTableSchema questionTableSchema = new QuestionTableSchema();
         questionTableSchema.up();
+
+        ScheduleTableSchema scheduleTableSchema = new ScheduleTableSchema();
+        scheduleTableSchema.up();
     }
 }
