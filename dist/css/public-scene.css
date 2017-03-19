@@ -50,5 +50,25 @@
 #answerLabel{
     -fx-font-size: 25px;
     -fx-font-family: "Quattrocento Sans";
-        -fx-text-fill: black;
+    -fx-text-fill: black;
+    -fx-font-size: 30px;
+            -fx-font-family: "Caviar Dreams";
+            -fx-text-fill: black;
+}
+
+#questionDate{
+    -fx-font-size: 10px;
+    -fx-text-fill: darkgrey;
+    -fx-font-style: italic;
+    -fx-font-weight: lighter;
+}
+
+#questionTitle{
+    -fx-font-weight: bolder;
+    -fx-text-fill: black;
+}
+
+#questionDescription{
+    -fx-font-size: 18px;
+    -fx-text-fill: black;
 }
