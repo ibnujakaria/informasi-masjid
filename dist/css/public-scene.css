@@ -34,3 +34,7 @@
 #userBtn{
     -fx-background-color: #00bcd4ff;
 }
+
+#QuestionSeeDetailButton{
+    -fx-float: right;
+}
