@@ -59,10 +59,6 @@ public class LoginScene extends MyGroup {
         );
 
         back = new BorderPane();
-
-
-//        back.setLeft(backButton);
-
         back.setTop(toolBar);
 
         header = new Label("Login");
@@ -96,8 +92,6 @@ public class LoginScene extends MyGroup {
         ObservableList list = vBox.getChildren();
         list.addAll(header,usernameField,passwordField,errorLabel,buttons);
         getChildren().addAll(vBox,back);
-
-
     }
 
     @Override
@@ -126,6 +120,7 @@ public class LoginScene extends MyGroup {
                 setPreviousScene(new PublicScene());
             }
             movePreviousScene();
+            setvBoxFullScreen();
         });
 
         signUpButton.setOnAction(event -> {
