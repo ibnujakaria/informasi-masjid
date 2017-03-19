@@ -71,6 +71,13 @@ public class DashboardScene extends MyGroup {
     }
 
     @Override
+    protected void onAfterBack() {
+        super.onAfterBack();
+        System.out.println("Im back!");
+        System.out.println("this you should call the query again");
+    }
+
+    @Override
     protected void addListeners() {
 //        homeButton.setOnAction(event -> {
 //            Auth.logout();
