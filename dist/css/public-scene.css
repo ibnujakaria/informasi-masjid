@@ -6,8 +6,8 @@
 
 .label {
     -fx-font-size: 23px;
-    -fx-font-family: "Caviar Dreams";
-    -fx-text-fill: red;
+    -fx-font-family: "Open Sans";
+    -fx-text-fill: #e74c3c;
 }
 
 #titleSignUp{
@@ -42,7 +42,13 @@
 }
 
 #userLabel{
-    -fx-font-size: 30px;
-            -fx-font-family: "Caviar Dreams";
-            -fx-text-fill: black;
+    -fx-font-size: 20px;
+    -fx-font-family: "Caviar Dreams";
+    -fx-text-fill: black;
+}
+
+#answerLabel{
+    -fx-font-size: 25px;
+    -fx-font-family: "Quattrocento Sans";
+        -fx-text-fill: black;
 }

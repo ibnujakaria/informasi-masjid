@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 import scenes.publics.PublicScene;
 
@@ -33,9 +34,18 @@ public class WelcomeScene extends MyGroup {
     Image logo,background;
     ImageView imageView;
     JFXButton nextButton;
+    String font1,font2,font3,font4;
 
     @Override
     protected void prepareLayout() {
+        font1 = Paths.get("dist/font/OpenSans-Regular.ttf").toUri().toString();
+        font2 = Paths.get("dist/font/ABeeZee-Regular.ttf").toUri().toString();
+        font3 = Paths.get("dist/font/CaviarDreams.ttf").toUri().toString();
+        font4 = Paths.get("dist/font/QuattrocentoSans-Regular.ttf").toUri().toString();
+        Font.loadFont(font1,20);
+        Font.loadFont(font2,20);
+        Font.loadFont(font3,20);
+        Font.loadFont(font4,20);
         String uri = Paths.get("dist/css/welcome.css").toUri().toString();
         Main.primaryStage.getScene().getStylesheets().add(uri);
 
