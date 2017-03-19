@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import scenes.MyGroup;
+import scenes.admin.users.ListUsersScene;
 import scenes.admin.ustadz.AddUstadzScene;
 import scenes.admin.ustadz.ListUstadzScene;
 
@@ -30,7 +31,6 @@ public class AdminScene extends MyGroup {
         listSchedulesButton = new JFXButton("Jadwal Kajian");
         listRecordingButton = new JFXButton("Rekaman Kajian");
 
-
         vBox.getChildren().addAll(backButton, label, listUsersButton, listUstadzButton,
                 listQuestionsButton, listSchedulesButton, listRecordingButton);
         getChildren().addAll(vBox);
@@ -44,6 +44,11 @@ public class AdminScene extends MyGroup {
 
         listUstadzButton.setOnAction(event -> {
             setNextScene(new ListUstadzScene());
+            moveNextScene();
+        });
+
+        listUsersButton.setOnAction(event -> {
+            setNextScene(new ListUsersScene());
             moveNextScene();
         });
     }

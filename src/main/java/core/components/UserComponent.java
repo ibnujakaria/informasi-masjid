@@ -26,7 +26,7 @@ public class UserComponent extends Group {
         nameLabel = new Label(user.get("name").toString());
         usernameLabel = new Label(user.get("username").toString());
         emailLabel = new Label(user.get("email").toString());
-        cityLabel = new Label(user.get("address").toString());
+        cityLabel = new Label(user.get("address") != null ? user.get("address").toString() : "");
 
         vBox.getChildren().addAll(nameLabel, usernameLabel, emailLabel, cityLabel);
         getChildren().addAll(vBox);

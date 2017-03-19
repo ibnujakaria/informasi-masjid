@@ -54,6 +54,7 @@ public class User {
     {
         return db.select().from(table("users"))
                 .where(field("is_ustadz").equal(1))
+                .orderBy(field("id").desc())
                 .fetch();
     }
 
@@ -61,5 +62,12 @@ public class User {
         return db.select().from(table("users"))
                 .where(field("id").equal(user_id))
                 .fetchOne();
+    }
+
+    public static Result<Record> getUsers () {
+        return db.select().from(table("users"))
+                .where(field("is_ustadz").equal(0))
+                .orderBy(field("id").desc())
+                .fetch();
     }
 }
