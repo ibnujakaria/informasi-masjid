@@ -150,6 +150,16 @@ public class SignupScene extends MyGroup {
             }
         });
 
+        setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER){
+                    doSignUpProcess();
+                    setvBoxFullScreen();
+                }
+            }
+        });
+
         signUpButton.setOnAction(event -> {
             doSignUpProcess();
             setvBoxFullScreen();

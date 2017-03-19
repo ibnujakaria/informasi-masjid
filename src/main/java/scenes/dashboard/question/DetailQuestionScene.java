@@ -3,7 +3,13 @@ package scenes.dashboard.question;
 import com.jfoenix.controls.JFXButton;
 import core.auth.Auth;
 import database.models.Question;
+import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
+import javafx.scene.control.ToolBar;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.jooq.Record;
 import scenes.MyGroup;
@@ -18,6 +24,10 @@ public class DetailQuestionScene extends MyGroup {
             answerLabel, answerText, ustadzLabel;
     private JFXButton backButton, answerButton;
     private VBox vBox;
+    BorderPane back;
+    ToolBar toolBar;
+    Separator separator;
+    Pane pane;
 
     public DetailQuestionScene (Record question) {
         this.question = question;
@@ -29,21 +39,36 @@ public class DetailQuestionScene extends MyGroup {
     protected void prepareLayout() {
         vBox = new VBox();
 
-        backButton = new JFXButton("Back");
-        answerButton = new JFXButton("Jawab");
-
-        welcomeLabel = new Label("Detail");
         titleLabel = new Label();
+        titleLabel.setId("titleQuestion");
         nameUserLabel = new Label();
+        nameUserLabel.setId("userLabel");
         descriptionLabel = new Label();
-        answerLabel = new Label("Jawaban");
         answerText = new Label();
         ustadzLabel = new Label();
         ustadzLabel.setVisible(true);
+        backButton = new JFXButton("Back");
+        answerButton = new JFXButton("Jawab");
+        pane = new Pane();
+        pane.setPrefWidth(300);
+        answerLabel = new Label("Jawaban");
+        separator = new Separator();
+        welcomeLabel = new Label("Detail");
 
-        vBox.getChildren().addAll(backButton, welcomeLabel, titleLabel, answerButton,
-                nameUserLabel, descriptionLabel, answerLabel, ustadzLabel, answerText);
-        getChildren().addAll(vBox);
+        toolBar = new ToolBar();
+        toolBar.setPrefWidth(800);
+
+        toolBar.getItems().addAll(
+                backButton, separator,pane,welcomeLabel
+
+        );
+        back = new BorderPane();
+        back.setTop(toolBar);
+        back.setCenter(vBox);
+        ObservableList list = vBox.getChildren();
+        list.addAll(titleLabel,
+                nameUserLabel, descriptionLabel, answerLabel,answerButton, ustadzLabel, answerText);
+        getChildren().addAll(back);
     }
 
     private void loadAndDrawQuestion() {

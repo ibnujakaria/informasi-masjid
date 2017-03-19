@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import scenes.MyGroup;
+import scenes.admin.schedules.ListSchedulesScene;
 import scenes.admin.users.ListUsersScene;
 import scenes.admin.ustadz.AddUstadzScene;
 import scenes.admin.ustadz.ListUstadzScene;
@@ -49,6 +50,11 @@ public class AdminScene extends MyGroup {
 
         listUsersButton.setOnAction(event -> {
             setNextScene(new ListUsersScene());
+            moveNextScene();
+        });
+
+        listSchedulesButton.setOnAction(event -> {
+            setNextScene(new ListSchedulesScene());
             moveNextScene();
         });
     }

@@ -51,7 +51,7 @@ public class PostNewQuestionScene extends MyGroup {
             Record question = Question.create(Auth.getUserId(), titleField.getText(), descriptionField.getText(),
                     isAnonimCheckbox.isSelected());
 
-            DashboardScene dashboardScene = (DashboardScene) getPreviousScene();
+            MyGroup dashboardScene = (MyGroup) getPreviousScene();
             dashboardScene.setNextScene(new MyListQuestionScene());
             dashboardScene.moveNextScene();
         });

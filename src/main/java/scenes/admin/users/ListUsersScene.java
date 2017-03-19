@@ -31,10 +31,16 @@ public class ListUsersScene extends MyGroup {
         displayUsers();
     }
 
+    @Override
+    protected void onAfterBack() {
+        super.onAfterBack();
+        displayUsers();
+    }
+
     private void displayUsers() {
         listUsers.getChildren().clear();
         for (Record user : User.getUsers()) {
-            listUsers.getChildren().add(new UserComponent(user));
+            listUsers.getChildren().add(new UserComponent(this, user));
         }
     }
 

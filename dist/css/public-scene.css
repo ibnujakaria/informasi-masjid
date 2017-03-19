@@ -35,6 +35,14 @@
     -fx-background-color: #00bcd4ff;
 }
 
-#QuestionSeeDetailButton{
-    -fx-float: right;
+#titleQuestion{
+        -fx-font-size: 53px;
+        -fx-font-family: "Caviar Dreams";
+        -fx-text-fill: black;
+}
+
+#userLabel{
+    -fx-font-size: 30px;
+            -fx-font-family: "Caviar Dreams";
+            -fx-text-fill: black;
 }

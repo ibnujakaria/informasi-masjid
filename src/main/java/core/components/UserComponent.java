@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.jooq.Record;
+import scenes.MyGroup;
+import scenes.admin.users.EditUserScene;
 
 /**
  * Created by ibnujakaria on 3/17/17.
@@ -17,11 +19,13 @@ public class UserComponent extends Group {
     private VBox vBox;
     private Label nameLabel, emailLabel, usernameLabel, cityLabel;
     private JFXButton editButton, deleteButton;
+    private MyGroup myParent;
 
-    public UserComponent (Record user) {
+    public UserComponent (MyGroup myParent, Record user) {
         this.user = user;
-
+        this.myParent = myParent;
         prepareLayout();
+        addListeners();
     }
 
     private void prepareLayout () {
@@ -42,5 +46,12 @@ public class UserComponent extends Group {
                 cityLabel, new HBox(editButton, deleteButton));
 
         getChildren().addAll(vBox);
+    }
+
+    private void addListeners () {
+        editButton.setOnAction(event -> {
+            myParent.setNextScene(new EditUserScene(user));
+            myParent.moveNextScene();
+        });
     }
 }
