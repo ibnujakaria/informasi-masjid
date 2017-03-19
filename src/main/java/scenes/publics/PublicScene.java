@@ -25,42 +25,50 @@ public class PublicScene extends MyGroup {
     JFXTabPane tabPane;
     BorderPane borderPane;
     Tab tab1, tab2, tab3;
-  
+
+    JFXButton toDashboard;
+
     @Override
     protected void prepareLayout() {
         String uri = Paths.get("dist/css/public-scene.css").toUri().toString();
         Main.primaryStage.getScene().getStylesheets().add(uri);
+
+        toDashboard = new JFXButton("Profile");
+
         tabPane = new JFXTabPane();
-        borderPane = new BorderPane();
         tab1 = new Tab();
         tab2 = new Tab();
         tab3 = new Tab();
         tab1.setText("Jadwal Kajian");
         tab2.setText("Tanya Ustadz");
         tab3.setText("Rekaman Kajian");
+        tab1.setContent(new JadwalContent());
+        tab2.setContent(new PertanyaanContent(this));
+        tab3.setContent(new Label("Content 3"));
         tabPane.getTabs().addAll(tab1,tab2,tab3);
 
+        borderPane = new BorderPane();
         borderPane.prefHeightProperty().bind(Main.primaryStage.getScene().heightProperty());
         borderPane.prefWidthProperty().bind(Main.primaryStage.getScene().widthProperty());
-        borderPane.setTop(new TopMenu(this));
+        borderPane.setTop(new TopMenu(this, toDashboard));
         borderPane.setCenter(tabPane);
+        getChildren().add(borderPane);
 
         try {
             background = new Image(new FileInputStream("dist/images/logo/blur.jpg"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
         ImagePattern imagePattern = new ImagePattern(background);
         Main.primaryStage.getScene().setFill(imagePattern);
-        tab1.setContent(new JadwalContent());
-        tab2.setContent(new PertanyaanContent(this));
-        tab3.setContent(new Label("Content 3"));
-        getChildren().add(borderPane);
     }
 
     @Override
     protected void addListeners() {
+        toDashboard.setOnAction(event -> {
+            movePreviousScene();
+        });
+
         Main.primaryStage.getScene().widthProperty().addListener(new ChangeListener<Number>() {
 
             @Override

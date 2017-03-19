@@ -13,7 +13,6 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import scenes.MyGroup;
-import scenes.dashboard.DashboardScene;
 import scenes.publics.auth.LoginScene;
 
 import java.io.FileInputStream;
@@ -23,25 +22,25 @@ import java.io.FileNotFoundException;
  * Created by abdullah on 17/03/17.
  */
 public class TopMenu extends HBox {
-    JFXButton menu, profile, login, logout;
+    JFXButton menu, option, login, logout;
     JFXPopup popup;
     Label title;
     StackPane menuPane;
     Image user;
     MyGroup myGroup;
 
-    public TopMenu(MyGroup myGroup) {
+    public TopMenu(MyGroup myGroup, JFXButton option) {
         this.myGroup = myGroup;
         setMinHeight(120);
         title = new Label("Info Masjid");
         title.setId("title");
         setId("top-menu");
         setMargin(title, new Insets(10,0,0,10));
-        addLeftMenu();
+        addLeftMenu(option);
         getChildren().addAll(title, menuPane);
     }
 
-    private void addLeftMenu() {
+    private void addLeftMenu(JFXButton option) {
         menuPane = new StackPane();
         VBox menuBox = new VBox();
 
@@ -56,11 +55,11 @@ public class TopMenu extends HBox {
             menu.setId("userBtn");
 
             menu.setGraphic(new ImageView(user));
-            profile = new JFXButton("Dashboard");
-            profile.setMaxWidth(75);
+            this.option = option;
+            option.setMaxWidth(75);
             logout = new JFXButton("Keluar");
             logout.setMaxWidth(75);
-            VBox dropdown = new VBox(profile, logout);
+            VBox dropdown = new VBox(this.option, logout);
 
             popup = new JFXPopup();
             popup.setContent(dropdown);
@@ -90,9 +89,6 @@ public class TopMenu extends HBox {
         if (isLogin) {
             menu.setOnMouseClicked(event -> {
                 popup.show(JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.RIGHT);
-            });
-            profile.setOnAction(event -> {
-                myGroup.movePreviousScene();
             });
             logout.setOnAction(event -> {
                 Auth.logout();
