@@ -2,6 +2,7 @@ package scenes.pieces;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPopup;
+import core.auth.Auth;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -11,6 +12,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import scenes.MyGroup;
+import scenes.publics.auth.LoginScene;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -19,50 +22,59 @@ import java.io.FileNotFoundException;
  * Created by abdullah on 17/03/17.
  */
 public class TopMenu extends HBox {
-    JFXButton menu, profile, logout;
+    JFXButton menu, profile, login, logout;
     JFXPopup popup;
     Label title;
     StackPane menuPane;
     Image user;
+    MyGroup myGroup;
 
-    public TopMenu() {
+    public TopMenu(MyGroup myGroup) {
+        this.myGroup = myGroup;
         setMinHeight(120);
         title = new Label("Info Masjid");
         title.setId("title");
         setId("top-menu");
         setMargin(title, new Insets(10,0,0,10));
         addLeftMenu();
-//        setStyle("-fx-background-color: #2f4f4f;");
         getChildren().addAll(title, menuPane);
     }
 
     private void addLeftMenu() {
-        try {
-            user = new Image(new FileInputStream("dist/images/user/user.png"),40,40,false,false);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        menuPane = new StackPane();
+        VBox menuBox = new VBox();
+
+        if (Auth.isLogin()) {
+            try {
+                user = new Image(new FileInputStream("dist/images/user/user.png"),40,40,false,false);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            menu = new JFXButton();
+            menu.setId("userBtn");
+
+            menu.setGraphic(new ImageView(user));
+            profile = new JFXButton("Profil");
+            profile.setMaxWidth(75);
+            logout = new JFXButton("Keluar");
+            logout.setMaxWidth(75);
+            VBox dropdown = new VBox(profile, logout);
+
+            popup = new JFXPopup();
+            popup.setContent(dropdown);
+            popup.setPopupContainer(menuBox);
+            popup.setSource(menu);
+
+            menuBox.getChildren().add(menu);
+            addListener(Auth.isLogin());
+        } else {
+            login = new JFXButton("Masuk");
+            menuBox.getChildren().add(login);
+            addListener(Auth.isLogin());
         }
 
-        menuPane = new StackPane();
-
-        menu = new JFXButton();
-        menu.setId("userBtn");
-
-        menu.setGraphic(new ImageView(user));
-        profile = new JFXButton("Profil");
-        profile.setMaxWidth(75);
-        logout = new JFXButton("Keluar");
-        logout.setMaxWidth(75);
-        VBox dropdown = new VBox(profile, logout);
-
-        VBox menuBox = new VBox(menu);
         menuBox.setAlignment(Pos.TOP_RIGHT);
-
-        popup = new JFXPopup();
-        popup.setContent(dropdown);
-        popup.setPopupContainer(menuBox);
-        popup.setSource(menu);
-
 
         menuPane.getChildren().addAll(menuBox);
         menuPane.setAlignment(Pos.TOP_RIGHT);
@@ -71,12 +83,18 @@ public class TopMenu extends HBox {
         StackPane.setMargin(menuBox, new Insets(10, 10, 0, 0));
         setHgrow(menuPane, Priority.ALWAYS);
 
-        addListener(menu);
     }
 
-    private void addListener(JFXButton button) {
-        button.setOnMouseClicked(event -> {
-            popup.show(JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.RIGHT);
-        });
+    private void addListener(boolean isLogin) {
+        if (isLogin) {
+            menu.setOnMouseClicked(event -> {
+                popup.show(JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.RIGHT);
+            });
+        } else {
+            login.setOnAction(event -> {
+                myGroup.setNextScene(new LoginScene());
+                myGroup.moveNextScene();
+            });
+        }
     }
 }

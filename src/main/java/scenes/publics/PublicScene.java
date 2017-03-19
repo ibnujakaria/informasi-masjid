@@ -57,7 +57,7 @@ public class PublicScene extends MyGroup {
         // bind to take available space
         borderPane.prefHeightProperty().bind(Main.primaryStage.getScene().heightProperty());
         borderPane.prefWidthProperty().bind(Main.primaryStage.getScene().widthProperty());
-        borderPane.setTop(new TopMenu());
+        borderPane.setTop(new TopMenu(this));
         borderPane.setCenter(tabPane);
 
         try {

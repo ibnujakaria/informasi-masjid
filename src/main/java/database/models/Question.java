@@ -63,6 +63,13 @@ public class Question {
                 .fetch();
     }
 
+    public static Result<Record> getAnsweredQuestion () {
+        return db.select().from(table("questions"))
+                .where(field("answer").isNotNull())
+                .orderBy(field("id").desc())
+                .fetch();
+    }
+
     public static boolean isAnonim (Record question) {
         return question.get("is_anonim").equals(1);
     }
