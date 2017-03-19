@@ -85,4 +85,11 @@ public class Question {
     public static Record getUser(Record question) {
         return User.getUserById(Integer.parseInt(question.get("user_id").toString()));
     }
+
+    public static Record getUstadzWhoAnswer (Record question) {
+        return db.select().from("users")
+                .where(field("id").equal(Integer.parseInt(question.get("ustadz_id").toString())))
+                .and(field("is_ustadz").equal(1))
+                .fetchOne();
+    }
 }

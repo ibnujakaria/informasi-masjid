@@ -14,7 +14,8 @@ import scenes.MyGroup;
 public class DetailQuestionScene extends MyGroup {
 
     private Record question;
-    private Label welcomeLabel, titleLabel, descriptionLabel, nameUserLabel, answerLabel, answerText;
+    private Label welcomeLabel, titleLabel, descriptionLabel, nameUserLabel,
+            answerLabel, answerText, ustadzLabel;
     private JFXButton backButton, answerButton;
     private VBox vBox;
 
@@ -37,9 +38,11 @@ public class DetailQuestionScene extends MyGroup {
         descriptionLabel = new Label();
         answerLabel = new Label("Jawaban");
         answerText = new Label();
+        ustadzLabel = new Label();
+        ustadzLabel.setVisible(true);
 
         vBox.getChildren().addAll(backButton, welcomeLabel, titleLabel, answerButton,
-                nameUserLabel, descriptionLabel, answerLabel, answerText);
+                nameUserLabel, descriptionLabel, answerLabel, ustadzLabel, answerText);
         getChildren().addAll(vBox);
     }
 
@@ -57,6 +60,13 @@ public class DetailQuestionScene extends MyGroup {
         answerLabel.setVisible(Question.isAnswered(question));
         answerText.setVisible(Question.isAnswered(question));
         answerText.setText(Question.isAnswered(question) ? question.get("answer").toString() : "");
+
+        if (Question.isAnswered(question)) {
+            Record ustadz = Question.getUstadzWhoAnswer(question);
+            ustadzLabel.setText("Oleh: " + ustadz.get("name").toString());
+            ustadzLabel.setVisible(true);
+
+        }
     }
 
     @Override
