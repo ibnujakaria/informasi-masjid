@@ -10,6 +10,7 @@ import scenes.admin.AdminScene;
 import scenes.dashboard.question.MyListQuestionScene;
 import scenes.dashboard.question.PostNewQuestionScene;
 import scenes.dashboard.question.UnAnsweredQuestionScene;
+import scenes.publics.PublicScene;
 import scenes.publics.auth.LoginScene;
 
 
@@ -24,7 +25,8 @@ public class DashboardScene extends MyGroup {
         Label label = new Label("Dashboard");
         label.setFont(new Font(40));
         Label welcome = new Label("Selamat datang: " + Auth.getUser().get("name"));
-        logoutButton = new JFXButton("Logout");
+//        logoutButton = new JFXButton("Logout");
+        logoutButton = new JFXButton("Home");
 
         adminButton = new JFXButton("Admin");
         adminButton.setVisible(Auth.isAdmin());
@@ -50,11 +52,15 @@ public class DashboardScene extends MyGroup {
 
     @Override
     protected void addListeners() {
+//        logoutButton.setOnAction(event -> {
+//            Auth.logout();
+//
+//            setPreviousScene(new LoginScene());
+//            movePreviousScene();
+//        });
         logoutButton.setOnAction(event -> {
-            Auth.logout();
-
-            setPreviousScene(new LoginScene());
-            movePreviousScene();
+            setNextScene(new PublicScene());
+            moveNextScene();
         });
 
         adminButton.setOnAction(event -> {
