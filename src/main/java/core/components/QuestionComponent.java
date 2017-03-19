@@ -1,8 +1,11 @@
 package core.components;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import org.jooq.Record;
 import scenes.MyGroup;
@@ -28,15 +31,29 @@ public class QuestionComponent extends MyGroup {
     protected void prepareLayout() {
         System.out.println("Prepare layout");
         titleLabel = new Label("judul");
+        titleLabel.setId("questionTitle");
         descriptionLabel = new Label("deskripsi");
+        descriptionLabel.setPrefWidth(750);
+        descriptionLabel.setWrapText(true);
+        descriptionLabel.setId("QuestionDescription");
         dateLabel = new Label("20-02-2017");
+        dateLabel.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
+        dateLabel.setId("QuestionDate");
         seeDetailButton = new JFXButton("Lihat detail");
+        seeDetailButton.setId("QuestionSeeDetailButton");
+        seeDetailButton.setMinSize(Button.USE_PREF_SIZE, Button.USE_PREF_SIZE);
+
+        Pane spacer = new Pane();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        spacer.setMinSize(10, 1);
 
         VBox vBox = new VBox();
         HBox bottomBox = new HBox();
-        bottomBox.getChildren().addAll(seeDetailButton);
 
         bottomBox.getChildren().addAll(dateLabel);
+        bottomBox.getChildren().addAll(spacer);
+        bottomBox.getChildren().addAll(seeDetailButton);
+
         vBox.getChildren().addAll(titleLabel, descriptionLabel, bottomBox);
         getChildren().addAll(vBox);
     }
