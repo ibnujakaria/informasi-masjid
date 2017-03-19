@@ -12,16 +12,17 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
+import javafx.scene.control.ToolBar;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import org.jooq.Record;
 import scenes.MyGroup;
 import scenes.dashboard.DashboardScene;
+import scenes.publics.PublicScene;
 
 import javax.swing.*;
 
@@ -29,16 +30,36 @@ import javax.swing.*;
  * Created by ibnujakaria on 3/15/17.
  */
 public class SignupScene extends MyGroup {
-    JFXButton signUpButton;
+    JFXButton signUpButton, backButton;
     JFXTextField nameField, usernameField, emailField, addressField;
     JFXPasswordField passwordField, passwordConfirmationField;
     VBox vBox;
     final KeyCombination kb = new KeyCodeCombination(KeyCode.B, KeyCombination.CONTROL_ANY);
-    Label titleSignUp;
+    Label titleSignUp, titleHeader;
+    BorderPane back;
+    ToolBar toolBar;
+    Separator separator;
+    Pane pane;
 
     @Override
     protected void prepareLayout() {
         vBox = new VBox();
+
+        pane = new Pane();
+        pane.setPrefWidth(300);
+        titleHeader = new Label("Sign Up");
+        separator = new Separator();
+
+        toolBar = new ToolBar();
+        toolBar.setPrefWidth(800);
+        backButton = new JFXButton("Back");
+
+        toolBar.getItems().addAll(
+                backButton, separator,pane,titleHeader
+
+        );
+        back = new BorderPane();
+        back.setTop(toolBar);
 
         titleSignUp = new Label("Sign Up");
         titleSignUp.setId("titleSignUp");
@@ -97,7 +118,7 @@ public class SignupScene extends MyGroup {
         vBox.setAlignment(Pos.CENTER);
         ObservableList list = vBox.getChildren();
         list.addAll(titleSignUp,nameField,usernameField,emailField, addressField,passwordField,passwordConfirmationField,buttons);
-        getChildren().addAll(vBox);
+        getChildren().addAll(vBox,back);
     }
 
     @Override
@@ -132,6 +153,13 @@ public class SignupScene extends MyGroup {
         signUpButton.setOnAction(event -> {
             doSignUpProcess();
             setvBoxFullScreen();
+        });
+
+        backButton.setOnAction(event -> {
+            if (previousScene == null) {
+                setPreviousScene(new PublicScene());
+            }
+            movePreviousScene();
         });
 
         Main.primaryStage.getScene().widthProperty().addListener(new ChangeListener<Number>() {
