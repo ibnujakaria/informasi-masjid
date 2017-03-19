@@ -33,7 +33,6 @@ public class AnswerQuestionScene extends MyGroup {
     private Record question;
     BorderPane back;
     ToolBar toolBar;
-    Separator separator;
     Pane pane;
 
     public AnswerQuestionScene (Record question) {
@@ -53,7 +52,6 @@ public class AnswerQuestionScene extends MyGroup {
         pane = new Pane();
         pane.setPrefWidth(300);
         toolbarTitle = new Label("Answer Question");
-        separator = new Separator();
 
         GridPane buttons = new GridPane();
         buttons.setPadding(new Insets(0, 10, 0, 10));
@@ -67,7 +65,7 @@ public class AnswerQuestionScene extends MyGroup {
         toolBar.setPrefWidth(800);
 
         toolBar.getItems().addAll(
-                backButton, separator,pane,toolbarTitle
+                backButton, pane,toolbarTitle
 
         );
         back = new BorderPane();

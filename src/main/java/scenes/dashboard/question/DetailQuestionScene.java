@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import core.auth.Auth;
 import database.models.Question;
 import javafx.collections.ObservableList;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
@@ -32,7 +33,7 @@ public class DetailQuestionScene extends MyGroup {
     private VBox vBox;
     BorderPane back;
     ToolBar toolBar;
-    Separator separator;
+    Separator hr;
     Pane pane;
     Font f;
 
@@ -62,14 +63,16 @@ public class DetailQuestionScene extends MyGroup {
         answerLabel = new Label("Jawaban");
         answerLabel.setId("answerLabel");
 
-        separator = new Separator();
+        hr = new Separator();
+        hr.setOrientation(Orientation.HORIZONTAL);
+
         welcomeLabel = new Label("Detail Question");
 
         toolBar = new ToolBar();
         toolBar.setPrefWidth(800);
 
         toolBar.getItems().addAll(
-                backButton, separator,pane,welcomeLabel
+                backButton, pane,welcomeLabel
 
         );
         back = new BorderPane();
@@ -78,7 +81,7 @@ public class DetailQuestionScene extends MyGroup {
         ObservableList list = vBox.getChildren();
 
         list.addAll(titleLabel,
-                nameUserLabel, descriptionLabel, answerLabel,answerButton, ustadzLabel, answerText);
+                nameUserLabel,hr, descriptionLabel, answerLabel,answerButton, ustadzLabel, answerText);
         getChildren().addAll(back);
     }
 

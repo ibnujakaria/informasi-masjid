@@ -38,7 +38,6 @@ public class SignupScene extends MyGroup {
     Label titleSignUp, titleHeader;
     BorderPane back;
     ToolBar toolBar;
-    Separator separator;
     Pane pane;
 
     @Override
@@ -48,14 +47,13 @@ public class SignupScene extends MyGroup {
         pane = new Pane();
         pane.setPrefWidth(300);
         titleHeader = new Label("Sign Up");
-        separator = new Separator();
 
         toolBar = new ToolBar();
         toolBar.setPrefWidth(800);
         backButton = new JFXButton("Back");
 
         toolBar.getItems().addAll(
-                backButton, separator,pane,titleHeader
+                backButton, pane,titleHeader
 
         );
         back = new BorderPane();

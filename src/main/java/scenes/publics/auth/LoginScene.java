@@ -38,7 +38,6 @@ public class LoginScene extends MyGroup {
     VBox vBox;
     BorderPane back;
     ToolBar toolBar;
-    Separator separator;
     Pane pane;
     final KeyCombination kb = new KeyCodeCombination(KeyCode.B, KeyCombination.CONTROL_ANY);
 
@@ -47,14 +46,13 @@ public class LoginScene extends MyGroup {
         pane = new Pane();
         pane.setPrefWidth(300);
         title = new Label("Login");
-        separator = new Separator();
         vBox = new VBox();
         toolBar = new ToolBar();
         toolBar.setPrefWidth(800);
         backButton = new JFXButton("Back");
 
         toolBar.getItems().addAll(
-          backButton, separator,pane,title
+          backButton, pane,title
 
         );
 
