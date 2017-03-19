@@ -2,6 +2,7 @@ package scenes.publics;
 
 import app.Main;
 import com.jfoenix.controls.*;
+import database.models.Question;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.*;
@@ -43,7 +44,7 @@ public class PublicScene extends MyGroup {
         tab2.setText("Tanya Ustadz");
         tab3.setText("Rekaman Kajian");
         tab1.setContent(new JadwalContent());
-        tab2.setContent(new PertanyaanContent(this));
+        tab2.setContent(new PertanyaanContent(this, Question.getAnsweredQuestion()));
         tab3.setContent(new Label("Content 3"));
         tabPane.getTabs().addAll(tab1,tab2,tab3);
 
