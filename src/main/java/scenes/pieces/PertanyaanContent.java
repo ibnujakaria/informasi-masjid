@@ -1,38 +1,42 @@
 package scenes.pieces;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXListView;
+import core.auth.Auth;
+import core.components.QuestionComponent;
+import database.models.Question;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import org.jooq.Record;
+import scenes.MyGroup;
 import scenes.publics.PublicScene;
 import scenes.publics.auth.LoginScene;
 
 /**
  * Created by abdullah on 17/03/17.
  */
-public class PertanyaanContent extends GridPane {
-    JFXButton loginButton, tanyaButton;
-    PublicScene publicScene;
+public class PertanyaanContent extends JFXListView<VBox> {
+    JFXButton tanyaButton;
 
-    public PertanyaanContent(PublicScene publicScene) {
-        setPadding(new Insets(10, 10, 10, 10));
-        setVgap(5);
-        setHgap(5);
+    public PertanyaanContent(MyGroup myGroup) {
+        for (Record question : Question.getAnsweredQuestion()) {
+            getItems().add(new VBox(new QuestionComponent(question, myGroup)));
+        }
 
-        loginButton = new JFXButton("Masuk");
+//        setPadding(new Insets(10, 10, 10, 10));
+//        setVgap(5);
+//        setHgap(5);
         tanyaButton = new JFXButton("Tanya");
+        getItems().add(new VBox(tanyaButton));
+//        add(tanyaButton, 0, 2);
 
-        add(loginButton, 0, 2);
-        add(tanyaButton, 1, 2);
-
-        this.publicScene = publicScene;
-
-        addListener(loginButton);
+//        addListener(loginButton);
     }
 
     private void addListener(JFXButton button) {
         button.setOnAction(event -> {
-            publicScene.setNextScene(new LoginScene());
-            publicScene.moveNextScene();
+            System.out.println("hello world");
         });
     }
 }

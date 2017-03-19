@@ -75,13 +75,9 @@ public class WelcomeScene extends MyGroup {
 
     @Override
     protected void addListeners() {
-        Timeline auto = new Timeline(new KeyFrame(Duration.seconds(3), new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                setNextScene(new PublicScene());
-                moveNextScene();
-            }
+        Timeline auto = new Timeline(new KeyFrame(Duration.seconds(3), event -> {
+            setNextScene(new PublicScene());
+            moveNextScene();
         }));
         auto.setCycleCount(1);
         auto.play();
