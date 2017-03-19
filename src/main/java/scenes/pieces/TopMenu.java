@@ -13,6 +13,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import scenes.MyGroup;
+import scenes.dashboard.DashboardScene;
 import scenes.publics.auth.LoginScene;
 
 import java.io.FileInputStream;
@@ -55,7 +56,7 @@ public class TopMenu extends HBox {
             menu.setId("userBtn");
 
             menu.setGraphic(new ImageView(user));
-            profile = new JFXButton("Profil");
+            profile = new JFXButton("Dashboard");
             profile.setMaxWidth(75);
             logout = new JFXButton("Keluar");
             logout.setMaxWidth(75);
@@ -89,6 +90,15 @@ public class TopMenu extends HBox {
         if (isLogin) {
             menu.setOnMouseClicked(event -> {
                 popup.show(JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.RIGHT);
+            });
+            profile.setOnAction(event -> {
+                myGroup.movePreviousScene();
+            });
+            logout.setOnAction(event -> {
+                Auth.logout();
+
+                myGroup.setPreviousScene(new LoginScene());
+                myGroup.movePreviousScene();
             });
         } else {
             login.setOnAction(event -> {

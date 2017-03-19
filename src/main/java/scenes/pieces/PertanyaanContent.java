@@ -6,7 +6,11 @@ import core.auth.Auth;
 import core.components.QuestionComponent;
 import database.models.Question;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.jooq.Record;
 import scenes.MyGroup;
@@ -16,22 +20,36 @@ import scenes.publics.auth.LoginScene;
 /**
  * Created by abdullah on 17/03/17.
  */
-public class PertanyaanContent extends JFXListView<VBox> {
+public class PertanyaanContent extends VBox {
     JFXButton tanyaButton;
+    JFXListView<VBox> listPertanyaan;
+    StackPane askPane;
 
     public PertanyaanContent(MyGroup myGroup) {
+        listPertanyaan = new JFXListView<>();
         for (Record question : Question.getAnsweredQuestion()) {
-            getItems().add(new VBox(new QuestionComponent(question, myGroup)));
+            listPertanyaan.getItems().add(new VBox(new QuestionComponent(question, myGroup)));
         }
+
+        getChildren().add(listPertanyaan);
 
 //        setPadding(new Insets(10, 10, 10, 10));
 //        setVgap(5);
 //        setHgap(5);
-        tanyaButton = new JFXButton("Tanya");
-        getItems().add(new VBox(tanyaButton));
-//        add(tanyaButton, 0, 2);
+//        tanyaButton = new JFXButton("Tanya");
+//        getChildren().add(tanyaButton);
 
-//        addListener(loginButton);
+        if (Auth.isLogin()) addAskButton();
+    }
+
+    private void addAskButton() {
+        askPane = new StackPane();
+        tanyaButton = new JFXButton("Tanya Sesuatu");
+        askPane.getChildren().add(tanyaButton);
+        askPane.setAlignment(Pos.BOTTOM_RIGHT);
+        askPane.setMargin(tanyaButton, new Insets(0, 10, 10, 0));
+        setVgrow(askPane, Priority.ALWAYS);
+        getChildren().add(askPane);
     }
 
     private void addListener(JFXButton button) {
