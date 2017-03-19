@@ -46,3 +46,20 @@
             -fx-font-family: "Caviar Dreams";
             -fx-text-fill: black;
 }
+
+#questionDate{
+    -fx-font-size: 10px;
+    -fx-text-fill: darkgrey;
+    -fx-font-style: italic;
+    -fx-font-weight: lighter;
+}
+
+#questionTitle{
+    -fx-font-weight: bolder;
+    -fx-text-fill: black;
+}
+
+#questionDescription{
+    -fx-font-size: 18px;
+    -fx-text-fill: black;
+}

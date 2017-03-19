@@ -33,15 +33,14 @@ public class QuestionComponent extends MyGroup {
         titleLabel = new Label("judul");
         titleLabel.setId("questionTitle");
         descriptionLabel = new Label("deskripsi");
-        descriptionLabel.setPrefWidth(750);
+        descriptionLabel.setPrefWidth(760);
         descriptionLabel.setWrapText(true);
-        descriptionLabel.setId("QuestionDescription");
+        descriptionLabel.setId("questionDescription");
         dateLabel = new Label("20-02-2017");
         dateLabel.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
-        dateLabel.setId("QuestionDate");
+        dateLabel.setId("questionDate");
         seeDetailButton = new JFXButton("Lihat detail");
-        seeDetailButton.setId("QuestionSeeDetailButton");
-        seeDetailButton.setMinSize(Button.USE_PREF_SIZE, Button.USE_PREF_SIZE);
+        seeDetailButton.setId("questionSeeDetailButton");
 
         Pane spacer = new Pane();
         HBox.setHgrow(spacer, Priority.ALWAYS);
@@ -50,11 +49,10 @@ public class QuestionComponent extends MyGroup {
         VBox vBox = new VBox();
         HBox bottomBox = new HBox();
 
-        bottomBox.getChildren().addAll(dateLabel);
         bottomBox.getChildren().addAll(spacer);
         bottomBox.getChildren().addAll(seeDetailButton);
 
-        vBox.getChildren().addAll(titleLabel, descriptionLabel, bottomBox);
+        vBox.getChildren().addAll(titleLabel, dateLabel, descriptionLabel, bottomBox);
         getChildren().addAll(vBox);
     }
 
@@ -66,7 +64,7 @@ public class QuestionComponent extends MyGroup {
         int limit = question.get("description").toString().length() - 1;
         limit = limit > 100 ? 100 : limit;
         descriptionLabel.setText(question.get("description").toString().substring(0, limit));
-        dateLabel.setText(question.get("created_at") != null ? question.get("created_at").toString() : "no tanggal");
+        dateLabel.setText(question.get("created_at") != null ? "Posted at "+question.get("created_at").toString() : "no tanggal");
     }
 
     @Override
