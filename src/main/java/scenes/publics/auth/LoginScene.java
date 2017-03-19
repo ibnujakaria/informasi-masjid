@@ -4,6 +4,7 @@ import app.Main;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXToolbar;
 import core.auth.Auth;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -12,13 +13,16 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
+import javafx.scene.control.ToolBar;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import scenes.MyGroup;
 import scenes.dashboard.DashboardScene;
 import scenes.publics.PublicScene;
@@ -29,14 +33,38 @@ import scenes.publics.PublicScene;
 public class LoginScene extends MyGroup {
     JFXTextField usernameField;
     JFXPasswordField passwordField;
-    JFXButton loginButton, signUpButton;
-    Label errorLabel,header;
+    JFXButton loginButton, signUpButton, backButton;
+    Label errorLabel,header, title;
     VBox vBox;
+    BorderPane back;
+    ToolBar toolBar;
+    Separator separator;
+    Pane pane;
     final KeyCombination kb = new KeyCodeCombination(KeyCode.B, KeyCombination.CONTROL_ANY);
 
     @Override
     protected void prepareLayout() {
+        pane = new Pane();
+        pane.setPrefWidth(300);
+        title = new Label("Login");
+        separator = new Separator();
         vBox = new VBox();
+        toolBar = new ToolBar();
+        toolBar.setPrefWidth(800);
+        backButton = new JFXButton("Back");
+
+        toolBar.getItems().addAll(
+          backButton, separator,pane,title
+
+        );
+
+        back = new BorderPane();
+
+
+//        back.setLeft(backButton);
+
+        back.setTop(toolBar);
+
         header = new Label("Login");
         header.setId("titleLogin");
         usernameField = new JFXTextField();
@@ -67,7 +95,8 @@ public class LoginScene extends MyGroup {
         vBox.setAlignment(Pos.CENTER);
         ObservableList list = vBox.getChildren();
         list.addAll(header,usernameField,passwordField,errorLabel,buttons);
-        getChildren().addAll(vBox);
+        getChildren().addAll(vBox,back);
+
 
     }
 
@@ -90,6 +119,13 @@ public class LoginScene extends MyGroup {
         loginButton.setOnAction(event -> {
             doLoginProcess();
             setvBoxFullScreen();
+        });
+
+        backButton.setOnAction(event -> {
+            if (previousScene == null) {
+                setPreviousScene(new PublicScene());
+            }
+            movePreviousScene();
         });
 
         signUpButton.setOnAction(event -> {
