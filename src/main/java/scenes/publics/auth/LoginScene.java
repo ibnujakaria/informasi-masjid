@@ -110,6 +110,16 @@ public class LoginScene extends MyGroup {
             }
         });
 
+        setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER){
+                    doLoginProcess();
+                    setvBoxFullScreen();
+                }
+            }
+        });
+
         loginButton.setOnAction(event -> {
             doLoginProcess();
             setvBoxFullScreen();
