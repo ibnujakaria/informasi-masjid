@@ -21,9 +21,9 @@ import scenes.publics.auth.LoginScene;
  * Created by abdullah on 17/03/17.
  */
 public class PertanyaanContent extends VBox {
-    JFXButton tanyaButton;
+//    JFXButton tanyaButton;
     JFXListView<VBox> listPertanyaan;
-    StackPane askPane;
+//    StackPane askPane;
 
     public PertanyaanContent(MyGroup myGroup) {
         listPertanyaan = new JFXListView<>();
@@ -33,28 +33,22 @@ public class PertanyaanContent extends VBox {
 
         getChildren().add(listPertanyaan);
 
-//        setPadding(new Insets(10, 10, 10, 10));
-//        setVgap(5);
-//        setHgap(5);
-//        tanyaButton = new JFXButton("Tanya");
-//        getChildren().add(tanyaButton);
-
-        if (Auth.isLogin()) addAskButton();
+//        if (Auth.isLogin()) addAskButton();
     }
 
-    private void addAskButton() {
-        askPane = new StackPane();
-        tanyaButton = new JFXButton("Tanya Sesuatu");
-        askPane.getChildren().add(tanyaButton);
-        askPane.setAlignment(Pos.BOTTOM_RIGHT);
-        askPane.setMargin(tanyaButton, new Insets(0, 10, 10, 0));
-        setVgrow(askPane, Priority.ALWAYS);
-        getChildren().add(askPane);
-    }
-
-    private void addListener(JFXButton button) {
-        button.setOnAction(event -> {
-            System.out.println("hello world");
-        });
-    }
+//    private void addAskButton() {
+//        askPane = new StackPane();
+//        tanyaButton = new JFXButton("Tanya Sesuatu");
+//        askPane.getChildren().add(tanyaButton);
+//        askPane.setAlignment(Pos.BOTTOM_RIGHT);
+//        askPane.setMargin(tanyaButton, new Insets(0, 10, 10, 0));
+//        setVgrow(askPane, Priority.ALWAYS);
+//        getChildren().add(askPane);
+//    }
+//
+//    private void addListener(JFXButton button) {
+//        button.setOnAction(event -> {
+//            System.out.println("hello world");
+//        });
+//    }
 }

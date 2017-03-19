@@ -1,8 +1,10 @@
 package scenes.dashboard;
 
+import app.Main;
 import com.jfoenix.controls.JFXButton;
 import core.auth.Auth;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import scenes.MyGroup;
@@ -10,6 +12,7 @@ import scenes.admin.AdminScene;
 import scenes.dashboard.question.MyListQuestionScene;
 import scenes.dashboard.question.PostNewQuestionScene;
 import scenes.dashboard.question.UnAnsweredQuestionScene;
+import scenes.pieces.TopMenu;
 import scenes.publics.PublicScene;
 import scenes.publics.auth.LoginScene;
 
@@ -18,6 +21,7 @@ import scenes.publics.auth.LoginScene;
  * Created by ibnujakaria on 3/15/17.
  */
 public class DashboardScene extends MyGroup {
+    BorderPane borderPane;
     private JFXButton logoutButton, adminButton, addQuestion, myListQuestions, unansweredQuestionButton;
 
     @Override
@@ -46,8 +50,15 @@ public class DashboardScene extends MyGroup {
 
         VBox vBox = new VBox();
         vBox.getChildren().addAll(label, welcome, adminButton, addQuestion, myListQuestions,
-                unansweredQuestionButton,logoutButton);
-        getChildren().add(vBox);
+                unansweredQuestionButton);
+
+        borderPane = new BorderPane();
+        // bind to take available space
+        borderPane.prefHeightProperty().bind(Main.primaryStage.getScene().heightProperty());
+        borderPane.prefWidthProperty().bind(Main.primaryStage.getScene().widthProperty());
+        borderPane.setTop(new TopMenu(this, logoutButton));
+        borderPane.setCenter(vBox);
+        getChildren().add(borderPane);
     }
 
     @Override
