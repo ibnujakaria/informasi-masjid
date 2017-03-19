@@ -19,12 +19,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import org.jooq.Record;
-import org.jooq.Table;
 import scenes.MyGroup;
 import scenes.dashboard.DashboardScene;
-import scenes.publics.PublicScene;
 
 import javax.swing.*;
 
