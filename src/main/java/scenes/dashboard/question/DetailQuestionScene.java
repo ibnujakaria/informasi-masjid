@@ -1,5 +1,6 @@
 package scenes.dashboard.question;
 
+import app.Main;
 import com.jfoenix.controls.JFXButton;
 import core.auth.Auth;
 import database.models.Question;
@@ -27,15 +28,14 @@ import java.nio.file.Paths;
 public class DetailQuestionScene extends MyGroup {
 
     private Record question;
-    private Label welcomeLabel, titleLabel, descriptionLabel, nameUserLabel,
-            answerLabel, answerText, ustadzLabel;
+    private Label welcomeLabel, titleLabel, descriptionLabel,
+            answerLabel, answerText, ustadzLabel, dateLabel;
     private JFXButton backButton, answerButton;
-    private VBox vBox;
+    private VBox vBox, header;
     BorderPane back;
     ToolBar toolBar;
     Separator hr;
     Pane pane;
-    Font f;
 
     public DetailQuestionScene (Record question) {
         this.question = question;
@@ -46,14 +46,21 @@ public class DetailQuestionScene extends MyGroup {
     @Override
     protected void prepareLayout() {
         vBox = new VBox();
+        header = new VBox();
         String uri = Paths.get("dist/font/QuattrocentoSans-Regular.ttf").toUri().toString();
         Font.loadFont(uri,20);
+        dateLabel = new Label();
         titleLabel = new Label();
         titleLabel.setId("titleQuestion");
-        nameUserLabel = new Label();
-        nameUserLabel.setId("userLabel");
+        dateLabel.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
+        dateLabel.setId("questionDate2");
+
         descriptionLabel = new Label();
+        descriptionLabel.setId("questionDescription");
         answerText = new Label();
+        answerText.setId("answerTxt");
+
+
         ustadzLabel = new Label();
         ustadzLabel.setVisible(true);
         backButton = new JFXButton("Back");
@@ -65,23 +72,28 @@ public class DetailQuestionScene extends MyGroup {
 
         hr = new Separator();
         hr.setOrientation(Orientation.HORIZONTAL);
+        hr.setMinHeight(10);
 
         welcomeLabel = new Label("Detail Question");
 
         toolBar = new ToolBar();
-        toolBar.setPrefWidth(800);
+        toolBar.prefWidthProperty().bind(Main.primaryStage.getScene().widthProperty());
+        toolBar.setStyle("-fx-background-color: #ecf0f1;");
 
         toolBar.getItems().addAll(
                 backButton, pane,welcomeLabel
 
         );
+        header.getChildren().addAll(titleLabel,dateLabel);
+        header.setStyle("-fx-background-color: #3498db;");
+        vBox.prefHeightProperty().bind(Main.primaryStage.getScene().heightProperty());
+        vBox.setStyle("-fx-background-color: white;");
         back = new BorderPane();
         back.setTop(toolBar);
-        back.setCenter(vBox);
+        back.setCenter(header);
+        back.setBottom(vBox);
         ObservableList list = vBox.getChildren();
-
-        list.addAll(titleLabel,
-                nameUserLabel,hr, descriptionLabel, answerLabel,answerButton, ustadzLabel, answerText);
+        list.addAll(descriptionLabel, answerButton, answerLabel, ustadzLabel, answerText);
         getChildren().addAll(back);
     }
 
@@ -91,11 +103,15 @@ public class DetailQuestionScene extends MyGroup {
         System.out.println("question is unanswered: " + Question.isUnAnswered(question));
         titleLabel.setText(question.get("title").toString());
         descriptionLabel.setText(question.get("description").toString());
-        nameUserLabel.setText("by "+Question.getUser(question).get("name").toString());
+
+        String posterQuestion = "by "+ Question.getUser(question).get("name").toString();
 
         if (Question.isAnonim(question)) {
-            nameUserLabel.setText("Hamba Allah");
+            posterQuestion = "Hamba Allah";
         }
+
+        String dateQuestion = question.get("created_at") != null ? "Posted at "+question.get("created_at").toString().substring(0, 10) : "no tanggal";
+        dateLabel.setText(dateQuestion + " " +posterQuestion);
 
         answerLabel.setVisible(Question.isAnswered(question));
 
@@ -104,7 +120,8 @@ public class DetailQuestionScene extends MyGroup {
 
         if (Question.isAnswered(question)) {
             Record ustadz = Question.getUstadzWhoAnswer(question);
-            ustadzLabel.setText("Oleh: " + ustadz.get("name").toString());
+            ustadzLabel.setText("by : Ustadz " + ustadz.get("name").toString());
+            ustadzLabel.setId("ustadzLbl");
             ustadzLabel.setVisible(true);
 
         }
