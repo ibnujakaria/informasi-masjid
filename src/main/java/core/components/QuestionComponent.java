@@ -39,7 +39,6 @@ public class QuestionComponent extends MyGroup {
         descriptionLabel.setWrapText(true);
         descriptionLabel.setId("questionDescription");
         dateLabel = new Label("20-02-2017");
-        dateLabel.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
         dateLabel.setId("questionDate");
         seeDetailButton = new JFXButton("Lihat detail");
         seeDetailButton.setId("questionSeeDetailButton");
@@ -75,7 +74,7 @@ public class QuestionComponent extends MyGroup {
         String posterQuestion = "by "+ Question.getUser(question).get("name").toString();
 
         if (Question.isAnonim(question)) {
-            posterQuestion = "Hamba Allah";
+            posterQuestion = "by Hamba Allah";
         }
 
         String dateQuestion = question.get("created_at") != null ? "Posted at "+question.get("created_at").toString().substring(0, 10) : "no tanggal";
