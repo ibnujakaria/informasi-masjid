@@ -19,7 +19,7 @@ public class ListSchedulesScene extends MyGroup {
         backButton = new JFXButton("Back");
         createScheduleButton = new JFXButton("Tambah Jadwal Kajian");
 
-        vBox.getChildren().addAll(backButton, label);
+        vBox.getChildren().addAll(backButton, label, createScheduleButton);
         getChildren().addAll(vBox);
     }
 
@@ -30,7 +30,8 @@ public class ListSchedulesScene extends MyGroup {
         });
 
         createScheduleButton.setOnAction(event -> {
-
+            setNextScene(new CreateScheduleScene());
+            moveNextScene();
         });
     }
 }
