@@ -52,7 +52,7 @@ public class PostNewQuestionScene extends MyGroup {
                     isAnonimCheckbox.isSelected());
 
             MyGroup dashboardScene = (MyGroup) getPreviousScene();
-            dashboardScene.setNextScene(new MyListQuestionScene());
+            dashboardScene.setNextScene(new DashboardScene());
             dashboardScene.moveNextScene();
         });
     }
