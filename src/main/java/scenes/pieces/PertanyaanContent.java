@@ -8,10 +8,8 @@ import database.models.Question;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
+import javafx.scene.layout.*;
 import org.jooq.Record;
 import org.jooq.Result;
 import scenes.MyGroup;
@@ -33,6 +31,13 @@ public class PertanyaanContent extends VBox {
         prepareLayout(myGroup, questions);
 
         if (Auth.isLogin() && !Auth.isUstadz() && !Auth.isAdmin()) addAskButton();
+    }
+
+    public PertanyaanContent(MyGroup myGroup, Result<Record> questions, Label welcome) {
+        this.myGroup = myGroup;
+        getChildren().add(welcome);
+        prepareLayout(myGroup, questions);
+        addAskButton();
     }
 
     public void prepareLayout(MyGroup myGroup, Result<Record> questions) {
