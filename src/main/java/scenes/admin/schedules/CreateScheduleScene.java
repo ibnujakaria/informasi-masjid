@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import org.jooq.Record;
 import scenes.MyGroup;
+import scenes.admin.schedules.pieces.PeriodicScheduleComboBox;
 
 /**
  * Created by ibnujakaria on 19/03/17.
@@ -14,7 +15,7 @@ import scenes.MyGroup;
 public class CreateScheduleScene extends MyGroup {
     private JFXButton backButton, submitButton;
     private JFXTextField titleField, ustadzField;
-    private ComboBox ustadzSpinner, periodicSpinner, intervalSpinner;
+    private JFXComboBox ustadzSpinner, periodicSpinner, intervalSpinner;
     private JFXCheckBox ustadzTamuCheckbox;
     private boolean ustadzTamu = false;
 
@@ -32,12 +33,17 @@ public class CreateScheduleScene extends MyGroup {
         ustadzField.setPromptText("Nama ustadz tamu");
         ustadzField.setVisible(ustadzTamu);
 
-        ustadzSpinner = new ComboBox();
+        ustadzSpinner = new JFXComboBox();
+        ustadzSpinner.setPromptText("Pilih ustadz");
         loadDataUstadz();
 
         ustadzTamuCheckbox = new JFXCheckBox("Ustadz Tamu");
 
-        vBox.getChildren().addAll(backButton, label, titleField, ustadzTamuCheckbox, ustadzSpinner, ustadzField, submitButton);
+        periodicSpinner = new PeriodicScheduleComboBox();
+        periodicSpinner.setPromptText("Periode");
+
+        vBox.getChildren().addAll(backButton, label, titleField, ustadzTamuCheckbox, ustadzSpinner,
+                ustadzField, periodicSpinner, submitButton);
         getChildren().addAll(vBox);
     }
 
@@ -57,7 +63,7 @@ public class CreateScheduleScene extends MyGroup {
     private void loadDataUstadz () {
         ustadzSpinner.getItems().clear();
         for (Record ustadz : User.getUstadz()) {
-            ustadzSpinner.getItems().add(ustadz.get("name").toString());
+            ustadzSpinner.getItems().add(new Label(ustadz.get("name").toString()));
         }
     }
 }
