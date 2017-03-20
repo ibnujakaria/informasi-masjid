@@ -37,11 +37,17 @@ public class ListUsersScene extends MyGroup {
         displayUsers();
     }
 
-    private void displayUsers() {
+    public void displayUsers() {
         listUsers.getChildren().clear();
         for (Record user : User.getUsers()) {
             listUsers.getChildren().add(new UserComponent(this, user));
         }
+    }
+
+    @Override
+    public void refreshContent() {
+        super.refreshContent();
+        displayUsers();
     }
 
     @Override

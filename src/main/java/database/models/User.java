@@ -98,6 +98,17 @@ public class User {
                 .fetch();
     }
 
+    public static void deleteById(int id){
+        DeleteConditionStep query = db.deleteFrom(table("users"))
+                .where(field("id").equal(id));
+        System.out.println(query.getSQL());
+        query.execute();
+
+        db.deleteFrom(table("questions"))
+                .where(field("user_id").equal(id))
+                .or(field("ustadz_id").equal(id)).execute();
+    }
+
     public static boolean isUstadz(Record user) {
         return Integer.parseInt(user.get("is_ustadz").toString()) == 1;
     }

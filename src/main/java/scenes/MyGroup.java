@@ -28,6 +28,10 @@ public abstract class MyGroup extends Group{
 
     }
 
+    public void refreshContent () {
+
+    }
+
     public void moveNextScene() {
         if (nextScene == null) {
             return;

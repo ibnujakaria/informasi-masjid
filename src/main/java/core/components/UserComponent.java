@@ -2,6 +2,7 @@ package core.components;
 
 import com.jfoenix.controls.JFXButton;
 import core.auth.Auth;
+import database.models.User;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -9,6 +10,7 @@ import javafx.scene.layout.VBox;
 import org.jooq.Record;
 import scenes.MyGroup;
 import scenes.admin.users.EditUserScene;
+import scenes.admin.users.ListUsersScene;
 
 /**
  * Created by ibnujakaria on 3/17/17.
@@ -52,6 +54,11 @@ public class UserComponent extends Group {
         editButton.setOnAction(event -> {
             myParent.setNextScene(new EditUserScene(user));
             myParent.moveNextScene();
+        });
+        deleteButton.setOnAction(event -> {
+            User.deleteById((int)user.get("id"));
+            myParent.refreshContent();
+            System.out.println("delete user" + (int)user.get("id"));
         });
     }
 }
