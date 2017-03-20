@@ -63,6 +63,10 @@ public class QuestionComponent extends MyGroup {
         titleLabel.setText(question.get("title").toString());
         int limit = question.get("description").toString().length() - 1;
         limit = limit > 100 ? 100 : limit;
+
+        if (limit < 0) {
+            limit = 0;
+        }
         descriptionLabel.setText(question.get("description").toString().substring(0, limit));
         dateLabel.setText(question.get("created_at") != null ? "Posted at "+question.get("created_at").toString() : "no tanggal");
     }
