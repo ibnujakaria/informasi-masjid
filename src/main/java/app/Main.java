@@ -1,6 +1,7 @@
 package app;
 
 import com.jfoenix.controls.JFXButton;
+import core.auth.Auth;
 import database.DB;
 import database.models.User;
 import database.schemas.UserTableSchema;
@@ -26,6 +27,9 @@ public class Main extends Application {
         this.primaryStage = page;
 
         primaryStage.setTitle("Info Masjid");
+
+        // check login
+        Auth.checkPreviousLogin();
 
         Scene scene = new Scene(new Group(), width, height);
         primaryStage.setScene(scene);

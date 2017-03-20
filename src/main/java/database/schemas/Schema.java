@@ -59,6 +59,8 @@ public abstract class Schema {
             }
 
             makeItSynchronized();
+        } else {
+            System.out.println(this.getClass().toString() + "'s migration is synchronized");
         }
     }
 
@@ -79,7 +81,6 @@ public abstract class Schema {
                 .fetch();
 
         if (result.size() > 0) {
-            System.out.println(this.getClass().toString() + "'s migration is synchronized");
             Record r = result.get(0);
             int version = Integer.parseInt(r.get("version") + "");
             return version;

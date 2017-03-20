@@ -2,6 +2,7 @@ package core.auth;
 
 import com.google.common.hash.Hashing;
 import database.DB;
+import database.models.User;
 import org.jooq.*;
 import org.jooq.impl.DSL;
 
@@ -34,10 +35,25 @@ public class Auth {
         if (result.size() > 0) {
             user = result.get(0);
             is_login = true;
+
+            synchronizeLastLogin();
             return true;
         }
 
         return false;
+    }
+
+    private static void synchronizeLastLogin() {
+        Record lastLogin = db.select().from(table("last_login")).fetchOne();
+        if (lastLogin == null) {
+            db.insertInto(table("last_login"))
+                    .set(field("value"), user.get("id"))
+                    .execute();
+        } else {
+            db.update(table("last_login"))
+                    .set(field("value"), user.get("id"))
+                    .execute();
+        }
     }
 
     public static boolean loginByUserRecord (Record user)
@@ -45,6 +61,8 @@ public class Auth {
         if (user.get("username") != null) {
             Auth.user = user;
             is_login = true;
+
+            synchronizeLastLogin();
             return true;
         }
 
@@ -55,6 +73,8 @@ public class Auth {
     {
         is_login = false;
         user = null;
+
+        db.deleteFrom(table("last_login")).execute();
     }
 
     public static boolean isLogin ()
@@ -84,5 +104,14 @@ public class Auth {
 
     public static int getUserId() {
         return Integer.parseInt(getUser().get("id").toString());
+    }
+
+    public static void checkPreviousLogin() {
+        Record lastLogin = db.select().from(table("last_login")).fetchOne();
+
+        if (lastLogin != null) {
+            Record lastUser = User.getUserById(Integer.parseInt(lastLogin.get("value").toString()));
+            loginByUserRecord(lastUser);
+        }
     }
 }

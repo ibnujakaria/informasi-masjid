@@ -1,5 +1,6 @@
 package database;
 
+import database.schemas.LastLoginTableSchema;
 import database.schemas.QuestionTableSchema;
 import database.schemas.ScheduleTableSchema;
 import database.schemas.UserTableSchema;
@@ -41,5 +42,8 @@ public class DB {
 
         ScheduleTableSchema scheduleTableSchema = new ScheduleTableSchema();
         scheduleTableSchema.up();
+
+        LastLoginTableSchema lastLoginTableSchema = new LastLoginTableSchema();
+        lastLoginTableSchema.up();
     }
 }
