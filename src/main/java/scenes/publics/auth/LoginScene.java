@@ -48,9 +48,9 @@ public class LoginScene extends MyGroup {
         title = new Label("Login");
         vBox = new VBox();
         toolBar = new ToolBar();
-        toolBar.setPrefWidth(800);
         backButton = new JFXButton("Back");
-
+        title.setAlignment(Pos.CENTER);
+        toolBar.prefWidthProperty().bind(Main.primaryStage.getScene().widthProperty());
         toolBar.getItems().addAll(
           backButton, pane,title
 
