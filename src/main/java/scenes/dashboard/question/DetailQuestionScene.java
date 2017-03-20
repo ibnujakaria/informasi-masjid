@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -33,10 +34,11 @@ public class DetailQuestionScene extends MyGroup {
             answerLabel, answerText, ustadzLabel, dateLabel;
     private JFXButton backButton, answerButton;
     private VBox vBox, header;
-    BorderPane back;
+    BorderPane back,top;
     ToolBar toolBar;
     Separator hr;
     Pane pane;
+    HBox hBox;
 
     public DetailQuestionScene (Record question) {
         this.question = question;
@@ -89,6 +91,20 @@ public class DetailQuestionScene extends MyGroup {
                 backButton, pane,welcomeLabel
 
         );
+        top = new BorderPane();
+
+        hBox = new HBox();
+        hBox.setStyle("-fx-background-color: #ecf0f1;");
+        backButton.setAlignment(Pos.TOP_LEFT);
+        welcomeLabel.setAlignment(Pos.CENTER);
+        hBox.setAlignment(Pos.CENTER);
+        hBox.getChildren().addAll(backButton,welcomeLabel);
+        hBox.prefWidthProperty().bind(Main.primaryStage.widthProperty());
+
+        top.setLeft(backButton);
+        top.setCenter(hBox);
+        top.setStyle("-fx-background-color: #ecf0f1;");
+        top.setMargin(backButton ,new Insets(5,1,5,8));
         header.getChildren().addAll(titleLabel,dateLabel);
         header.setMargin(titleLabel ,new Insets(1,1,1,10));
         header.setMargin(dateLabel ,new Insets(1,1,1,10));
@@ -100,9 +116,10 @@ public class DetailQuestionScene extends MyGroup {
         vBox.setMargin(answerText,new Insets(15,1,1,10));
         vBox.setStyle("-fx-background-color: white;");
         back = new BorderPane();
-        back.setTop(toolBar);
+//        back.setTop(toolBar);
         back.setCenter(header);
         back.setBottom(vBox);
+        back.setTop(top);
         ObservableList list = vBox.getChildren();
         list.addAll(descriptionLabel, answerButton, answerLabel, ustadzLabel, answerText);
         getChildren().addAll(back);
