@@ -1,6 +1,7 @@
 package core.components;
 
 import com.jfoenix.controls.JFXButton;
+import database.models.Question;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -33,7 +34,7 @@ public class QuestionComponent extends MyGroup {
         titleLabel = new Label("judul");
         titleLabel.setId("questionTitle");
         descriptionLabel = new Label("deskripsi");
-        descriptionLabel.setPrefWidth(760);
+        descriptionLabel.setPrefWidth(755);
         descriptionLabel.setWrapText(true);
         descriptionLabel.setId("questionDescription");
         dateLabel = new Label("20-02-2017");
@@ -68,7 +69,15 @@ public class QuestionComponent extends MyGroup {
             limit = 0;
         }
         descriptionLabel.setText(question.get("description").toString().substring(0, limit));
-        dateLabel.setText(question.get("created_at") != null ? "Posted at "+question.get("created_at").toString() : "no tanggal");
+
+        String posterQuestion = "by "+ Question.getUser(question).get("name").toString();
+
+        if (Question.isAnonim(question)) {
+            posterQuestion = "Hamba Allah";
+        }
+
+        String dateQuestion = question.get("created_at") != null ? "Posted at "+question.get("created_at").toString().substring(0, 10) : "no tanggal";
+        dateLabel.setText(dateQuestion + " " +posterQuestion);
     }
 
     @Override
