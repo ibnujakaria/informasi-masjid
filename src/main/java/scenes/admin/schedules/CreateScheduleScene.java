@@ -1,10 +1,8 @@
 package scenes.admin.schedules;
 
 import com.jfoenix.controls.*;
-import com.jfoenix.skins.JFXTimePickerContent;
 import database.models.User;
 import javafx.scene.Node;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import org.jooq.Record;

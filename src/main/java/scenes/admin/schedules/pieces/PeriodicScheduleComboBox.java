@@ -1,6 +1,7 @@
 package scenes.admin.schedules.pieces;
 
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import core.components.KeyValueLabelComponent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -14,20 +15,20 @@ import java.util.HashMap;
 public class PeriodicScheduleComboBox extends HBox {
     public KeyValueLabelComponent periodics[];
     private JFXComboBox periodicComboBox, intervalByComboBox, subIntervalByComboBox, intervalComboBox;
+    private JFXDatePicker datePicker;
+    private String days[] = {"Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Ahad"};
 
     public PeriodicScheduleComboBox () {
         periodics = new KeyValueLabelComponent[]{
                 new KeyValueLabelComponent("once", "Sekali"),
                 new KeyValueLabelComponent("weekly", "Mingguan"),
-                new KeyValueLabelComponent("monthly", "Bulanan"),
-                new KeyValueLabelComponent("yearly", "Tahunan")
+                new KeyValueLabelComponent("monthly", "Bulanan")
         };
 
         periodicComboBox = new JFXComboBox();
         periodicComboBox.setPromptText("Periode");
 
         intervalByComboBox = new JFXComboBox();
-        intervalByComboBox.setPromptText("Pilih Interval");
         intervalByComboBox.setVisible(false);
         periodicComboBox.getItems().addAll(periodics);
 
@@ -37,7 +38,10 @@ public class PeriodicScheduleComboBox extends HBox {
         intervalComboBox = new JFXComboBox();
         intervalComboBox.setVisible(false);
 
-        getChildren().addAll(periodicComboBox, intervalByComboBox, subIntervalByComboBox, intervalComboBox);
+        datePicker = new JFXDatePicker();
+        datePicker.setVisible(false);
+
+        getChildren().addAll(periodicComboBox, intervalByComboBox, subIntervalByComboBox, intervalComboBox, datePicker);
         addListeners();
     }
 
@@ -46,37 +50,72 @@ public class PeriodicScheduleComboBox extends HBox {
             KeyValueLabelComponent selected = (KeyValueLabelComponent) periodicComboBox.getValue();
             System.out.println(periodicComboBox.getValue());
 
-            if (selected.getKey().equals("monthly")) {
+            if (selected.getKey().equals("once")) {
+                datePicker.setVisible(true);
+                intervalByComboBox.setVisible(false);
+                intervalComboBox.setVisible(false);
+                subIntervalByComboBox.setVisible(false);
+            } else if (selected.getKey().equals("weekly")) {
+                intervalByComboBox.getItems().clear();
+
+                for (int i = 1; i <= 7; i++) {
+                    intervalByComboBox.getItems().add(new KeyValueLabelComponent("" + i, days[i-1]));
+                }
+                intervalByComboBox.setPromptText("Pilih Hari");
+                intervalByComboBox.setVisible(true);
+                subIntervalByComboBox.setVisible(false);
+                datePicker.setVisible(false);
+            } else if (selected.getKey().equals("monthly")) {
+                intervalByComboBox.setPromptText("Pilih Interval");
                 intervalByComboBox.getItems().clear();
                 intervalByComboBox.getItems().addAll(
                         new KeyValueLabelComponent("day", "Pertanggal"),
                         new KeyValueLabelComponent("week", "Perpekan ke-")
                 );
                 intervalByComboBox.setVisible(true);
+                datePicker.setVisible(false);
+                subIntervalByComboBox.setVisible(false);
             } else {
                 intervalByComboBox.setVisible(false);
+                subIntervalByComboBox.setVisible(false);
+                datePicker.setVisible(false);
             }
         });
 
         intervalByComboBox.setOnAction(event -> {
             KeyValueLabelComponent selected = (KeyValueLabelComponent) intervalByComboBox.getValue();
+            KeyValueLabelComponent selectedPeriodic = (KeyValueLabelComponent) periodicComboBox.getValue();
+            if (selected != null && selectedPeriodic != null) {
 
-            if (selected.getKey().equals("week")) {
-                subIntervalByComboBox.getItems().clear();
-                for (int i = 1; i <= 5; i++) {
-                    subIntervalByComboBox.getItems().add(new KeyValueLabelComponent(i + "", "Pekan " + i));
+                if (selectedPeriodic.getKey().equals("monthly") && selected.getKey().equals("week")) {
+                    subIntervalByComboBox.getItems().clear();
+                    for (int i = 1; i <= 5; i++) {
+                        subIntervalByComboBox.getItems().add(new KeyValueLabelComponent(i + "", "Pekan " + i));
+                    }
+                    subIntervalByComboBox.setPromptText("Pilih pekan");
+                    subIntervalByComboBox.setVisible(true);
+                    intervalComboBox.setVisible(false);
+                } else if (selectedPeriodic.getKey().equals("monthly") && selected.getKey().equals("day")) {
+                    subIntervalByComboBox.getItems().clear();
+                    for (int i = 1; i <= 31; i++) {
+                        subIntervalByComboBox.getItems().add(new KeyValueLabelComponent("" + i, "" + i));
+                    }
+                    subIntervalByComboBox.setPromptText("Pilih tanggal");
+                    subIntervalByComboBox.setVisible(true);
+                    intervalComboBox.setVisible(false);
                 }
-                subIntervalByComboBox.setPromptText("Pilih pekan");
-                subIntervalByComboBox.setVisible(true);
             }
         });
 
         subIntervalByComboBox.setOnAction(event -> {
+            KeyValueLabelComponent selectedPeriodic = (KeyValueLabelComponent) periodicComboBox.getValue();
+            KeyValueLabelComponent selectedIntervalBy = (KeyValueLabelComponent) intervalByComboBox.getValue();
             KeyValueLabelComponent selected = (KeyValueLabelComponent) subIntervalByComboBox.getValue();
 
-            if (selected != null) {
+            if (selected != null && selectedPeriodic.getKey().equals("monthly") &&
+                    selectedIntervalBy.getKey().equals("week")) {
                 intervalComboBox.getItems().clear();
-                String days[] = {"Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Ahad"};
+
                 for (int i = 1; i <= 7; i++) {
                     intervalComboBox.getItems().add(new KeyValueLabelComponent("" + i, days[i-1]));
                 }
