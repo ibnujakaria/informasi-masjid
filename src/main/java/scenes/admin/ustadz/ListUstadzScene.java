@@ -32,6 +32,12 @@ public class ListUstadzScene extends MyGroup {
     }
 
     @Override
+    public void refreshContent() {
+        super.refreshContent();
+        prepareUstadz();
+    }
+
+    @Override
     protected void onAfterBack() {
         super.onAfterBack();
         prepareUstadz();
