@@ -1,5 +1,6 @@
 package scenes.pieces;
 
+import app.Main;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import core.auth.Auth;
@@ -8,6 +9,8 @@ import database.models.Question;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
@@ -19,11 +22,15 @@ import scenes.dashboard.question.PostNewQuestionScene;
 import scenes.publics.PublicScene;
 import scenes.publics.auth.LoginScene;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 /**
  * Created by abdullah on 17/03/17.
  */
 public class PertanyaanContent extends VBox {
     JFXButton tanyaButton;
+    Image ask;
     JFXListView<VBox> listPertanyaan;
     StackPane askPane;
     MyGroup myGroup;
@@ -37,6 +44,7 @@ public class PertanyaanContent extends VBox {
 
     public void prepareLayout(MyGroup myGroup, Result<Record> questions) {
         listPertanyaan = new JFXListView<>();
+        listPertanyaan.prefHeightProperty().bind(Main.primaryStage.getScene().heightProperty());
         for (Record question : questions) {
             listPertanyaan.getItems().add(new VBox(new QuestionComponent(question, myGroup)));
         }
@@ -45,11 +53,20 @@ public class PertanyaanContent extends VBox {
     }
 
     private void addAskButton() {
+        try {
+            ask = new Image(new FileInputStream("dist/images/user/ask.png"),18,27,false,false);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         askPane = new StackPane();
-        tanyaButton = new JFXButton("Tanya Sesuatu");
+        askPane.setStyle("-fx-background-color: white;");
+        tanyaButton = new JFXButton("+");
+        tanyaButton.setId("tanyaBtn");
+        tanyaButton.setGraphic(new ImageView(ask));
         askPane.getChildren().add(tanyaButton);
+
         askPane.setAlignment(Pos.BOTTOM_RIGHT);
-        askPane.setMargin(tanyaButton, new Insets(0, 10, 10, 0));
+        askPane.setMargin(tanyaButton, new Insets(10, 20, 10, 0));
         setVgrow(askPane, Priority.ALWAYS);
         getChildren().add(askPane);
 

@@ -36,9 +36,9 @@
 }
 
 #titleQuestion{
-        -fx-font-size: 53px;
+        -fx-font-size: 40px;
         -fx-font-family: "Open Sans";
-        -fx-text-fill: #ecf0f1;
+        -fx-text-fill: white;
         -fx-font-weight: bolder;
 
 }
@@ -94,4 +94,13 @@
 .separator{
     -fx-background-color: #ecf0f1;
     -fx-background-radius: 2;
+}
+
+#tanyaBtn{
+    -fx-font-size: 15px;
+    -fx-background-radius: 5em;
+    -fx-min-width: 50px;
+    -fx-min-height: 50px;
+    -fx-max-width: 50px;
+    -fx-max-height: 50px;
 }
