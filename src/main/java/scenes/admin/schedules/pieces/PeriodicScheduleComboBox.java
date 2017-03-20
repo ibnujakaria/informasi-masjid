@@ -156,6 +156,10 @@ public class PeriodicScheduleComboBox extends HBox {
     }
 
     public String getInterval() {
+        if (((KeyValueLabelComponent) periodicComboBox.getValue()).getKey().equals("monthly") &&
+                ((KeyValueLabelComponent) intervalByComboBox.getValue()).getKey().equals("week")) {
+            return ((KeyValueLabelComponent) intervalComboBox.getValue()).getKey().toString();
+        }
         return null;
     }
 }
