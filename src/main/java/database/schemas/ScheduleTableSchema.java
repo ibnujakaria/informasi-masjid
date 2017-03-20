@@ -6,7 +6,7 @@ package database.schemas;
 public class ScheduleTableSchema extends Schema {
     @Override
     protected int getVersion() {
-        return 1;
+        return 4;
     }
 
     @Override
@@ -17,10 +17,16 @@ public class ScheduleTableSchema extends Schema {
                 "ustadz_id integer default 0," +
                 "ustadz varchar (200) null," +
                 "description varchar (3000) null," +
-                "periodic varchar (200)," + // once, weekly, monthly_by_day, monthly_by_week, yearly,
+                "periodic varchar (200)," + // once, weekly, monthly, monthly, yearly,
                 "interval integer default 0," + // ist not ngaruh for daily and once
                 "created_at text," +
                 "updated_at text" +
                 ")";
+
+        UP_QUERIES[1] = "alter table schedules add column interval_by varchar(100) null";
+
+        UP_QUERIES[2] = "alter table schedules add column sub_interval_by varchar(100) null";
+
+        UP_QUERIES[3] = "alter table schedules add column start_at varchar (100) null";
     }
 }
