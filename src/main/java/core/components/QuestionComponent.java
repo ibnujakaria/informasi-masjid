@@ -35,7 +35,8 @@ public class QuestionComponent extends MyGroup {
         titleLabel = new Label("judul");
         titleLabel.setId("questionTitle");
         descriptionLabel = new Label("deskripsi");
-        descriptionLabel.setPrefWidth(755);
+//        descriptionLabel.setPrefWidth(755);
+        descriptionLabel.prefWidthProperty().bind(Main.primaryStage.getScene().widthProperty());
         descriptionLabel.setWrapText(true);
         descriptionLabel.setId("questionDescription");
         dateLabel = new Label("20-02-2017");

@@ -58,9 +58,11 @@ public class DetailQuestionScene extends MyGroup {
 
         descriptionLabel = new Label();
         descriptionLabel.setId("questionDescription");
+        descriptionLabel.prefWidthProperty().bind(Main.primaryStage.getScene().widthProperty().subtract(10));
         descriptionLabel.setWrapText(true);
         answerText = new Label();
         answerText.setId("answerTxt");
+        answerText.prefWidthProperty().bind(Main.primaryStage.getScene().widthProperty().subtract(10));
         answerText.setWrapText(true);
 
 
