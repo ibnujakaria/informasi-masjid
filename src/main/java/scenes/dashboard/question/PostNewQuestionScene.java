@@ -4,6 +4,8 @@ import com.jfoenix.controls.*;
 import core.auth.Auth;
 import database.models.Question;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToolBar;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import org.jooq.Record;
@@ -18,6 +20,9 @@ public class PostNewQuestionScene extends MyGroup {
     private JFXTextArea descriptionField;
     private JFXCheckBox isAnonimCheckbox;
     private JFXButton submitButton, backButton;
+    private Label welcomeLabel;
+    Pane pane;
+    ToolBar toolBar;
 
     @Override
     protected void prepareLayout() {
@@ -34,10 +39,22 @@ public class PostNewQuestionScene extends MyGroup {
 
         isAnonimCheckbox = new JFXCheckBox("Ajukan sebagai Hamba Allah");
 
+        pane = new Pane();
+        pane.setPrefWidth(300);
         backButton = new JFXButton("Back");
+        welcomeLabel = new Label("Buat Pertanyaan");
+
+        toolBar = new ToolBar();
+        toolBar.setPrefWidth(800);
+
+        toolBar.getItems().addAll(
+                backButton, pane,welcomeLabel
+        );
+
         submitButton = new JFXButton("Submit");
 
-        vBox.getChildren().addAll(backButton, welcome, titleField, descriptionField, isAnonimCheckbox, submitButton);
+        vBox.getChildren().addAll(toolBar, titleField, descriptionField, isAnonimCheckbox, submitButton);
+        vBox.setSpacing(15);
         getChildren().add(vBox);
     }
 
