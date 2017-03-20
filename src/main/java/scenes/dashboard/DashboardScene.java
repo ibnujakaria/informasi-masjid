@@ -4,8 +4,10 @@ import app.Main;
 import com.jfoenix.controls.JFXButton;
 import core.auth.Auth;
 import database.models.Question;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import scenes.MyGroup;
@@ -24,12 +26,14 @@ import scenes.publics.PublicScene;
 public class DashboardScene extends MyGroup {
     BorderPane borderPane;
     private JFXButton homeButton, adminButton, addQuestion, myListQuestions, unansweredQuestionButton;
+    private Label label, welcome;
 
     @Override
     protected void prepareLayout() {
-        Label label = new Label("Dashboard");
-        label.setFont(new Font(40));
-        Label welcome = new Label("Selamat datang: " + Auth.getUser().get("name"));
+//        label = new Label("Dashboard");
+//        label.setFont(new Font(40));
+        String ustadz = Auth.isUstadz()?"Ustadz ":"";
+        welcome = new Label("Selamat datang: " + ustadz + Auth.getUser().get("name"));
         homeButton = new JFXButton("Home");
 
         adminButton = new JFXButton("Admin");
@@ -106,12 +110,13 @@ public class DashboardScene extends MyGroup {
     }
 
     private VBox getAskingContent() {
+//        HBox hBox = new HBox(welcome);
         if (Auth.isAdmin()) {
             return  new VBox(adminButton);
         } else if (Auth.isUstadz()) {
-            return new PertanyaanContent(this, Question.getUnAnsweredQuestions());
+            return new PertanyaanContent(this, Question.getUnAnsweredQuestions(), welcome);
         } else {
-            return new PertanyaanContent(this, Question.getQuestionsOfUserId(Auth.getUserId()));
+            return new PertanyaanContent(this, Question.getQuestionsOfUserId(Auth.getUserId()), welcome);
         }
     }
 }

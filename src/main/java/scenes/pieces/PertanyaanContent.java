@@ -5,22 +5,18 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import core.auth.Auth;
 import core.components.QuestionComponent;
-import database.models.Question;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
 import org.jooq.Record;
 import org.jooq.Result;
 import scenes.MyGroup;
 import scenes.dashboard.question.PostNewQuestionScene;
-import scenes.publics.PublicScene;
-import scenes.publics.auth.LoginScene;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -40,6 +36,13 @@ public class PertanyaanContent extends VBox {
         prepareLayout(myGroup, questions);
 
         if (Auth.isLogin() && !Auth.isUstadz() && !Auth.isAdmin()) addAskButton();
+    }
+
+    public PertanyaanContent(MyGroup myGroup, Result<Record> questions, Label welcome) {
+        this.myGroup = myGroup;
+        getChildren().add(welcome);
+        prepareLayout(myGroup, questions);
+        addAskButton();
     }
 
     public void prepareLayout(MyGroup myGroup, Result<Record> questions) {
