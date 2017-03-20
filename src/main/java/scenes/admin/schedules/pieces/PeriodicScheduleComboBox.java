@@ -71,7 +71,7 @@ public class PeriodicScheduleComboBox extends HBox {
                 intervalByComboBox.getItems().clear();
                 intervalByComboBox.getItems().addAll(
                         new KeyValueLabelComponent("day", "Pertanggal"),
-                        new KeyValueLabelComponent("week", "Perpekan ke-")
+                        new KeyValueLabelComponent("week", "Perpekan")
                 );
                 intervalByComboBox.setVisible(true);
                 datePicker.setVisible(false);
@@ -159,6 +159,9 @@ public class PeriodicScheduleComboBox extends HBox {
         if (((KeyValueLabelComponent) periodicComboBox.getValue()).getKey().equals("monthly") &&
                 ((KeyValueLabelComponent) intervalByComboBox.getValue()).getKey().equals("week")) {
             return ((KeyValueLabelComponent) intervalComboBox.getValue()).getKey().toString();
+        } else if (((KeyValueLabelComponent) periodicComboBox.getValue()).getKey().equals("monthly") &&
+                ((KeyValueLabelComponent) intervalByComboBox.getValue()).getKey().equals("day")) {
+            return ((KeyValueLabelComponent) subIntervalByComboBox.getValue()).getKey().toString();
         }
         return null;
     }
