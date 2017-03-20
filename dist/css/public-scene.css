@@ -77,7 +77,7 @@
 }
 
 #questionTitle{
-    -fx-font-weight: bolder;
+    -fx-font-weight: lighter;
     -fx-text-fill: black;
 }
 
@@ -87,7 +87,7 @@
 }
 
 #answerTxt{
-    -fx-font-size: 20px;
+        -fx-font-size: 20px;
         -fx-text-fill: #2c3e50;
 }
 

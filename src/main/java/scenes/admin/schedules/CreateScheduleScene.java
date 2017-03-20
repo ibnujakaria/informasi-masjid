@@ -1,7 +1,9 @@
 package scenes.admin.schedules;
 
 import com.jfoenix.controls.*;
+import com.jfoenix.skins.JFXTimePickerContent;
 import database.models.User;
+import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -15,7 +17,9 @@ import scenes.admin.schedules.pieces.PeriodicScheduleComboBox;
 public class CreateScheduleScene extends MyGroup {
     private JFXButton backButton, submitButton;
     private JFXTextField titleField, ustadzField;
-    private JFXComboBox ustadzSpinner, periodicSpinner, intervalSpinner;
+    private JFXComboBox ustadzSpinner;
+    private JFXDatePicker datePicker;
+    private Node periodicSpinner;
     private JFXCheckBox ustadzTamuCheckbox;
     private boolean ustadzTamu = false;
 
@@ -38,12 +42,13 @@ public class CreateScheduleScene extends MyGroup {
         loadDataUstadz();
 
         ustadzTamuCheckbox = new JFXCheckBox("Ustadz Tamu");
-
         periodicSpinner = new PeriodicScheduleComboBox();
-        periodicSpinner.setPromptText("Periode");
+        datePicker = new JFXDatePicker();
+        datePicker.setPromptText("Waktu mulai");
+        datePicker.setShowTime(true);
 
         vBox.getChildren().addAll(backButton, label, titleField, ustadzTamuCheckbox, ustadzSpinner,
-                ustadzField, periodicSpinner, submitButton);
+                ustadzField, periodicSpinner, datePicker, submitButton);
         getChildren().addAll(vBox);
     }
 
