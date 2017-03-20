@@ -59,7 +59,7 @@ public class LoginScene extends MyGroup {
         back = new BorderPane();
         back.setTop(toolBar);
 
-        header = new Label("Login");
+        header = new Label(Main.primaryStage.getTitle()+" - Login");
         header.setId("titleLogin");
         usernameField = new JFXTextField();
         usernameField.setPromptText("Username");

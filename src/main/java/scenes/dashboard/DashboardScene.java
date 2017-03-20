@@ -57,7 +57,7 @@ public class DashboardScene extends MyGroup {
         // bind to take available space
         borderPane.prefHeightProperty().bind(Main.primaryStage.getScene().heightProperty());
         borderPane.prefWidthProperty().bind(Main.primaryStage.getScene().widthProperty());
-        borderPane.setTop(new TopMenu(this, homeButton));
+        borderPane.setTop(new TopMenu(this, homeButton, "Dashboard"));
         borderPane.setCenter(getAskingContent());
         getChildren().add(borderPane);
     }

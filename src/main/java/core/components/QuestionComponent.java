@@ -1,5 +1,6 @@
 package core.components;
 
+import app.Main;
 import com.jfoenix.controls.JFXButton;
 import database.models.Question;
 import javafx.scene.control.Button;
@@ -49,6 +50,7 @@ public class QuestionComponent extends MyGroup {
 
         VBox vBox = new VBox();
         HBox bottomBox = new HBox();
+        vBox.prefWidthProperty().bind(Main.primaryStage.getScene().widthProperty().subtract(46));
 
         bottomBox.getChildren().addAll(spacer);
         bottomBox.getChildren().addAll(seeDetailButton);
