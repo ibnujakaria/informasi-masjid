@@ -4,6 +4,8 @@ import com.jfoenix.controls.JFXButton;
 import core.auth.Auth;
 import database.models.User;
 import javafx.scene.Group;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -56,9 +58,13 @@ public class UserComponent extends Group {
             myParent.moveNextScene();
         });
         deleteButton.setOnAction(event -> {
-            User.deleteById((int)user.get("id"));
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Apakah anda yakin?", ButtonType.YES, ButtonType.CANCEL);
+            alert.showAndWait();
+
+            if (alert.getResult() == ButtonType.YES) {
+                User.deleteById((int)user.get("id"));
+            }
             myParent.refreshContent();
-            System.out.println("delete user" + (int)user.get("id"));
         });
     }
 }
