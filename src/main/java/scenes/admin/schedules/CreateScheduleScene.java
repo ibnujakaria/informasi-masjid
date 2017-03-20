@@ -1,6 +1,8 @@
 package scenes.admin.schedules;
 
 import com.jfoenix.controls.*;
+import core.components.KeyValueLabelComponent;
+import database.models.Schedule;
 import database.models.User;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -17,7 +19,8 @@ public class CreateScheduleScene extends MyGroup {
     private JFXTextField titleField, ustadzField;
     private JFXComboBox ustadzSpinner;
     private JFXDatePicker datePicker;
-    private Node periodicSpinner;
+    private JFXTextArea descriptionField;
+    private PeriodicScheduleComboBox periodicSpinner;
     private JFXCheckBox ustadzTamuCheckbox;
     private boolean ustadzTamu = false;
 
@@ -45,8 +48,11 @@ public class CreateScheduleScene extends MyGroup {
         datePicker.setPromptText("Waktu mulai");
         datePicker.setShowTime(true);
 
-        vBox.getChildren().addAll(backButton, label, titleField, ustadzTamuCheckbox, ustadzSpinner,
-                ustadzField, periodicSpinner, datePicker, submitButton);
+        descriptionField = new JFXTextArea();
+        descriptionField.setPromptText("Deskripsi kajian");
+
+        vBox.getChildren().addAll(backButton, label, titleField, ustadzTamuCheckbox, ustadzSpinner, ustadzField,
+                descriptionField, periodicSpinner, datePicker, submitButton);
         getChildren().addAll(vBox);
     }
 
@@ -61,12 +67,31 @@ public class CreateScheduleScene extends MyGroup {
             ustadzSpinner.setVisible(!ustadzTamuCheckbox.isSelected());
             ustadzField.setVisible(ustadzTamu);
         });
+
+        submitButton.setOnAction(event -> {
+            String selectedUstadz = ((KeyValueLabelComponent) ustadzSpinner.getValue()).getKey().toString();
+
+            String startAt = "";
+
+            if (datePicker != null && datePicker.getTime() != null) {
+                startAt = datePicker.getTime().getHour() + ":" + datePicker.getTime().getMinute();
+            }
+            Schedule.insert(
+                    titleField.getText(), ustadzTamu ? 0 : Integer.parseInt(selectedUstadz),
+                    (ustadzTamu ? ustadzField.getText() : null), descriptionField.getText(),
+                    periodicSpinner.getPeriodic(), periodicSpinner.getIntervalBy(),
+                    periodicSpinner.getSubIntervalBy(), periodicSpinner.getInterval(),
+                    startAt, periodicSpinner.getExactDate()
+            );
+
+            movePreviousScene();
+        });
     }
 
     private void loadDataUstadz () {
         ustadzSpinner.getItems().clear();
         for (Record ustadz : User.getUstadz()) {
-            ustadzSpinner.getItems().add(new Label(ustadz.get("name").toString()));
+            ustadzSpinner.getItems().add(new KeyValueLabelComponent(ustadz.get("id").toString(), ustadz.get("name").toString()));
         }
     }
 }

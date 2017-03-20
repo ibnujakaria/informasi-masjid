@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.security.Key;
 import java.util.HashMap;
 
 /**
@@ -123,5 +124,38 @@ public class PeriodicScheduleComboBox extends HBox {
                 intervalComboBox.setVisible(true);
             }
         });
+    }
+
+    public String getPeriodic () {
+        return ((KeyValueLabelComponent) periodicComboBox.getValue()).getKey().toString();
+    }
+
+
+    public String getIntervalBy() {
+        if (((KeyValueLabelComponent) periodicComboBox.getValue()).getKey().equals("monthly")) {
+            return ((KeyValueLabelComponent) intervalByComboBox.getValue()).getKey().toString();
+        } else if (((KeyValueLabelComponent) periodicComboBox.getValue()).getKey().equals("weekly")) {
+            return ((KeyValueLabelComponent) intervalByComboBox.getValue()).getKey().toString();
+        }
+        return null;
+    }
+
+    public String getSubIntervalBy() {
+        if (((KeyValueLabelComponent) periodicComboBox.getValue()).getKey().equals("monthly") &&
+                ((KeyValueLabelComponent) intervalByComboBox.getValue()).getKey().equals("week")) {
+            return ((KeyValueLabelComponent) subIntervalByComboBox.getValue()).getKey().toString();
+        }
+        return null;
+    }
+
+    public String getExactDate() {
+        if (((KeyValueLabelComponent) periodicComboBox.getValue()).getKey().equals("once")) {
+            return datePicker.getValue().toString();
+        }
+        return null;
+    }
+
+    public String getInterval() {
+        return null;
     }
 }
