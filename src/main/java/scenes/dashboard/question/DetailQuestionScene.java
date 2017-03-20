@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXButton;
 import core.auth.Auth;
 import database.models.Question;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -57,8 +58,12 @@ public class DetailQuestionScene extends MyGroup {
 
         descriptionLabel = new Label();
         descriptionLabel.setId("questionDescription");
+        descriptionLabel.prefWidthProperty().bind(Main.primaryStage.getScene().widthProperty().subtract(10));
+        descriptionLabel.setWrapText(true);
         answerText = new Label();
         answerText.setId("answerTxt");
+        answerText.prefWidthProperty().bind(Main.primaryStage.getScene().widthProperty().subtract(10));
+        answerText.setWrapText(true);
 
 
         ustadzLabel = new Label();
@@ -85,8 +90,14 @@ public class DetailQuestionScene extends MyGroup {
 
         );
         header.getChildren().addAll(titleLabel,dateLabel);
+        header.setMargin(titleLabel ,new Insets(1,1,1,10));
+        header.setMargin(dateLabel ,new Insets(1,1,1,10));
         header.setStyle("-fx-background-color: #3498db;");
         vBox.prefHeightProperty().bind(Main.primaryStage.getScene().heightProperty());
+        vBox.setMargin(descriptionLabel ,new Insets(15,1,1,10));
+        vBox.setMargin(answerLabel,new Insets(1,1,1,10));
+        vBox.setMargin(ustadzLabel,new Insets(1,1,1,10));
+        vBox.setMargin(answerText,new Insets(15,1,1,10));
         vBox.setStyle("-fx-background-color: white;");
         back = new BorderPane();
         back.setTop(toolBar);

@@ -6,7 +6,7 @@ package database.schemas;
 public class ScheduleTableSchema extends Schema {
     @Override
     protected int getVersion() {
-        return 4;
+        return 5;
     }
 
     @Override
@@ -28,5 +28,7 @@ public class ScheduleTableSchema extends Schema {
         UP_QUERIES[2] = "alter table schedules add column sub_interval_by varchar(100) null";
 
         UP_QUERIES[3] = "alter table schedules add column start_at varchar (100) null";
+
+        UP_QUERIES[4] = "alter table schedules add column exact_date varchar (100) null";
     }
 }
