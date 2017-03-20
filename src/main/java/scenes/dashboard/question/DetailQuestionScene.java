@@ -11,8 +11,14 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import org.jooq.Record;
 import scenes.MyGroup;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.nio.file.Paths;
 
 /**
  * Created by ibnujakaria on 3/17/17.
@@ -28,6 +34,7 @@ public class DetailQuestionScene extends MyGroup {
     ToolBar toolBar;
     Separator separator;
     Pane pane;
+    Font f;
 
     public DetailQuestionScene (Record question) {
         this.question = question;
@@ -38,7 +45,8 @@ public class DetailQuestionScene extends MyGroup {
     @Override
     protected void prepareLayout() {
         vBox = new VBox();
-
+        String uri = Paths.get("dist/font/QuattrocentoSans-Regular.ttf").toUri().toString();
+        Font.loadFont(uri,20);
         titleLabel = new Label();
         titleLabel.setId("titleQuestion");
         nameUserLabel = new Label();
@@ -48,12 +56,14 @@ public class DetailQuestionScene extends MyGroup {
         ustadzLabel = new Label();
         ustadzLabel.setVisible(true);
         backButton = new JFXButton("Back");
-        answerButton = new JFXButton("Jawab");
+        answerButton = new JFXButton("Answer");
         pane = new Pane();
         pane.setPrefWidth(300);
         answerLabel = new Label("Jawaban");
+        answerLabel.setId("answerLabel");
+
         separator = new Separator();
-        welcomeLabel = new Label("Detail");
+        welcomeLabel = new Label("Detail Question");
 
         toolBar = new ToolBar();
         toolBar.setPrefWidth(800);
@@ -66,6 +76,7 @@ public class DetailQuestionScene extends MyGroup {
         back.setTop(toolBar);
         back.setCenter(vBox);
         ObservableList list = vBox.getChildren();
+
         list.addAll(titleLabel,
                 nameUserLabel, descriptionLabel, answerLabel,answerButton, ustadzLabel, answerText);
         getChildren().addAll(back);
@@ -73,16 +84,18 @@ public class DetailQuestionScene extends MyGroup {
 
     private void loadAndDrawQuestion() {
         answerButton.setVisible(Auth.isLogin() && Auth.isUstadz() && Question.isUnAnswered(question));
+
         System.out.println("question is unanswered: " + Question.isUnAnswered(question));
         titleLabel.setText(question.get("title").toString());
         descriptionLabel.setText(question.get("description").toString());
-        nameUserLabel.setText(Question.getUser(question).get("name").toString());
+        nameUserLabel.setText("by "+Question.getUser(question).get("name").toString());
 
         if (Question.isAnonim(question)) {
             nameUserLabel.setText("Hamba Allah");
         }
 
         answerLabel.setVisible(Question.isAnswered(question));
+
         answerText.setVisible(Question.isAnswered(question));
         answerText.setText(Question.isAnswered(question) ? question.get("answer").toString() : "");
 
