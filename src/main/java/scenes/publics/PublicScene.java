@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
 import scenes.MyGroup;
+import scenes.dashboard.DashboardScene;
 import scenes.pieces.JadwalContent;
 import scenes.pieces.PertanyaanContent;
 import scenes.pieces.TopMenu;
@@ -67,6 +68,7 @@ public class PublicScene extends MyGroup {
     @Override
     protected void addListeners() {
         toDashboard.setOnAction(event -> {
+            setPreviousScene(new DashboardScene());
             movePreviousScene();
         });
 
