@@ -52,7 +52,7 @@ public class PublicScene extends MyGroup {
         borderPane = new BorderPane();
         borderPane.prefHeightProperty().bind(Main.primaryStage.getScene().heightProperty());
         borderPane.prefWidthProperty().bind(Main.primaryStage.getScene().widthProperty());
-        borderPane.setTop(new TopMenu(this, toDashboard));
+        borderPane.setTop(new TopMenu(this, toDashboard, "Home"));
         borderPane.setCenter(tabPane);
         getChildren().add(borderPane);
 

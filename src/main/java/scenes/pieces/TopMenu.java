@@ -1,5 +1,6 @@
 package scenes.pieces;
 
+import app.Main;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPopup;
 import core.auth.Auth;
@@ -29,10 +30,10 @@ public class TopMenu extends HBox {
     Image user;
     MyGroup myGroup;
 
-    public TopMenu(MyGroup myGroup, JFXButton option) {
+    public TopMenu(MyGroup myGroup, JFXButton option, String header) {
         this.myGroup = myGroup;
         setMinHeight(120);
-        title = new Label("Info Masjid");
+        title = new Label(Main.primaryStage.getTitle()+" - "+header);
         title.setId("title");
         setId("top-menu");
         setMargin(title, new Insets(10,0,0,10));
