@@ -52,21 +52,13 @@ public class DashboardScene extends MyGroup {
 //        vBox.getChildren().addAll(label, welcome, adminButton, addQuestion, myListQuestions,
 //                unansweredQuestionButton);
 
-        VBox vBox;
-        if (Auth.isAdmin()) {
-            vBox = new VBox(label, welcome, adminButton);
-        } else if (Auth.isUstadz()) {
-            vBox = new PertanyaanContent(this, Question.getUnAnsweredQuestions());
-        } else {
-            vBox = new PertanyaanContent(this, Question.getQuestionsOfUserId(Auth.getUserId()));
-        }
 
         borderPane = new BorderPane();
         // bind to take available space
         borderPane.prefHeightProperty().bind(Main.primaryStage.getScene().heightProperty());
         borderPane.prefWidthProperty().bind(Main.primaryStage.getScene().widthProperty());
         borderPane.setTop(new TopMenu(this, homeButton));
-        borderPane.setCenter(vBox);
+        borderPane.setCenter(getAskingContent());
         getChildren().add(borderPane);
     }
 
@@ -75,6 +67,8 @@ public class DashboardScene extends MyGroup {
         super.onAfterBack();
         System.out.println("Im back!");
         System.out.println("this you should call the query again");
+
+        borderPane.setCenter(getAskingContent());
     }
 
     @Override
@@ -109,5 +103,15 @@ public class DashboardScene extends MyGroup {
 //            setNextScene(new UnAnsweredQuestionScene());
 //            moveNextScene();
 //        });
+    }
+
+    private VBox getAskingContent() {
+        if (Auth.isAdmin()) {
+            return  new VBox(adminButton);
+        } else if (Auth.isUstadz()) {
+            return new PertanyaanContent(this, Question.getUnAnsweredQuestions());
+        } else {
+            return new PertanyaanContent(this, Question.getQuestionsOfUserId(Auth.getUserId()));
+        }
     }
 }
