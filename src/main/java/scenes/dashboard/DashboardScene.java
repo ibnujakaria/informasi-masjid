@@ -112,7 +112,7 @@ public class DashboardScene extends MyGroup {
     private VBox getAskingContent() {
 //        HBox hBox = new HBox(welcome);
         if (Auth.isAdmin()) {
-            return  new VBox(adminButton);
+            return  new VBox(welcome, adminButton);
         } else if (Auth.isUstadz()) {
             return new PertanyaanContent(this, Question.getUnAnsweredQuestions(), welcome);
         } else {

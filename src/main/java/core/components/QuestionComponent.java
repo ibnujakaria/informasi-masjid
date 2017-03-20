@@ -35,7 +35,8 @@ public class QuestionComponent extends MyGroup {
         titleLabel = new Label("judul");
         titleLabel.setId("questionTitle");
         descriptionLabel = new Label("deskripsi");
-        descriptionLabel.setPrefWidth(755);
+//        descriptionLabel.setPrefWidth(755);
+        descriptionLabel.prefWidthProperty().bind(Main.primaryStage.getScene().widthProperty());
         descriptionLabel.setWrapText(true);
         descriptionLabel.setId("questionDescription");
         dateLabel = new Label("20-02-2017");
@@ -65,12 +66,6 @@ public class QuestionComponent extends MyGroup {
 
         titleLabel.setText(question.get("title").toString());
         int limit = question.get("description").toString().length() - 1;
-        limit = limit > 100 ? 100 : limit;
-
-        if (limit < 0) {
-            limit = 0;
-        }
-        descriptionLabel.setText(question.get("description").toString().substring(0, limit+1));
 
         String posterQuestion = "by "+ Question.getUser(question).get("name").toString();
 
