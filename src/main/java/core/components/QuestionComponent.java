@@ -40,7 +40,7 @@ public class QuestionComponent extends MyGroup {
         descriptionLabel.setId("questionDescription");
         dateLabel = new Label("20-02-2017");
         dateLabel.setId("questionDate");
-        seeDetailButton = new JFXButton("Lihat detail");
+        seeDetailButton = new JFXButton("See detail");
         seeDetailButton.setId("questionSeeDetailButton");
 
         Pane spacer = new Pane();
