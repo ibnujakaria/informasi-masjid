@@ -1,5 +1,6 @@
 package database.models;
 
+import core.components.KeyValueLabelComponent;
 import database.DB;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
@@ -15,7 +16,8 @@ import static org.jooq.impl.DSL.*;
  */
 public class Schedule {
 
-    private  static DSLContext db = DSL.using(DB.conn, SQLDialect.SQLITE);
+    private static DSLContext db = DSL.using(DB.conn, SQLDialect.SQLITE);
+    public static String days[] = {"Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Ahad"};
 
     public static void insert (String title, int ustadz_id, String ustadz, String description,
                                String periodic, String interval_by, String sub_interval_by, String interval,
@@ -57,5 +59,18 @@ public class Schedule {
         }
 
         return (String) User.getUserById((int) schedule.get("ustadz_id")).get("name");
+    }
+
+    public static String getDateLabel (Record schedule) {
+        if (((String) schedule.get("periodic")).equals("weekly")) {
+            return "Setiap hari " + days[((int) schedule.get("interval")) - 1];
+        } else if (((String) schedule.get("periodic")).equals("monthly") && ((String) schedule.get("interval_by")).equals("day")) {
+            return "Setiap tanggal " + schedule.get("interval");
+        } else if (((String) schedule.get("periodic")).equals("monthly") && ((String) schedule.get("interval_by")).equals("week")) {
+            return "Setiap " + days[((int) schedule.get("interval")) - 1] + " ke-" + schedule.get("interval");
+        } else if (((String) schedule.get("periodic")).equals("once")) {
+            return "Tanggal " + schedule.get("exact_date");
+        }
+        return null;
     }
 }

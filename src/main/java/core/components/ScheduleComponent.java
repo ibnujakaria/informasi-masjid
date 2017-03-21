@@ -21,7 +21,7 @@ public class ScheduleComponent extends VBox {
     private void prepareLayout() {
         titleLabel = new Label((String) schedule.get("title"));
         descriptionLabel = new Label((String) schedule.get("description"));
-        dateLabel = new Label();
+        dateLabel = new Label(Schedule.getDateLabel(schedule));
         timeLabel = new Label((String) schedule.get("start_at"));
         ustadzLabel = new Label(Schedule.getUstadz(schedule));
     }
