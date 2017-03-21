@@ -69,7 +69,9 @@ public class CreateScheduleScene extends MyGroup {
         });
 
         submitButton.setOnAction(event -> {
-            String selectedUstadz = ((KeyValueLabelComponent) ustadzSpinner.getValue()).getKey().toString();
+            String selectedUstadz = null;
+            if (!ustadzTamu)
+                ((KeyValueLabelComponent) ustadzSpinner.getValue()).getKey().toString();
 
             String startAt = "";
 
