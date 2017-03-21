@@ -41,7 +41,7 @@ public class QuestionComponent extends MyGroup {
         dateLabel = new Label("20-02-2017");
         dateLabel.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
         dateLabel.setId("questionDate");
-        seeDetailButton = new JFXButton("Lihat detail");
+        seeDetailButton = new JFXButton("See detail");
         seeDetailButton.setId("questionSeeDetailButton");
 
         Pane spacer = new Pane();
