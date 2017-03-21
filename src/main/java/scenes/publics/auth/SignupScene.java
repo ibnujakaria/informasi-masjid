@@ -36,28 +36,17 @@ public class SignupScene extends MyGroup {
     VBox vBox;
     final KeyCombination kb = new KeyCodeCombination(KeyCode.B, KeyCombination.CONTROL_ANY);
     Label titleSignUp, titleHeader;
-    BorderPane back;
-    ToolBar toolBar;
-    Pane pane;
+    HBox hBox;
+    BorderPane back,top;
 
     @Override
     protected void prepareLayout() {
         vBox = new VBox();
 
-        pane = new Pane();
-        pane.setPrefWidth(300);
         titleHeader = new Label("Sign Up");
-
-        toolBar = new ToolBar();
-        toolBar.setPrefWidth(800);
         backButton = new JFXButton("Back");
 
-        toolBar.getItems().addAll(
-                backButton, pane,titleHeader
-
-        );
         back = new BorderPane();
-        back.setTop(toolBar);
 
         titleSignUp = new Label("Sign Up");
         titleSignUp.setId("titleSignUp");
@@ -113,10 +102,28 @@ public class SignupScene extends MyGroup {
         buttons.setAlignment(Pos.CENTER);
         setvBoxFullScreen();
 
+        hBox = new HBox();
+        hBox.setStyle("-fx-background-color: #ecf0f1;");
+        backButton.setAlignment(Pos.TOP_LEFT);
+        titleHeader.setAlignment(Pos.CENTER);
+        hBox.setAlignment(Pos.CENTER);
+        hBox.getChildren().addAll(backButton,titleHeader);
+        hBox.prefWidthProperty().bind(Main.primaryStage.widthProperty());
+
+        top = new BorderPane();
+        top.setLeft(backButton);
+        top.setCenter(hBox);
+        top.setStyle("-fx-background-color: #ecf0f1;");
+        top.setMargin(backButton ,new Insets(5,1,5,8));
+
         vBox.setAlignment(Pos.CENTER);
         ObservableList list = vBox.getChildren();
         list.addAll(titleSignUp,nameField,usernameField,emailField, addressField,passwordField,passwordConfirmationField,buttons);
-        getChildren().addAll(vBox,back);
+
+        back = new BorderPane();
+        back.setTop(top);
+        back.setCenter(vBox);
+        getChildren().addAll(back);
     }
 
     @Override

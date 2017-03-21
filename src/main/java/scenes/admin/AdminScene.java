@@ -57,5 +57,10 @@ public class AdminScene extends MyGroup {
             setNextScene(new ListSchedulesScene());
             moveNextScene();
         });
+
+        listQuestionsButton.setOnAction(event -> {
+            setNextScene(new ListQuestionScene());
+            moveNextScene();
+        });
     }
 }

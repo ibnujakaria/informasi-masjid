@@ -1,10 +1,18 @@
 package scenes.dashboard.question;
 
+import app.Main;
 import com.jfoenix.controls.*;
 import core.auth.Auth;
 import database.models.Question;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToolBar;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -21,12 +29,13 @@ public class PostNewQuestionScene extends MyGroup {
     private JFXCheckBox isAnonimCheckbox;
     private JFXButton submitButton, backButton;
     private Label welcomeLabel;
-    Pane pane;
-    ToolBar toolBar;
+    VBox vBox;
+    HBox hBox;
+    BorderPane back, top;
 
     @Override
     protected void prepareLayout() {
-        VBox vBox = new VBox();
+        vBox = new VBox();
 
         Label welcome = new Label("Tulis Pertanyaan");
         welcome.setFont(new Font(40));
@@ -39,29 +48,44 @@ public class PostNewQuestionScene extends MyGroup {
 
         isAnonimCheckbox = new JFXCheckBox("Ajukan sebagai Hamba Allah");
 
-        pane = new Pane();
-        pane.setPrefWidth(300);
         backButton = new JFXButton("Back");
         welcomeLabel = new Label("Buat Pertanyaan");
 
-        toolBar = new ToolBar();
-        toolBar.setPrefWidth(800);
-
-        toolBar.getItems().addAll(
-                backButton, pane,welcomeLabel
-        );
 
         submitButton = new JFXButton("Submit");
 
-        vBox.getChildren().addAll(toolBar, titleField, descriptionField, isAnonimCheckbox, submitButton);
-        vBox.setSpacing(15);
-        getChildren().add(vBox);
+        hBox = new HBox();
+        hBox.setStyle("-fx-background-color: #ecf0f1;");
+        backButton.setAlignment(Pos.TOP_LEFT);
+        welcomeLabel.setAlignment(Pos.CENTER);
+        hBox.setAlignment(Pos.CENTER);
+        hBox.getChildren().addAll(backButton,welcomeLabel);
+        hBox.prefWidthProperty().bind(Main.primaryStage.widthProperty());
+
+        top = new BorderPane();
+        top.setLeft(backButton);
+        top.setCenter(hBox);
+        top.setStyle("-fx-background-color: #ecf0f1;");
+        top.setMargin(backButton ,new Insets(5,1,5,8));
+
+        ObservableList list = vBox.getChildren();
+        list.addAll(titleField, descriptionField, isAnonimCheckbox, submitButton);
+        vBox.setMargin(titleField, new Insets(1,10,1,10));
+        vBox.setMargin(descriptionField, new Insets(1,10,1,10));
+        vBox.setMargin(isAnonimCheckbox, new Insets(5,1,5,10));
+        vBox.setMargin(submitButton, new Insets(5,1,1,10));
+        setvBoxFullScreen();
+        back = new BorderPane();
+        back.setTop(top);
+        back.setCenter(vBox);
+        getChildren().addAll(back);
     }
 
     @Override
     protected void addListeners() {
         backButton.setOnAction(event -> {
             movePreviousScene();
+            setvBoxFullScreen();
         });
 
         submitButton.setOnAction(event -> {
@@ -71,6 +95,28 @@ public class PostNewQuestionScene extends MyGroup {
             MyGroup dashboardScene = (MyGroup) getPreviousScene();
             dashboardScene.setNextScene(new DashboardScene());
             dashboardScene.moveNextScene();
+            setvBoxFullScreen();
+        });
+
+        Main.primaryStage.getScene().widthProperty().addListener(new ChangeListener<Number>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                setvBoxFullScreen();
+            }
+        });
+
+        Main.primaryStage.getScene().heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                setvBoxFullScreen();
+            }
         });
     }
+
+    private void setvBoxFullScreen () {
+        vBox.setMinHeight(Main.primaryStage.getScene().getHeight());
+        vBox.setMinWidth(Main.primaryStage.getScene().getWidth());
+    }
+
 }
