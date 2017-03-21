@@ -35,9 +35,6 @@ public class DetailQuestionScene extends MyGroup {
     private JFXButton backButton, answerButton;
     private VBox vBox, header;
     BorderPane back,top;
-    ToolBar toolBar;
-    Separator hr;
-    Pane pane;
     HBox hBox;
 
     public DetailQuestionScene (Record question) {
@@ -48,16 +45,6 @@ public class DetailQuestionScene extends MyGroup {
 
     @Override
     protected void prepareLayout() {
-        vBox = new VBox();
-        header = new VBox();
-        String uri = Paths.get("dist/font/QuattrocentoSans-Regular.ttf").toUri().toString();
-        Font.loadFont(uri,20);
-        dateLabel = new Label();
-        titleLabel = new Label();
-        titleLabel.setId("titleQuestion");
-        dateLabel.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
-        dateLabel.setId("questionDate2");
-
         descriptionLabel = new Label();
         descriptionLabel.setId("questionDescription");
         descriptionLabel.prefWidthProperty().bind(Main.primaryStage.getScene().widthProperty().subtract(10));
@@ -66,62 +53,60 @@ public class DetailQuestionScene extends MyGroup {
         answerText.setId("answerTxt");
         answerText.prefWidthProperty().bind(Main.primaryStage.getScene().widthProperty().subtract(10));
         answerText.setWrapText(true);
-
-
         ustadzLabel = new Label();
+        vBox = new VBox();
         ustadzLabel.setVisible(true);
         backButton = new JFXButton("Back");
         answerButton = new JFXButton("Answer");
-        pane = new Pane();
-        pane.setPrefWidth(300);
         answerLabel = new Label("Jawaban");
         answerLabel.setId("answerLabel");
+        dateLabel = new Label();
+        titleLabel = new Label();
+        titleLabel.setId("titleQuestion");
+        titleLabel.prefWidthProperty().bind(Main.primaryStage.getScene().widthProperty().subtract(10));
+        titleLabel.setWrapText(true);
 
-        hr = new Separator();
-        hr.setOrientation(Orientation.HORIZONTAL);
-        hr.setMinHeight(10);
+        dateLabel.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
+        dateLabel.setId("questionDate2");
 
-        welcomeLabel = new Label("Detail Question");
-
-        toolBar = new ToolBar();
-        toolBar.prefWidthProperty().bind(Main.primaryStage.getScene().widthProperty());
-        toolBar.setStyle("-fx-background-color: #ecf0f1;");
-
-        toolBar.getItems().addAll(
-                backButton, pane,welcomeLabel
-
-        );
-        top = new BorderPane();
-
-        hBox = new HBox();
-        hBox.setStyle("-fx-background-color: #ecf0f1;");
-        backButton.setAlignment(Pos.TOP_LEFT);
-        welcomeLabel.setAlignment(Pos.CENTER);
-        hBox.setAlignment(Pos.CENTER);
-        hBox.getChildren().addAll(backButton,welcomeLabel);
-        hBox.prefWidthProperty().bind(Main.primaryStage.widthProperty());
-
-        top.setLeft(backButton);
-        top.setCenter(hBox);
-        top.setStyle("-fx-background-color: #ecf0f1;");
-        top.setMargin(backButton ,new Insets(5,1,5,8));
-        header.getChildren().addAll(titleLabel,dateLabel);
-        header.setMargin(titleLabel ,new Insets(1,1,1,10));
-        header.setMargin(dateLabel ,new Insets(1,1,1,10));
-        header.setStyle("-fx-background-color: #3498db;");
         vBox.prefHeightProperty().bind(Main.primaryStage.getScene().heightProperty());
         vBox.setMargin(descriptionLabel ,new Insets(15,1,1,10));
         vBox.setMargin(answerLabel,new Insets(1,1,1,10));
         vBox.setMargin(ustadzLabel,new Insets(1,1,1,10));
         vBox.setMargin(answerText,new Insets(15,1,1,10));
         vBox.setStyle("-fx-background-color: white;");
+        ObservableList list = vBox.getChildren();
+        list.addAll(descriptionLabel, answerButton, answerLabel, ustadzLabel, answerText);
+
+        header = new VBox();
+        header.getChildren().addAll(titleLabel,dateLabel);
+        header.setMargin(titleLabel ,new Insets(1,1,1,10));
+        header.setMargin(dateLabel ,new Insets(1,1,1,10));
+        header.setStyle("-fx-background-color: #3498db;");
+
+
+        hBox = new HBox();
+        hBox.setStyle("-fx-background-color: #ecf0f1;");
+        welcomeLabel = new Label("Detail Question");
+        backButton.setAlignment(Pos.TOP_LEFT);
+        welcomeLabel.setAlignment(Pos.CENTER);
+        hBox.setAlignment(Pos.CENTER);
+        hBox.getChildren().addAll(backButton,welcomeLabel);
+        hBox.prefWidthProperty().bind(Main.primaryStage.widthProperty());
+
+        top = new BorderPane();
+        top.setLeft(backButton);
+        top.setCenter(hBox);
+        top.setStyle("-fx-background-color: #ecf0f1;");
+        top.setMargin(backButton ,new Insets(5,1,5,8));
+
+        String uri = Paths.get("dist/font/QuattrocentoSans-Regular.ttf").toUri().toString();
+        Font.loadFont(uri,20);
+
         back = new BorderPane();
-//        back.setTop(toolBar);
         back.setCenter(header);
         back.setBottom(vBox);
         back.setTop(top);
-        ObservableList list = vBox.getChildren();
-        list.addAll(descriptionLabel, answerButton, answerLabel, ustadzLabel, answerText);
         getChildren().addAll(back);
     }
 
