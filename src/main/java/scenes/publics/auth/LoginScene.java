@@ -19,10 +19,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import scenes.MyGroup;
 import scenes.dashboard.DashboardScene;
 import scenes.publics.PublicScene;
@@ -36,30 +33,16 @@ public class LoginScene extends MyGroup {
     JFXButton loginButton, signUpButton, backButton;
     Label errorLabel,header, title;
     VBox vBox;
-    BorderPane back;
-    ToolBar toolBar;
-    Pane pane;
+    BorderPane back, top;
+    HBox hBox;
     final KeyCombination kb = new KeyCodeCombination(KeyCode.B, KeyCombination.CONTROL_ANY);
 
     @Override
     protected void prepareLayout() {
-        pane = new Pane();
-        pane.setPrefWidth(300);
         title = new Label("Login");
         vBox = new VBox();
-        toolBar = new ToolBar();
         backButton = new JFXButton("Back");
-        title.setAlignment(Pos.CENTER);
-        toolBar.prefWidthProperty().bind(Main.primaryStage.getScene().widthProperty());
-        toolBar.getItems().addAll(
-          backButton, pane,title
-
-        );
-
-        back = new BorderPane();
-        back.setTop(toolBar);
-
-        header = new Label(Main.primaryStage.getTitle()+" - Login");
+        header = new Label("Login");
         header.setId("titleLogin");
         usernameField = new JFXTextField();
         usernameField.setPromptText("Username");
@@ -77,6 +60,20 @@ public class LoginScene extends MyGroup {
         errorLabel = new Label("Login failed!");
         errorLabel.setVisible(false);
 
+        hBox = new HBox();
+        hBox.setStyle("-fx-background-color: #ecf0f1;");
+        backButton.setAlignment(Pos.TOP_LEFT);
+        title.setAlignment(Pos.CENTER);
+        hBox.setAlignment(Pos.CENTER);
+        hBox.getChildren().addAll(backButton,title);
+        hBox.prefWidthProperty().bind(Main.primaryStage.widthProperty());
+
+        top = new BorderPane();
+        top.setLeft(backButton);
+        top.setCenter(hBox);
+        top.setStyle("-fx-background-color: #ecf0f1;");
+        top.setMargin(backButton ,new Insets(5,1,5,8));
+
         GridPane buttons = new GridPane();
         buttons.setPadding(new Insets(0, 10, 0, 10));
         buttons.setVgap(10);
@@ -89,7 +86,13 @@ public class LoginScene extends MyGroup {
         vBox.setAlignment(Pos.CENTER);
         ObservableList list = vBox.getChildren();
         list.addAll(header,usernameField,passwordField,errorLabel,buttons);
-        getChildren().addAll(vBox,back);
+
+        back = new BorderPane();
+        back.setTop(top);
+        back.setCenter(vBox);
+
+
+        getChildren().addAll(back);
     }
 
     @Override
