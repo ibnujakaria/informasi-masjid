@@ -4,6 +4,8 @@ import database.DB;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.Result;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 import static org.jooq.impl.DSL.*;
@@ -43,5 +45,17 @@ public class Schedule {
                 .set(field("created_at"), new LocalDate() + " " + new LocalTime())
                 .set(field("updated_at"), new LocalDate() + " " + new LocalTime())
                 .execute();
+    }
+
+    public static Result<Record> get () {
+        return db.select().from(table("schedules")).fetch();
+    }
+
+    public static String getUstadz(Record schedule) {
+        if (schedule.get("ustadz") != null) {
+            return (String) schedule.get("ustadz");
+        }
+
+        return (String) User.getUserById((int) schedule.get("ustadz_id")).get("name");
     }
 }
