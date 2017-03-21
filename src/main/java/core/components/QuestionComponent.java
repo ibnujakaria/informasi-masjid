@@ -65,6 +65,7 @@ public class QuestionComponent extends MyGroup {
 
         titleLabel.setText(question.get("title").toString());
         int limit = question.get("description").toString().length() - 1;
+        descriptionLabel.setText(question.get("description").toString().substring(0, limit+1));
 
         String posterQuestion = "by "+ Question.getUser(question).get("name").toString();
 
