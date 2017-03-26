@@ -3,6 +3,7 @@ package core.components;
 import com.jfoenix.controls.JFXButton;
 import core.auth.Auth;
 import database.models.User;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -41,11 +42,11 @@ public class UserComponent extends Group {
         cityLabel = new Label(user.get("address") != null ? user.get("address").toString() : "");
 
         editButton = new JFXButton("Edit");
+
         deleteButton = new JFXButton("Hapus");
 
         editButton.setVisible(Auth.isLogin() && Auth.isAdmin());
         deleteButton.setVisible(Auth.isLogin() && Auth.isAdmin());
-
         vBox.getChildren().addAll(nameLabel, usernameLabel, emailLabel,
                 cityLabel, new HBox(editButton, deleteButton));
 
