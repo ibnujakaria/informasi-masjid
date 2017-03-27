@@ -74,6 +74,8 @@ public class DetailQuestionScene extends MyGroup {
         vBox.setMargin(answerLabel,new Insets(1,1,1,10));
         vBox.setMargin(ustadzLabel,new Insets(1,1,1,10));
         vBox.setMargin(answerText,new Insets(15,1,1,10));
+        vBox.setMargin(answerButton ,new Insets(15,1,1,8));
+
         vBox.setStyle("-fx-background-color: white;");
         ObservableList list = vBox.getChildren();
         list.addAll(descriptionLabel, answerButton, answerLabel, ustadzLabel, answerText);
