@@ -10,20 +10,26 @@ import org.jooq.Record;
  */
 public class ScheduleComponent extends VBox {
     private Record schedule;
-    private Label titleLabel, descriptionLabel, dateLabel, timeLabel, ustadzLabel;
+    private Label titleLabel, descriptionLabel, dateLabel, ustadzLabel;
+    String time,date;
 
     public ScheduleComponent (Record schedule) {
         this.schedule = schedule;
         prepareLayout();
-        getChildren().addAll(titleLabel, descriptionLabel, dateLabel, timeLabel, ustadzLabel);
+        getChildren().addAll(titleLabel, dateLabel, ustadzLabel, descriptionLabel);
     }
 
     private void prepareLayout() {
+        dateLabel = new Label();
+        dateLabel.setStyle("-fx-font-size: 13px;");
+        time = "jam "+schedule.get("start_at").toString();
+        date = "" +Schedule.getDateLabel(schedule).toString();
+        dateLabel.setText(date+" "+time);
         titleLabel = new Label((String) schedule.get("title"));
         descriptionLabel = new Label((String) schedule.get("description"));
-        dateLabel = new Label(Schedule.getDateLabel(schedule));
-        timeLabel = new Label((String) schedule.get("start_at"));
-        ustadzLabel = new Label(Schedule.getUstadz(schedule));
+        descriptionLabel.setStyle("-fx-font-size: 19px;");
+        ustadzLabel = new Label("oleh Ustadz "+Schedule.getUstadz(schedule));
+        ustadzLabel.setStyle("-fx-font-size: 17px;");
     }
 
 

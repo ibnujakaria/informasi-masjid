@@ -42,8 +42,8 @@ public class AdminScene extends MyGroup {
         label.setFont(new Font(40));
         flowPane = new FlowPane();
         flowPane.setPadding(new Insets(5, 1, 5, 1));
-        flowPane.setVgap(6);
-        flowPane.setHgap(6);
+        flowPane.setVgap(3);
+        flowPane.setHgap(3);
         flowPane.setPrefWrapLength(100);
         flowPane.setStyle("-fx-background-color: DAE6F3;");
 
@@ -91,7 +91,7 @@ public class AdminScene extends MyGroup {
 
         back = new BorderPane();
         back.setTop(top);
-        back.setLeft(flowPane);
+        back.setCenter(flowPane);
 
 
         getChildren().addAll(back);

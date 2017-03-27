@@ -37,7 +37,7 @@ public class ListUsersScene extends MyGroup {
         label.setAlignment(Pos.CENTER);
         vbox.setAlignment(Pos.CENTER);
         vbox.getChildren().addAll(label);
-        vbox.setStyle("-fx-background-color: #e74c3c;");
+        vbox.setStyle("-fx-background-color: #3498db;");
 
 
 
