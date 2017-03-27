@@ -40,19 +40,19 @@ public abstract class MyGroup extends Group{
             return;
         }
 
-        Main.primaryStage.getScene().getRoot().setLayoutY(0);
+//        Main.primaryStage.getScene().getRoot().setLayoutY(0);
 
         TranslateTransition translateTransition = new TranslateTransition();
         translateTransition.setDuration(Duration.millis(1000));
         translateTransition.setNode(Main.primaryStage.getScene().getRoot());
         translateTransition.setByY(-Main.primaryStage.getHeight()/2);
 
-        translateTransition.play();
+//        translateTransition.play();
 
         translateTransition.setOnFinished(event -> {
-            Main.primaryStage.getScene().setRoot(nextScene);
-            nextScene.onAfterNext();
         });
+        Main.primaryStage.getScene().setRoot(nextScene);
+        nextScene.onAfterNext();
     }
 
     public void movePreviousScene() {
@@ -62,14 +62,14 @@ public abstract class MyGroup extends Group{
 
         Main.primaryStage.getScene().setRoot(previousScene);
         previousScene.onAfterBack();
-        previousScene.setLayoutY(-Main.primaryStage.getHeight()/2);
+//        previousScene.setLayoutY(-Main.primaryStage.getHeight()/2);
 
         TranslateTransition translateTransition = new TranslateTransition();
         translateTransition.setDuration(Duration.millis(1000));
         translateTransition.setNode(Main.primaryStage.getScene().getRoot());
         translateTransition.setByY(Main.primaryStage.getHeight()/2);
 
-        translateTransition.play();
+//        translateTransition.play();
     }
 
     public MyGroup getNextScene() {
