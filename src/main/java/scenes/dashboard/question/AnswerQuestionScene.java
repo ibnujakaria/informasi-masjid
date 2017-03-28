@@ -15,10 +15,7 @@ import javafx.scene.control.Separator;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import org.jooq.Record;
 import scenes.MyGroup;
 
@@ -32,8 +29,8 @@ public class AnswerQuestionScene extends MyGroup {
     private JFXButton backButton, submitButton;
     private Record question;
     BorderPane back;
-    ToolBar toolBar;
-    Pane pane;
+//    ToolBar toolBar;
+//    Pane pane;
 
     public AnswerQuestionScene (Record question) {
         this.question = question;
@@ -49,32 +46,35 @@ public class AnswerQuestionScene extends MyGroup {
         answerField.setMaxWidth(480);
         backButton = new JFXButton("Back");
         submitButton = new JFXButton("Submit");
-        pane = new Pane();
-        pane.setPrefWidth(300);
+//        pane = new Pane();
+//        pane.setPrefWidth(300);
         toolbarTitle = new Label("Answer Question");
 
-        GridPane buttons = new GridPane();
-        buttons.setPadding(new Insets(0, 10, 0, 10));
-        buttons.setVgap(10);
-        buttons.setHgap(10);
-        buttons.add(submitButton, 0, 2);
-        buttons.setAlignment(Pos.CENTER);
+//        GridPane buttons = new GridPane();
+//        buttons.setPadding(new Insets(0, 10, 0, 10));
+//        buttons.setVgap(10);
+//        buttons.setHgap(10);
+//        buttons.add(submitButton, 0, 2);
+//        buttons.setAlignment(Pos.CENTER);
         setvBoxFullScreen();
 
-        toolBar = new ToolBar();
-        toolBar.setPrefWidth(800);
-
-        toolBar.getItems().addAll(
-                backButton, pane,toolbarTitle
-
-        );
+//        toolBar = new ToolBar();
+//        toolBar.setPrefWidth(800);
+//
+//        toolBar.getItems().addAll(
+//                backButton, pane,toolbarTitle
+//
+//        );
         back = new BorderPane();
-        back.setTop(toolBar);
+        HBox hBox = titleBar(backButton, toolbarTitle);
+        back.setTop(hBox);
 
         vBox.setAlignment(Pos.CENTER);
+        vBox.setMargin(submitButton, new Insets(10));
         ObservableList list = vBox.getChildren();
-        list.addAll(welcomeLabel, answerField,buttons);
-        getChildren().addAll(vBox,back);
+        list.addAll(welcomeLabel, answerField,submitButton);
+        back.setCenter(vBox);
+        getChildren().addAll(back);
     }
 
     @Override
