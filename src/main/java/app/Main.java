@@ -53,10 +53,6 @@ public class Main extends Application {
             exception.printStackTrace();
         }
 
-        System.out.println(prop.getProperty("app.db.mysql_host"));
-        System.out.println(prop.getProperty("app.db.mysql_port"));
-        System.out.println(prop.getProperty("app.db.mysql_username"));
-        System.out.println(prop.getProperty("app.db.mysql_password"));
         DB.start();
         launch(args);
     }

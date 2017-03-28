@@ -14,31 +14,31 @@ import static org.jooq.impl.DSL.*;
 /**
  * Created by ibnujakaria on 3/11/17.
  */
-public abstract class Schema {
+public abstract class MysqlSchema {
     private Statement stmt;
     protected String[] UP_QUERIES;
     protected String[] DOWN_QUERIES ;
 
-    private DSLContext db;
+    private DSLContext mysql_db;
 
     protected abstract int getVersion();
     protected abstract void prepare();
 
-    public Schema ()
+    public MysqlSchema ()
     {
         UP_QUERIES = new String[getVersion()];
         DOWN_QUERIES = new String[getVersion()];
         prepare();
 
-        db = DSL.using(DB.conn, SQLDialect.SQLITE);
+        mysql_db = DSL.using(DB.mysql_conn, SQLDialect.MARIADB);
 
-        Result<Record> result = db.select().from(table("migrations"))
+        Result<Record> result = mysql_db.select().from(table("migrations"))
                 .where(field("class").equal(this.getClass().toString()))
                 .fetch();
 
         if (result.size() == 0) {
             try {
-                stmt = DB.conn.createStatement();
+                stmt = DB.mysql_conn.createStatement();
                 stmt.execute("insert into migrations values (" +
                         "'"  + this.getClass().toString() + "', '"
                         + 0 + "')");
@@ -55,7 +55,7 @@ public abstract class Schema {
             for (int i = getVersionFromMigration(); i < getVersion(); i++) {
                 String sql = UP_QUERIES[i];
                 if (sql != null && !sql.isEmpty()) {
-                    db.execute(sql);
+                    mysql_db.execute(sql);
                     System.out.println(this.getClass().toString() + " is executing query[" + i + "]");
                 }
             }
@@ -78,7 +78,7 @@ public abstract class Schema {
 
     private int getVersionFromMigration ()
     {
-        Result<Record> result = db.select().from(table("migrations"))
+        Result<Record> result = mysql_db.select().from(table("migrations"))
                 .where(field("class").equal(this.getClass().toString()))
                 .fetch();
 
@@ -94,7 +94,7 @@ public abstract class Schema {
     private void makeItSynchronized()
     {
         try {
-            stmt = DB.conn.createStatement();
+            stmt = DB.mysql_conn.createStatement();
             stmt.execute("update migrations set version = " + getVersion() + " where class = '" + this.getClass().toString() + "'");
         } catch (SQLException e) {
             e.printStackTrace();
