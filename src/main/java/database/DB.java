@@ -1,5 +1,6 @@
 package database;
 
+import app.Main;
 import database.schemas.LastLoginTableSchema;
 import database.schemas.QuestionTableSchema;
 import database.schemas.ScheduleTableSchema;
@@ -34,7 +35,11 @@ public class DB {
         // Mysql Connection
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            mysql_conn = DriverManager.getConnection("jdbc:mysql://localhost/mahasiswa?useLegacyDatetimeCode=false&serverTimezone=UTC","root","arif123");
+            String host = Main.prop.getProperty("app.db.mysql_host");
+            String db_name = Main.prop.getProperty("app.db.mysql_database");
+            String username = Main.prop.getProperty("app.db.mysql_username");
+            String password = Main.prop.getProperty("app.db.mysql_password");
+            mysql_conn = DriverManager.getConnection("jdbc:mysql://"+host+"/"+db_name+"?useLegacyDatetimeCode=false&serverTimezone=UTC",username,password);
             System.out.println("Connection success arif!");
         } catch(Exception e){
             System.out.println(e);
