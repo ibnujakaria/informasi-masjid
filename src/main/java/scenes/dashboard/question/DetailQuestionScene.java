@@ -87,14 +87,15 @@ public class DetailQuestionScene extends MyGroup {
         header.setStyle("-fx-background-color: #3498db;");
 
 
-        hBox = new HBox();
-        hBox.setStyle("-fx-background-color: #ecf0f1;");
         welcomeLabel = new Label("Detail Question");
-        backButton.setAlignment(Pos.TOP_LEFT);
-        welcomeLabel.setAlignment(Pos.CENTER);
-        hBox.setAlignment(Pos.CENTER);
-        hBox.getChildren().addAll(backButton,welcomeLabel);
-        hBox.prefWidthProperty().bind(Main.primaryStage.widthProperty());
+        hBox = titleBar(backButton, welcomeLabel);
+//        hBox = new HBox();
+//        hBox.setStyle("-fx-background-color: #ecf0f1;");
+//        backButton.setAlignment(Pos.TOP_LEFT);
+//        welcomeLabel.setAlignment(Pos.CENTER);
+//        hBox.setAlignment(Pos.CENTER);
+//        hBox.getChildren().addAll(backButton,welcomeLabel);
+//        hBox.prefWidthProperty().bind(Main.primaryStage.widthProperty());
 
         top = new BorderPane();
         top.setLeft(backButton);

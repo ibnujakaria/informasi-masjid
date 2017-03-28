@@ -54,13 +54,14 @@ public class PostNewQuestionScene extends MyGroup {
 
         submitButton = new JFXButton("Submit");
 
-        hBox = new HBox();
-        hBox.setStyle("-fx-background-color: #ecf0f1;");
-        backButton.setAlignment(Pos.TOP_LEFT);
-        welcomeLabel.setAlignment(Pos.CENTER);
-        hBox.setAlignment(Pos.CENTER);
-        hBox.getChildren().addAll(backButton,welcomeLabel);
-        hBox.prefWidthProperty().bind(Main.primaryStage.widthProperty());
+        hBox = titleBar(backButton, welcomeLabel);
+//        hBox = new HBox();
+//        hBox.setStyle("-fx-background-color: #ecf0f1;");
+//        backButton.setAlignment(Pos.TOP_LEFT);
+//        welcomeLabel.setAlignment(Pos.CENTER);
+//        hBox.setAlignment(Pos.CENTER);
+//        hBox.getChildren().addAll(backButton,welcomeLabel);
+//        hBox.prefWidthProperty().bind(Main.primaryStage.widthProperty());
 
         top = new BorderPane();
         top.setLeft(backButton);

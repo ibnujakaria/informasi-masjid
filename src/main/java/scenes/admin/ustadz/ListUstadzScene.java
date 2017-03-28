@@ -49,12 +49,13 @@ public class ListUstadzScene extends MyGroup {
         titleBar.setMargin(addUstadzButton, new Insets(2,80,7,0));
         titleBar.setStyle("-fx-background-color: #3498db;");
 
-        hBox = new HBox();
-        hBox.setStyle("-fx-background-color: #ecf0f1;");
-        backButton.setAlignment(Pos.TOP_LEFT);
-        hBox.setAlignment(Pos.CENTER);
-        hBox.getChildren().addAll(backButton);
-        hBox.prefWidthProperty().bind(Main.primaryStage.widthProperty());
+        hBox = titleBar(backButton, new Label("List Ustadz"));
+//        hBox = new HBox();
+//        hBox.setStyle("-fx-background-color: #ecf0f1;");
+//        backButton.setAlignment(Pos.TOP_LEFT);
+//        hBox.setAlignment(Pos.CENTER);
+//        hBox.getChildren().addAll(backButton);
+//        hBox.prefWidthProperty().bind(Main.primaryStage.widthProperty());
 
         top = new BorderPane();
         top.setLeft(backButton);
@@ -83,10 +84,10 @@ public class ListUstadzScene extends MyGroup {
     }
 
     private void prepareUstadz() {
-        listUstadzs = new JFXListView<>();
+        listUstadzs = new JFXListView<VBox>();
         listUstadz.getChildren().clear();
-        listUstadzs.prefHeightProperty().bind(Main.primaryStage.getScene().heightProperty());
-        listUstadzs.prefWidthProperty().bind(Main.primaryStage.getScene().widthProperty());
+//        listUstadzs.prefHeightProperty().bind(Main.primaryStage.getScene().heightProperty());
+//        listUstadzs.prefWidthProperty().bind(Main.primaryStage.getScene().widthProperty());
         for (Record r : User.getUstadz()) {
             listUstadzs.getItems().add(new VBox(new UserComponent(this, r)));
         }

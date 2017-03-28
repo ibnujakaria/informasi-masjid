@@ -72,12 +72,13 @@ public class AdminScene extends MyGroup {
         listSchedulesButton.setGraphic(new ImageView(scheduleImg));
         listRecordingButton.setGraphic(new ImageView(recordingImg));
 
-        hBox = new HBox();
-        hBox.setStyle("-fx-background-color: #ecf0f1;");
-        backButton.setAlignment(Pos.TOP_LEFT);
-        hBox.setAlignment(Pos.CENTER);
-        hBox.getChildren().addAll(backButton);
-        hBox.prefWidthProperty().bind(Main.primaryStage.widthProperty());
+        hBox = titleBar(backButton, new Label(""));
+//        hBox = new HBox();
+//        hBox.setStyle("-fx-background-color: #ecf0f1;");
+//        backButton.setAlignment(Pos.TOP_LEFT);
+//        hBox.setAlignment(Pos.CENTER);
+//        hBox.getChildren().addAll(backButton);
+//        hBox.prefWidthProperty().bind(Main.primaryStage.widthProperty());
 
         top = new BorderPane();
         top.setLeft(backButton);

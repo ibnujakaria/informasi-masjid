@@ -1,9 +1,13 @@
 package scenes;
 
 import app.Main;
+import com.jfoenix.controls.JFXButton;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
 /**
@@ -87,6 +91,19 @@ public abstract class MyGroup extends Group{
 
     public void setPreviousScene(MyGroup previousScene) {
         this.previousScene = previousScene;
+    }
+
+    public HBox titleBar(JFXButton back, Label title) {
+//        this.back = back;
+//        this.title = title;
+        HBox hBox = new HBox();
+        hBox.setStyle("-fx-background-color: #ecf0f1;");
+        back.setAlignment(Pos.TOP_LEFT);
+//        title.setAlignment(Pos.CENTER);
+        hBox.setAlignment(Pos.CENTER);
+        hBox.getChildren().addAll(back, title);
+        hBox.prefWidthProperty().bind(Main.primaryStage.widthProperty());
+        return hBox;
     }
 
 }

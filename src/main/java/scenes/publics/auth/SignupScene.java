@@ -102,13 +102,14 @@ public class SignupScene extends MyGroup {
         buttons.setAlignment(Pos.CENTER);
         setvBoxFullScreen();
 
-        hBox = new HBox();
-        hBox.setStyle("-fx-background-color: #ecf0f1;");
-        backButton.setAlignment(Pos.TOP_LEFT);
-        titleHeader.setAlignment(Pos.CENTER);
-        hBox.setAlignment(Pos.CENTER);
-        hBox.getChildren().addAll(backButton,titleHeader);
-        hBox.prefWidthProperty().bind(Main.primaryStage.widthProperty());
+        hBox = titleBar(backButton, titleHeader);
+//        hBox = new HBox();
+//        hBox.setStyle("-fx-background-color: #ecf0f1;");
+//        backButton.setAlignment(Pos.TOP_LEFT);
+//        titleHeader.setAlignment(Pos.CENTER);
+//        hBox.setAlignment(Pos.CENTER);
+//        hBox.getChildren().addAll(backButton,titleHeader);
+//        hBox.prefWidthProperty().bind(Main.primaryStage.widthProperty());
 
         top = new BorderPane();
         top.setLeft(backButton);
