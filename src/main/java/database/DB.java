@@ -1,10 +1,7 @@
 package database;
 
 import app.Main;
-import database.schemas.LastLoginTableSchema;
-import database.schemas.QuestionTableSchema;
-import database.schemas.ScheduleTableSchema;
-import database.schemas.UserTableSchema;
+import database.schemas.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -40,7 +37,10 @@ public class DB {
             String username = Main.prop.getProperty("app.db.mysql_username");
             String password = Main.prop.getProperty("app.db.mysql_password");
             mysql_conn = DriverManager.getConnection("jdbc:mysql://"+host+"/"+db_name+"?useLegacyDatetimeCode=false&serverTimezone=UTC",username,password);
-            System.out.println("Connection success arif!");
+            Statement stmt = mysql_conn.createStatement();
+            stmt.execute("" +
+                    "create table if not exists migrations " +
+                    "(class varchar(500) not null, version int default 1)");
         } catch(Exception e){
             System.out.println(e);
         }
@@ -61,5 +61,8 @@ public class DB {
 
         LastLoginTableSchema lastLoginTableSchema = new LastLoginTableSchema();
         lastLoginTableSchema.up();
+
+        MysqlUserTableSchema mysqlUserTableSchema = new MysqlUserTableSchema();
+        mysqlUserTableSchema.up();
     }
 }
