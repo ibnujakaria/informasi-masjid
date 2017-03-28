@@ -14,10 +14,11 @@ import static org.jooq.impl.DSL.*;
  * Created by ibnujakaria on 3/10/17.
  */
 public class DB {
-    public static Connection conn;
+    public static Connection conn, mysql_conn;
 
     public static void  connect ()
     {
+        // Sqlite Connection
         try {
             Class.forName("org.sqlite.JDBC");
 
@@ -29,6 +30,16 @@ public class DB {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // Mysql Connection
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            mysql_conn = DriverManager.getConnection("jdbc:mysql://localhost/mahasiswa?useLegacyDatetimeCode=false&serverTimezone=UTC","root","arif123");
+            System.out.println("Connection success arif!");
+        } catch(Exception e){
+            System.out.println(e);
+        }
+
     }
 
     public static void start ()
