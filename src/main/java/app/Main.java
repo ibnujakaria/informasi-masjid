@@ -13,6 +13,11 @@ import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import scenes.WelcomeScene;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 
 /**
  * Created by ibnujakaria on 3/10/17.
@@ -21,6 +26,8 @@ public class Main extends Application {
 
     public static Stage primaryStage;
     public static double height = 600, width = 800;
+    public static Properties prop = new Properties();
+    private static InputStream inputStream;
 
     @Override
     public void start(Stage page) throws Exception {
@@ -39,6 +46,17 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        try {
+            inputStream = new FileInputStream("config.properties");
+            prop.load(inputStream);
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+
+        System.out.println(prop.getProperty("app.db.mysql_host"));
+        System.out.println(prop.getProperty("app.db.mysql_port"));
+        System.out.println(prop.getProperty("app.db.mysql_username"));
+        System.out.println(prop.getProperty("app.db.mysql_password"));
         DB.start();
         launch(args);
     }

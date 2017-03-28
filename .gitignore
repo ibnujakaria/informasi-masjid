@@ -2,3 +2,4 @@
 .gradle/
 build/
 informasi_masjid.sqlite
+config.properties
