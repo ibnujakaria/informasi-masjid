@@ -37,6 +37,7 @@ public class DB {
             String username = Main.prop.getProperty("app.db.mysql_username");
             String password = Main.prop.getProperty("app.db.mysql_password");
             mysql_conn = DriverManager.getConnection("jdbc:mysql://"+host+"/"+db_name+"?useLegacyDatetimeCode=false&serverTimezone=UTC",username,password);
+            System.out.println("MYSQL connection success!!!");
             Statement stmt = mysql_conn.createStatement();
             stmt.execute("" +
                     "create table if not exists migrations " +
@@ -64,5 +65,14 @@ public class DB {
 
         MysqlUserTableSchema mysqlUserTableSchema = new MysqlUserTableSchema();
         mysqlUserTableSchema.up();
+
+        MysqlQuestionTableSchema mysqlQuestionTableSchema = new MysqlQuestionTableSchema();
+        mysqlQuestionTableSchema.up();
+
+        MysqlScheduleTableSchema mysqlScheduleTableSchema= new MysqlScheduleTableSchema();
+        mysqlScheduleTableSchema.up();
+
+        MysqlLastLoginTableSchema mysqlLastLoginTableSchema= new MysqlLastLoginTableSchema();
+        mysqlLastLoginTableSchema.up();
     }
 }
