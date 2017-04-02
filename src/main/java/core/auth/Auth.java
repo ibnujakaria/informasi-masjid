@@ -17,7 +17,7 @@ public class Auth {
 
     private static boolean is_login = false;
     private static Record user;
-    private static DSLContext db = DSL.using(DB.conn, SQLDialect.SQLITE);
+    private static DSLContext db = DSL.using(DB.mysql_conn, SQLDialect.MARIADB);
 
     public static boolean attemps (String username, String password)
     {
