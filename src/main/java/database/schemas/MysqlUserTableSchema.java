@@ -11,7 +11,7 @@ import java.sql.Statement;
 public class MysqlUserTableSchema extends MysqlSchema {
     @Override
     protected int getVersion() {
-        return 2;
+        return 4;
     }
 
 
@@ -23,5 +23,9 @@ public class MysqlUserTableSchema extends MysqlSchema {
                 "create_at datetime, update_at datetime)";
 
         UP_QUERIES[1] = "alter table users add column username varchar(200)";
+
+        UP_QUERIES[2] = "alter table users change create_at created_at datetime";
+
+        UP_QUERIES[3] = "alter table users change update_at updated_at datetime";
     }
 }
