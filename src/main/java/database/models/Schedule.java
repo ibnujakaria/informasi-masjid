@@ -16,7 +16,9 @@ import static org.jooq.impl.DSL.*;
  */
 public class Schedule {
 
-    private static DSLContext db = DSL.using(DB.conn, SQLDialect.SQLITE);
+    private static DSLContext db = DSL.using(DB.mysql_conn, SQLDialect.MARIADB);
+    private static DSLContext db_secondary = DSL.using(DB.conn, SQLDialect.SQLITE);
+
     public static String days[] = {"Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Ahad"};
 
     public static void insert (String title, int ustadz_id, String ustadz, String description,

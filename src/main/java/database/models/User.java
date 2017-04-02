@@ -15,7 +15,8 @@ import static org.jooq.impl.DSL.*;
  * Created by ibnujakaria on 3/15/17.
  */
 public class User {
-    private  static DSLContext db = DSL.using(DB.conn, SQLDialect.SQLITE);
+    private  static DSLContext db = DSL.using(DB.mysql_conn, SQLDialect.MARIADB);
+    private  static DSLContext db_secondary= DSL.using(DB.conn, SQLDialect.SQLITE);
 
     public static Record createUser (String name, String username, String email, String address,
                                    String password, boolean is_ustadz, boolean is_admin) {

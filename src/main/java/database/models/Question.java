@@ -13,7 +13,8 @@ import static org.jooq.impl.DSL.*;
  * Created by ibnujakaria on 3/17/17.
  */
 public class Question {
-    private  static DSLContext db = DSL.using(DB.conn, SQLDialect.SQLITE);
+    private  static DSLContext db = DSL.using(DB.mysql_conn, SQLDialect.MARIADB);
+    private  static DSLContext db_secondary = DSL.using(DB.conn, SQLDialect.SQLITE);
 
     public static Record create (int user_id, String title, String description,
                                  boolean is_anonim) {
