@@ -18,7 +18,7 @@ public class MysqlScheduleTableSchema extends MysqlSchema {
                 "ustadz varchar(200) null," +
                 "description varchar(3000) null," +
                 "periodic varchar(200)," + // once, weekly, monthly, monthly, yearly,
-                "interval int default 0," + // ist not ngaruh for daily and once
+                "frequency int default 0," + // ist not ngaruh for daily and once
                 "created_at datetime," +
                 "updated_at datetime" +
                 ")";
