@@ -18,6 +18,7 @@ public class Auth {
     private static boolean is_login = false;
     private static Record user;
     private static DSLContext db = DSL.using(DB.mysql_conn, SQLDialect.MARIADB);
+    private static DSLContext db_secondary = DSL.using(DB.conn, SQLDialect.SQLITE);
 
     public static boolean attemps (String username, String password)
     {
@@ -44,13 +45,13 @@ public class Auth {
     }
 
     private static void synchronizeLastLogin() {
-        Record lastLogin = db.select().from(table("last_login")).fetchOne();
+        Record lastLogin = db_secondary.select().from(table("last_login")).fetchOne();
         if (lastLogin == null) {
-            db.insertInto(table("last_login"))
+            db_secondary.insertInto(table("last_login"))
                     .set(field("value"), user.get("id"))
                     .execute();
         } else {
-            db.update(table("last_login"))
+            db_secondary.update(table("last_login"))
                     .set(field("value"), user.get("id"))
                     .execute();
         }
@@ -74,7 +75,7 @@ public class Auth {
         is_login = false;
         user = null;
 
-        db.deleteFrom(table("last_login")).execute();
+        db_secondary.deleteFrom(table("last_login")).execute();
     }
 
     public static boolean isLogin ()
@@ -107,7 +108,7 @@ public class Auth {
     }
 
     public static void checkPreviousLogin() {
-        Record lastLogin = db.select().from(table("last_login")).fetchOne();
+        Record lastLogin = db_secondary.select().from(table("last_login")).fetchOne();
 
         if (lastLogin != null) {
             Record lastUser = User.getUserById(Integer.parseInt(lastLogin.get("value").toString()));
