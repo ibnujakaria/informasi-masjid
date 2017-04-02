@@ -6,7 +6,7 @@ package database.schemas;
 public class ScheduleTableSchema extends Schema {
     @Override
     protected int getVersion() {
-        return 6;
+        return 7;
     }
 
     @Override
