@@ -58,7 +58,7 @@ public class Auth {
 
     public static boolean loginByUserRecord (Record user)
     {
-        if (user.get("username") != null) {
+        if (user != null && user.get("username") != null) {
             Auth.user = user;
             is_login = true;
 
