@@ -2,6 +2,7 @@ package database.models;
 
 import com.google.common.hash.Hashing;
 import database.DB;
+import database.Synchronization;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.jooq.*;
@@ -34,6 +35,9 @@ public class User {
                 .set(field("created_at"), new LocalDate() + " " + new LocalTime())
                 .set(field("updated_at"), new LocalDate() + " " + new LocalTime())
                 .execute();
+
+        // update last transaction di mysql
+        Synchronization.upadateLastTransaction("users","insert");
 
         return getUserByUsername(username);
     }
