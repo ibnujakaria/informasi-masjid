@@ -74,5 +74,8 @@ public class DB {
 
         MysqlLastLoginTableSchema mysqlLastLoginTableSchema= new MysqlLastLoginTableSchema();
         mysqlLastLoginTableSchema.up();
+
+        MysqlLastTransactionsTableSchema mysqlLastTransactionsTableSchema= new MysqlLastTransactionsTableSchema();
+        mysqlLastTransactionsTableSchema.up();
     }
 }
