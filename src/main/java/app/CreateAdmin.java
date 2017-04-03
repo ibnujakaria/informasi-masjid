@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class CreateAdmin {
 
     public static void main(String[] args) {
+        Main.readProperties();
         DB.start();
 
         Scanner scanner = new Scanner(System.in);

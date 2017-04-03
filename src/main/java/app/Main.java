@@ -45,13 +45,17 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public static void main(String[] args) {
+    public static void readProperties () {
         try {
             inputStream = new FileInputStream("config.properties");
             prop.load(inputStream);
         } catch (IOException exception) {
             exception.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        readProperties();
 
         DB.start();
         launch(args);
