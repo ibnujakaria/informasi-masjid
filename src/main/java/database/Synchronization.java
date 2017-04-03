@@ -1,7 +1,9 @@
 package database;
 
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
+import org.joda.time.format.DateTimeFormat;
 import org.jooq.*;
 import org.jooq.impl.DSL;
 
@@ -21,9 +23,12 @@ public class Synchronization {
                 .where(field("table_name").equal(table_name))
                 .fetch();
 
+        DateTime dt = new DateTime();
+        org.joda.time.format.DateTimeFormatter dtf = DateTimeFormat.forPattern("YYYY-MM-DD HH:MM:SS");
+
         if (result.size() > 0) {
             UpdateSetMoreStep query = db.update(table("last_transactions"))
-                    .set(field("last_executed"), new LocalDate() + " " + new LocalTime());
+                    .set(field("last_executed"), dtf.print(new DateTime()));
 
             query.where(field("table_name").equal(table_name)).and(field("action").equal(action))
                     .execute();
@@ -31,7 +36,7 @@ public class Synchronization {
             db.insertInto(table("last_transactions"))
                     .set(field("table_name"), table_name)
                     .set(field("action"), action)
-                    .set(field("last_executed"), new LocalDate() + " " + new LocalTime())
+                    .set(field("last_executed"), dtf.print(new DateTime()))
                     .execute();
         }
 

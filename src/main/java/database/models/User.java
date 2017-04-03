@@ -97,6 +97,12 @@ public class User {
     }
 
     public static Result<Record> getUsers () {
+        Record last_server_transaction = db.select().from(table("last_transactions"))
+            .fetchOne();
+
+        System.out.println(last_server_transaction.get("last_executed"));
+
+
         return db.select().from(table("users"))
                 .where(field("is_ustadz").equal(0))
                 .orderBy(field("id").desc())
