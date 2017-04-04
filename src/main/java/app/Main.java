@@ -71,17 +71,6 @@ public class Main extends Application {
 
         DB.start();
 
-        DSLContext db = DSL.using(DB.mysql_conn, SQLDialect.MARIADB);
-        Record last_server_transaction = db.select().from(table("last_transactions"))
-                .fetchOne();
-
-        Timestamp timestamp = (Timestamp) last_server_transaction.get("last_executed");
-        Instant timeInstant = new Instant(timestamp.getTime());
-
-        System.out.println("timestamp -> " + timestamp);
-        System.out.println("joda convert -> " + Main.dtf.print(timeInstant));
-
-        if (true) return;
         launch(args);
     }
 }

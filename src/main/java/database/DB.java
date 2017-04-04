@@ -63,6 +63,8 @@ public class DB {
         LastLoginTableSchema lastLoginTableSchema = new LastLoginTableSchema();
         lastLoginTableSchema.up();
 
+        new LastTransactionsTableSchema().up();
+
         MysqlUserTableSchema mysqlUserTableSchema = new MysqlUserTableSchema();
         mysqlUserTableSchema.up();
 

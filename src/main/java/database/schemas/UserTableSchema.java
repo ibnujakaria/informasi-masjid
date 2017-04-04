@@ -11,7 +11,7 @@ import java.sql.Statement;
 public class UserTableSchema extends Schema {
     @Override
     protected int getVersion() {
-        return 6;
+        return 7;
     }
 
 
@@ -35,5 +35,7 @@ public class UserTableSchema extends Schema {
                 "created_at, updated_at from user_backup_temp";
 
         UP_QUERIES[5] = "drop table user_backup_temp";
+
+        UP_QUERIES[6] = "alter table users add column username varchar(200)";
     }
 }

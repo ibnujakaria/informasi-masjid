@@ -1,8 +1,10 @@
 package database.models;
 
+import app.Main;
 import com.google.common.hash.Hashing;
 import database.DB;
 import database.Synchronization;
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.jooq.*;
@@ -15,16 +17,20 @@ import static org.jooq.impl.DSL.*;
 /**
  * Created by ibnujakaria on 3/15/17.
  */
-public class User {
-    private  static DSLContext db = DSL.using(DB.mysql_conn, SQLDialect.MARIADB);
-    private  static DSLContext db_secondary= DSL.using(DB.conn, SQLDialect.SQLITE);
+public class User extends Model{
 
     public static Record createUser (String name, String username, String email, String address,
-                                   String password, boolean is_ustadz, boolean is_admin) {
+                                     String password, boolean is_ustadz, boolean is_admin) {
 
+        return createUsersWithId(null, name, username, email, address, password, is_ustadz, is_admin);
+    }
+
+    public static Record createUsersWithId (String id, String name, String username, String email, String address,
+                                          String password, boolean is_ustadz, boolean is_admin) {
         String hashedPassword = null;
         hashedPassword = Hashing.sha256().newHasher().putString(password, Charset.defaultCharset()).hash().toString();
         db.insertInto(table("users"))
+                .set(field("id"), id)
                 .set(field("name"), name)
                 .set(field("username"), username)
                 .set(field("email"), email)
@@ -32,8 +38,28 @@ public class User {
                 .set(field("role"), is_admin ? 1 : 0)
                 .set(field("address"), address)
                 .set(field("is_ustadz"), is_ustadz ? 1 : 0)
-                .set(field("created_at"), new LocalDate() + " " + new LocalTime())
-                .set(field("updated_at"), new LocalDate() + " " + new LocalTime())
+                .set(field("created_at"), Main.dtf.print(new DateTime()))
+                .set(field("updated_at"), Main.dtf.print(new DateTime()))
+                .execute();
+
+        // update last transaction di mysql
+        Synchronization.upadateLastTransaction("users","insert");
+
+        return getUserByUsername(username);
+    }
+
+    public static Record createUsersWithIdLocal (String id, String name, String username, String email, String address,
+                                            boolean is_ustadz, boolean is_admin) {
+        db_secondary.insertInto(table("users"))
+                .set(field("id"), id)
+                .set(field("name"), name)
+                .set(field("username"), username)
+                .set(field("email"), email)
+                .set(field("role"), is_admin ? 1 : 0)
+                .set(field("address"), address)
+                .set(field("is_ustadz"), is_ustadz ? 1 : 0)
+                .set(field("created_at"), Main.dtf.print(new DateTime()))
+                .set(field("updated_at"), Main.dtf.print(new DateTime()))
                 .execute();
 
         // update last transaction di mysql
@@ -56,8 +82,7 @@ public class User {
                 .set(field("role"), is_admin ? 1 : 0)
                 .set(field("address"), address)
                 .set(field("is_ustadz"), is_ustadz ? 1 : 0)
-                .set(field("created_at"), new LocalDate() + " " + new LocalTime())
-                .set(field("updated_at"), new LocalDate() + " " + new LocalTime());
+                .set(field("updated_at"), Main.dtf.print(new DateTime()));
 
         if (password != null) {
             query = query.set(field("password"), hashedPassword);
@@ -65,6 +90,9 @@ public class User {
 
         query.where(field("id").equal(Integer.parseInt(user.get("id").toString())))
                 .execute();
+
+        // update last transaction di mysql
+        Synchronization.upadateLastTransaction("users","update");
 
         return getUserByUsername(username);
     }
@@ -102,7 +130,7 @@ public class User {
 
         System.out.println(last_server_transaction.get("last_executed"));
 
-
+        synchronizeWithServer("users");
         return db.select().from(table("users"))
                 .where(field("is_ustadz").equal(0))
                 .orderBy(field("id").desc())
