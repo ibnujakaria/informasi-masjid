@@ -62,9 +62,6 @@ public class User extends Model {
                 .set(field("updated_at"), Main.dtf.print(new DateTime()))
                 .execute();
 
-        // update last transaction di mysql
-        Synchronization.upadateLastTransaction("users","insert");
-
         return getUserByUsername(username);
     }
 
@@ -97,6 +94,23 @@ public class User extends Model {
         return getUserByUsername(username);
     }
 
+    public static Record updateToLocal (Record user, String name, String username, String email, String address,
+                                 boolean is_ustadz, boolean is_admin) {
+
+        db_secondary.update(table("users"))
+                .set(field("name"), name)
+                .set(field("username"), username)
+                .set(field("email"), email)
+                .set(field("role"), is_admin ? 1 : 0)
+                .set(field("address"), address)
+                .set(field("is_ustadz"), is_ustadz ? 1 : 0)
+                .set(field("updated_at"), Main.dtf.print(new DateTime()))
+                .where(field("id").equal(user.get("id")))
+                .execute();
+
+        return getUserByUsername(username);
+    }
+
     public static Record getUserByUsername (String username)
     {
         Result<Record> result = db.select().from(table("users"))
@@ -125,11 +139,6 @@ public class User extends Model {
     }
 
     public static Result<Record> getUsers () {
-        Record last_server_transaction = db.select().from(table("last_transactions"))
-            .fetchOne();
-
-        System.out.println(last_server_transaction.get("last_executed"));
-
         synchronizeWithServer("users", new SyncronizationInterface() {
             @Override
             public void insertNewRows() {
@@ -152,7 +161,16 @@ public class User extends Model {
 
             @Override
             public void updateRowsFromServer() {
+                System.out.println("update this data: ");
+                System.out.println(newRowsFromServer);
+                for (Record user : newRowsFromServer) {
+                    User.updateToLocal(user, (String) user.get("name"),
+                            (String) user.get("username"), (String) user.get("email"),
+                            (String) user.get("address"), User.isUstadz(user),
+                            User.isAdmin(user));
+                }
 
+                Synchronization.upadateLastTransactionLocal("users", "update");
             }
         });
         return db.select().from(table("users"))

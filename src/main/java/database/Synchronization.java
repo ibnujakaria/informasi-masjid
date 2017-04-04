@@ -23,6 +23,7 @@ public class Synchronization {
     {
         Result<Record> result = db.select().from(table("last_transactions"))
                 .where(field("table_name").equal(table_name))
+                .and(field("action").equal(action))
                 .fetch();
 
         if (result.size() > 0) {
@@ -47,6 +48,7 @@ public class Synchronization {
     {
         Result<Record> result = db_secondary.select().from(table("last_transactions"))
                 .where(field("table_name").equal(table_name))
+                .and(field("action").equal(action))
                 .fetch();
 
         if (result.size() > 0) {
