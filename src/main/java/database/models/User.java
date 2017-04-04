@@ -17,7 +17,7 @@ import static org.jooq.impl.DSL.*;
 /**
  * Created by ibnujakaria on 3/15/17.
  */
-public class User extends Model{
+public class User extends Model {
 
     public static Record createUser (String name, String username, String email, String address,
                                      String password, boolean is_ustadz, boolean is_admin) {
@@ -130,7 +130,31 @@ public class User extends Model{
 
         System.out.println(last_server_transaction.get("last_executed"));
 
-        synchronizeWithServer("users");
+        synchronizeWithServer("users", new SyncronizationInterface() {
+            @Override
+            public void insertNewRows() {
+                System.out.println("insert this data:");
+                System.out.println(newRowsFromServer);
+                for (Record user : newRowsFromServer) {
+                    User.createUsersWithIdLocal(
+                            ((Integer) user.get("id")) + "",
+                            (String) user.get("name"),
+                            (String) user.get("username"),
+                            (String) user.get("email"),
+                            (String) user.get("address"),
+                            User.isUstadz(user),
+                            User.isAdmin(user)
+                    );
+                }
+
+                Synchronization.upadateLastTransactionLocal("users", "insert");
+            }
+
+            @Override
+            public void updateRowsFromServer() {
+
+            }
+        });
         return db.select().from(table("users"))
                 .where(field("is_ustadz").equal(0))
                 .orderBy(field("id").desc())
@@ -155,4 +179,5 @@ public class User extends Model{
     public static boolean isAdmin(Record user) {
         return Integer.parseInt(user.get("role").toString()) == 1;
     }
+
 }
