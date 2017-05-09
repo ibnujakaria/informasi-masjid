@@ -1,10 +1,8 @@
 package scenes.admin;
 
 import com.jfoenix.controls.JFXButton;
-import core.components.UserComponent;
 import core.components.QuestionComponent;
-import database.models.User;
-import database.models.Question;
+import database.models.jooq.Question;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;

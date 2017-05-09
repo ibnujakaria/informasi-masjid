@@ -2,9 +2,8 @@ package scenes.pieces;
 
 import com.jfoenix.controls.JFXListView;
 import core.components.ScheduleComponent;
-import database.models.Schedule;
+import database.models.jooq.Schedule;
 import javafx.geometry.Insets;
-import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import org.jooq.Record;
 

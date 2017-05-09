@@ -1,30 +1,25 @@
 package app;
 
-import com.jfoenix.controls.JFXButton;
 import core.auth.Auth;
+import core.json.reader.QuestionJSONReader;
+import core.socket.client.ClientOnSuccess;
+import core.socket.client.api.QuestionSocketApi;
 import database.DB;
-import database.models.User;
-import database.schemas.UserTableSchema;
+import database.models.template.Question;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.joda.time.DateTime;
-import org.joda.time.Instant;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormat;
-import org.jooq.DSLContext;
-import org.jooq.Record;
-import org.jooq.SQLDialect;
-import org.jooq.impl.DSL;
+import org.json.JSONException;
+import org.json.JSONObject;
 import scenes.WelcomeScene;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Timestamp;
-import java.time.format.DateTimeFormatter;
+import java.net.Socket;
+import java.util.List;
 import java.util.Properties;
 
 import static org.jooq.impl.DSL.table;
@@ -71,6 +66,23 @@ public class Main extends Application {
 
         DB.start();
 
-        launch(args);
+//        launch(args);
+        QuestionSocketApi.getAnsweredQuestion(new ClientOnSuccess() {
+            @Override
+            public void doWhatYouWant(Socket socket, List<String> headers, List<String> body) {
+                String fullBody = "";
+                for (String line: body) fullBody += line;
+
+                try {
+                    JSONObject questionObject = new JSONObject(fullBody);
+                    List<Question> questions = QuestionJSONReader.parseQuestions(questionObject.getJSONArray("questions"));
+                    for (Question q: questions) {
+                        System.out.println(q);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

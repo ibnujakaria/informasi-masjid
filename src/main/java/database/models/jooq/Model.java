@@ -1,12 +1,8 @@
-package database.models;
+package database.models.jooq;
 
 import database.DB;
-import database.Synchronization;
-import org.joda.time.Instant;
 import org.jooq.*;
 import org.jooq.impl.DSL;
-
-import java.sql.Timestamp;
 
 import static org.jooq.impl.DSL.table;
 import static org.jooq.impl.DSL.*;

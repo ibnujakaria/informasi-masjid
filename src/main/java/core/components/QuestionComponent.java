@@ -2,8 +2,7 @@ package core.components;
 
 import app.Main;
 import com.jfoenix.controls.JFXButton;
-import database.models.Question;
-import javafx.scene.control.Button;
+import database.models.jooq.Question;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;

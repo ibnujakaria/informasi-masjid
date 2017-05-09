@@ -1,7 +1,7 @@
 package app;
 
 import database.DB;
-import database.models.User;
+import database.models.jooq.User;
 
 import java.util.Scanner;
 

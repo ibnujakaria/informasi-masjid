@@ -4,7 +4,7 @@ import app.Main;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import core.auth.Auth;
-import database.models.User;
+import database.models.jooq.User;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -12,8 +12,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.Separator;
-import javafx.scene.control.ToolBar;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -23,8 +21,6 @@ import org.jooq.Record;
 import scenes.MyGroup;
 import scenes.dashboard.DashboardScene;
 import scenes.publics.PublicScene;
-
-import javax.swing.*;
 
 /**
  * Created by ibnujakaria on 3/15/17.

@@ -1,6 +1,6 @@
 package core.components;
 
-import database.models.Schedule;
+import database.models.jooq.Schedule;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import org.jooq.Record;

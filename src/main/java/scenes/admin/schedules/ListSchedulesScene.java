@@ -2,7 +2,7 @@ package scenes.admin.schedules;
 
 import com.jfoenix.controls.JFXButton;
 import core.components.ScheduleComponent;
-import database.models.Schedule;
+import database.models.jooq.Schedule;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import org.jooq.Record;

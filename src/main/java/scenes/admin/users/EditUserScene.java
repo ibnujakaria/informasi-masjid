@@ -3,7 +3,7 @@ package scenes.admin.users;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import database.models.User;
+import database.models.jooq.User;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import org.jooq.Record;

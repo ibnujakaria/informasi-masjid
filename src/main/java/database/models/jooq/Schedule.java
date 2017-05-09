@@ -1,6 +1,5 @@
-package database.models;
+package database.models.jooq;
 
-import core.components.KeyValueLabelComponent;
 import database.DB;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;

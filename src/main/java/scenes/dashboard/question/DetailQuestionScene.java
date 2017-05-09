@@ -3,25 +3,17 @@ package scenes.dashboard.question;
 import app.Main;
 import com.jfoenix.controls.JFXButton;
 import core.auth.Auth;
-import database.models.Question;
+import database.models.jooq.Question;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.Separator;
-import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import org.jooq.Record;
 import scenes.MyGroup;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.nio.file.Paths;
 
 /**

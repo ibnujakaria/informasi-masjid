@@ -1,4 +1,4 @@
-package database.models;
+package database.models.jooq;
 
 import core.auth.Auth;
 import database.DB;

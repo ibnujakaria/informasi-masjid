@@ -2,9 +2,8 @@ package scenes.admin.schedules;
 
 import com.jfoenix.controls.*;
 import core.components.KeyValueLabelComponent;
-import database.models.Schedule;
-import database.models.User;
-import javafx.scene.Node;
+import database.models.jooq.Schedule;
+import database.models.jooq.User;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import org.jooq.Record;

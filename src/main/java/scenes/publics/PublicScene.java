@@ -2,7 +2,7 @@ package scenes.publics;
 
 import app.Main;
 import com.jfoenix.controls.*;
-import database.models.Question;
+import database.models.jooq.Question;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.*;

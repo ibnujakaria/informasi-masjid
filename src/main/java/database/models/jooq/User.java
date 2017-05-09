@@ -1,14 +1,10 @@
-package database.models;
+package database.models.jooq;
 
 import app.Main;
 import com.google.common.hash.Hashing;
-import database.DB;
 import database.Synchronization;
 import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
 import org.jooq.*;
-import org.jooq.impl.DSL;
 
 import java.nio.charset.Charset;
 

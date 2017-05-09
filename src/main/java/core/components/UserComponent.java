@@ -2,7 +2,7 @@ package core.components;
 
 import com.jfoenix.controls.JFXButton;
 import core.auth.Auth;
-import database.models.User;
+import database.models.jooq.User;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.control.Alert;
@@ -13,7 +13,6 @@ import javafx.scene.layout.VBox;
 import org.jooq.Record;
 import scenes.MyGroup;
 import scenes.admin.users.EditUserScene;
-import scenes.admin.users.ListUsersScene;
 
 /**
  * Created by ibnujakaria on 3/17/17.

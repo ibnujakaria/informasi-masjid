@@ -2,7 +2,7 @@ package core.auth;
 
 import com.google.common.hash.Hashing;
 import database.DB;
-import database.models.User;
+import database.models.jooq.User;
 import org.jooq.*;
 import org.jooq.impl.DSL;
 

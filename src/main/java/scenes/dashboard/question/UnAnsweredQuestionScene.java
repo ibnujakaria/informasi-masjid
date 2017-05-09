@@ -2,7 +2,7 @@ package scenes.dashboard.question;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
-import database.models.Question;
+import database.models.jooq.Question;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
